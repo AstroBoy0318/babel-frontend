@@ -17,22 +17,22 @@ const TeamsPage = ({ fallback }: InferGetStaticPropsType<typeof getStaticProps>)
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const fetchedTeams = await getTeams()
-  if (!fetchedTeams) {
-    return {
-      props: {
-        fallback: {
-          teams: teamsById,
-        },
-      },
-      revalidate: 1,
-    }
-  }
+  // const fetchedTeams = await getTeams()
+  // if (!fetchedTeams) {
+  //   return {
+  //     props: {
+  //       fallback: {
+  //         teams: teamsById,
+  //       },
+  //     },
+  //     revalidate: 1,
+  //   }
+  // }
 
   return {
     props: {
       fallback: {
-        teams: fetchedTeams,
+        teams: null,
       },
     },
     revalidate: 60 * 60 * 12, // 12 hours

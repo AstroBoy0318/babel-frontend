@@ -10,7 +10,7 @@ import { getTeams } from '../../state/teams/helpers'
 
 const Teams = () => {
   const { t } = useTranslation()
-  const { data, status } = useSWR('teams', async () => getTeams())
+  const { data, status } = useSWR('teams', async () => null)
   const teamList = data ? Object.values(data) : []
   const topTeams = orderBy(teamList, ['points', 'id', 'name'], ['desc', 'asc', 'asc'])
 
@@ -21,9 +21,6 @@ const Teams = () => {
         <Heading scale="xl">{t('Teams')}</Heading>
         {status !== FetchStatus.Fetched && <AutoRenewIcon spin />}
       </Flex>
-      {topTeams.map((team, index) => (
-        <TeamListCard key={team.id} rank={index + 1} team={team} />
-      ))}
     </Page>
   )
 }

@@ -11,7 +11,7 @@ import useProfileCreation from './contexts/hook'
 const Team: React.FC = () => {
   const { teamId: currentTeamId, actions } = useProfileCreation()
   const { t } = useTranslation()
-  const { data: teams } = useSWR('teams', async () => getTeams())
+  const { data: teams } = useSWR('teams', async () => null)
   const teamValues = useMemo(() => (teams ? shuffle(Object.values(teams)) : []), [teams])
   const handleTeamSelection = (value: string) => actions.setTeamId(parseInt(value, 10))
 
@@ -36,26 +36,6 @@ const Team: React.FC = () => {
               'There’s currently no big difference between teams, and no benefit of joining one team over another for now. So pick whichever one you like!',
             )}
           </Text>
-          {teamValues &&
-            teamValues.map((team) => {
-              return (
-                <SelectionCard
-                  key={team.name}
-                  name="teams-selection"
-                  value={team.id}
-                  isChecked={currentTeamId === team.id}
-                  image={`/images/teams/${team.images.md}`}
-                  onChange={handleTeamSelection}
-                  disabled={!team.isJoinable}
-                >
-                  <Text bold>{team.name}</Text>
-                  <Flex>
-                    <CommunityIcon mr="8px" />
-                    <Text>{team.users.toLocaleString()}</Text>
-                  </Flex>
-                </SelectionCard>
-              )
-            })}
         </CardBody>
       </Card>
       <NextStepButton onClick={actions.nextStep} disabled={currentTeamId === null}>

@@ -18,7 +18,6 @@ import farmsReducer from './farms'
 import { updateVersion } from './global/actions'
 import infoReducer from './info'
 import lists from './lists/reducer'
-import lotteryReducer from './lottery'
 import mint from './mint/reducer'
 import multicall from './multicall/reducer'
 import nftMarketReducer from './nftMarket/reducer'
@@ -59,7 +58,6 @@ const persistedReducer = persistReducer(
     farms: farmsReducer,
     pools: poolsReducer,
     predictions: predictionsReducer,
-    lottery: lotteryReducer,
     info: infoReducer,
     nftMarket: nftMarketReducer,
 

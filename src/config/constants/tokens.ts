@@ -3,7 +3,7 @@ import { serializeToken } from 'state/user/hooks/helpers'
 import { CHAIN_ID } from './networks'
 import { SerializedToken } from './types'
 
-const { MAINNET, TESTNET, FANTOM, FANTOMTEST } = ChainId
+const { MAINNET, TESTNET } = ChainId
 
 interface TokenList {
   [symbol: string]: Token
@@ -12,7 +12,7 @@ interface TokenList {
 const defineTokens = <T extends TokenList>(t: T) => t
 
 export const mainnetTokens = defineTokens({
-  wbnb: new Token(
+  wftm: new Token(
     MAINNET,
     '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
     18,
@@ -2045,33 +2045,33 @@ export const mainnetTokens = defineTokens({
 } as const)
 
 export const testnetTokens = defineTokens({
-  wbnb: new Token(
+  wftm: new Token(
     TESTNET,
-    '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
+    '0x07b9c47452c41e8e00f98ac4c075f5c443281d2a',
     18,
-    'WBNB',
-    'Wrapped BNB',
-    'https://www.binance.com/',
+    'WFTM',
+    'Wrapped FTM',
+    '',
   ),
   cake: new Token(
     TESTNET,
-    '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
+    '0x6a92dcE48b742F2f2d9c1DD9D1D2081cb272A1db',
     18,
-    'CAKE',
-    'PancakeSwap Token',
-    'https://pancakeswap.finance/',
+    'BK',
+    'Begoiko',
+    'https://app.begoiko.com/',
   ),
   busd: new Token(
     TESTNET,
-    '0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee',
+    '0x3A5b6631aD2Bd2b82fd3C5c4007937F14fa809b9',
     18,
-    'BUSD',
-    'Binance USD',
+    'DAI',
+    'FTMTEST DAI',
     'https://www.paxos.com/busd/',
   ),
   syrup: new Token(
     TESTNET,
-    '0xfE1e507CeB712BDe086f3579d2c03248b2dB77f9',
+    '0xBf17865dfc5217531A911B4DDC4C9b8c94d1E35d',
     18,
     'SYRUP',
     'SyrupBar Token',
@@ -2084,17 +2084,6 @@ export const testnetTokens = defineTokens({
     'BAKE',
     'Bakeryswap Token',
     'https://www.bakeryswap.org/',
-  ),
-} as const)
-
-export const testftmTokens = defineTokens({
-  wftm: new Token(
-    FANTOMTEST,
-    '0x07b9c47452c41e8e00f98ac4c075f5c443281d2a',
-    18,
-    'WFTM',
-    'Wrapped FTM',
-    '',
   ),
 } as const)
 
