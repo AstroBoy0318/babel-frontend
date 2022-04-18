@@ -9,7 +9,6 @@ import tokens from 'config/constants/tokens'
 // Addresses
 import {
   getAddress,
-  getPancakeProfileAddress,
   getPancakeRabbitsAddress,
   getBunnyFactoryAddress,
   getBunnySpecialAddress,
@@ -37,7 +36,6 @@ import {
 } from 'utils/addressHelpers'
 
 // ABI
-import profileABI from 'config/abi/pancakeProfile.json'
 import pancakeRabbitsAbi from 'config/abi/pancakeRabbits.json'
 import bunnyFactoryAbi from 'config/abi/bunnyFactory.json'
 import bunnySpecialAbi from 'config/abi/bunnySpecial.json'
@@ -145,9 +143,6 @@ export const getPointCenterIfoContract = (signer?: Signer | Provider) => {
 }
 export const getCakeContract = (signer?: Signer | Provider) => {
   return getContract(cakeAbi, tokens.cake.address, signer) as Cake
-}
-export const getProfileContract = (signer?: Signer | Provider) => {
-  return getContract(profileABI, getPancakeProfileAddress(), signer) as PancakeProfile
 }
 export const getPancakeRabbitContract = (signer?: Signer | Provider) => {
   return getContract(pancakeRabbitsAbi, getPancakeRabbitsAddress(), signer) as PancakeRabbits

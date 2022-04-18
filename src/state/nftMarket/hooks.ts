@@ -4,7 +4,6 @@ import { isAddress } from 'utils'
 import { FetchStatus } from 'config/constants/types'
 import erc721Abi from 'config/abi/erc721.json'
 import { useSWRMulticall } from 'hooks/useSWRContract'
-import { getPancakeProfileAddress } from 'utils/addressHelpers'
 import useSWR from 'swr'
 import useSWRImmutable from 'swr/immutable'
 import isEmpty from 'lodash/isEmpty'
@@ -69,14 +68,7 @@ export const useApprovalNfts = (nftsInWallet: NftToken[]) => {
 
   const { data } = useSWRMulticall(erc721Abi, nftApprovalCalls)
 
-  const approvedTokenIds = Array.isArray(data)
-    ? data
-        .flat()
-        .reduce(
-          (acc, address, index) => ({ ...acc, [nftsInWallet[index].tokenId]: getPancakeProfileAddress() === address }),
-          {},
-        )
-    : null
+  const approvedTokenIds = null
 
   return { data: approvedTokenIds }
 }

@@ -6,7 +6,6 @@ import {
   getBunnyFactoryContract,
   getBunnySpecialContract,
   getPancakeRabbitContract,
-  getProfileContract,
   getIfoV1Contract,
   getIfoV2Contract,
   getMasterchefContract,
@@ -58,7 +57,7 @@ import { ERC20_BYTES32_ABI } from '../config/abi/erc20'
 import ERC20_ABI from '../config/abi/erc20.json'
 import WETH_ABI from '../config/abi/weth.json'
 import multiCallAbi from '../config/abi/Multicall.json'
-import { getContract, getProviderOrSigner } from '../utils'
+import { getContract, getContractWeb3, getProviderOrSigner } from '../utils'
 
 import { IPancakePair } from '../config/abi/types/IPancakePair'
 
@@ -111,14 +110,6 @@ export const useBunnyFactory = () => {
 export const usePancakeRabbits = () => {
   const { library } = useActiveWeb3React()
   return useMemo(() => getPancakeRabbitContract(library.getSigner()), [library])
-}
-
-export const useProfileContract = (withSignerIfPossible = true) => {
-  const { library, account } = useActiveWeb3React()
-  return useMemo(
-    () => getProfileContract(withSignerIfPossible ? getProviderOrSigner(library, account) : null),
-    [withSignerIfPossible, account, library],
-  )
 }
 
 export const useLotteryV2Contract = () => {
@@ -283,6 +274,25 @@ function useContract<T extends Contract = Contract>(
   }, [address, ABI, library, withSignerIfPossible, account]) as T
 }
 
+
+function useContractWeb3<T extends Contract = Contract>(
+  address: string | undefined,
+  ABI: any,
+  withSignerIfPossible = true,
+): T | null {
+  const { library, account } = useActiveWeb3React()
+
+  return useMemo(() => {
+    if (!address || !ABI || !library) return null
+    try {
+      return getContractWeb3(address, ABI)
+    } catch (error) {
+      console.error('Failed to get contract', error)
+      return null
+    }
+  }, [address, ABI, library, withSignerIfPossible, account]) as T
+}
+
 export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: boolean) {
   return useContract<Erc20>(tokenAddress, ERC20_ABI, withSignerIfPossible)
 }
@@ -320,5 +330,5 @@ export function usePairContract(pairAddress?: string, withSignerIfPossible?: boo
 }
 
 export function useMulticallContract() {
-  return useContract<Multicall>(getMulticallAddress(), multiCallAbi, false)
+  return useContractWeb3<Multicall>(getMulticallAddress(), multiCallAbi, false)
 }

@@ -14,7 +14,6 @@ export interface MulticallOptions {
 const multicall = async <T = any>(abi: any[], calls: Call[]): Promise<T> => {
   const multi = getMulticallContract()
   const itf = new Interface(abi)
-
   const calldata = calls.map((call) => ({
     target: call.address.toLowerCase(),
     callData: itf.encodeFunctionData(call.name, call.params),
@@ -40,7 +39,6 @@ export const multicallv2 = async <T = any>(
   const { requireSuccess } = options
   const multi = getMulticallContract()
   const itf = new Interface(abi)
-
   const calldata = calls.map((call) => ({
     target: call.address.toLowerCase(),
     callData: itf.encodeFunctionData(call.name, call.params),

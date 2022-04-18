@@ -12,7 +12,8 @@ import { JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@pancakes
 import { ROUTER_ADDRESS } from '../config/constants'
 import { BASE_BSC_SCAN_URLS } from '../config'
 import { TokenAddressMap } from '../state/lists/hooks'
-import { simpleRpcProvider } from './providers'
+import { simpleRpcProvider, simpleRpcProviderWeb3 } from './providers'
+import Web3 from 'web3'
 
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
@@ -90,6 +91,15 @@ export function getContract(address: string, ABI: any, signer?: Signer | Provide
   }
 
   return new Contract(address, ABI, signer ?? simpleRpcProvider)
+}
+
+// account is optional
+export function getContractWeb3(address: string, ABI: any): any {
+  if (!isAddress(address) || address === AddressZero) {
+    throw Error(`Invalid 'address' parameter '${address}'.`)
+  }
+
+  return new simpleRpcProviderWeb3.eth.Contract(ABI, address)
 }
 
 // account is optional

@@ -35,12 +35,12 @@ async function fetchChunk(
   let returnData
   try {
     // prettier-ignore
-    [resultsBlockNumber, returnData] = await multicallContract.aggregate(
-      chunk.map((obj) => [obj.address, obj.callData]),
-      {
-        blockTag: minBlockNumber,
-      }
-    )
+    let params = chunk.map((obj) => [obj.address, obj.callData]);
+    let result = await multicallContract.methods.aggregate(
+      params
+    ).call()
+    resultsBlockNumber = result.blockNumber
+    returnData = result.returnData
   } catch (err) {
     const error = err as any
     if (
@@ -68,10 +68,10 @@ async function fetchChunk(
     console.debug('Failed to fetch chunk inside retry', error)
     throw error
   }
-  if (resultsBlockNumber.toNumber() < minBlockNumber) {
+  if (Number(resultsBlockNumber) < minBlockNumber) {
     console.debug(`Fetched results for old block number: ${resultsBlockNumber.toString()} vs. ${minBlockNumber}`)
   }
-  return { results: returnData, blockNumber: resultsBlockNumber.toNumber() }
+  return { results: returnData, blockNumber: Number(resultsBlockNumber) }
 }
 
 /**
