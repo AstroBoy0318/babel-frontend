@@ -52,7 +52,7 @@ const Page: React.FC<
         {children}
         <Flex flexGrow={1} />
         <Box display={['block', null, null, hideFooterOnDesktop ? 'none' : 'block']} width="100%">
-          <Footer helpUrl={helpUrl} />
+          {/* <Footer helpUrl={helpUrl} /> */}
         </Box>
       </StyledPage>
     </>
