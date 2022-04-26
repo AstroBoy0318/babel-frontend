@@ -329,6 +329,9 @@ export function usePairContract(pairAddress?: string, withSignerIfPossible?: boo
   return useContract(pairAddress, IPancakePairABI, withSignerIfPossible)
 }
 
-export function useMulticallContract() {
-  return useContractWeb3<Multicall>(getMulticallAddress(), multiCallAbi, false)
+export function useMulticallContract(usingWeb3?: boolean) {
+  if(usingWeb3)
+    return useContractWeb3<Multicall>(getMulticallAddress(), multiCallAbi, false)
+  else
+    return useContract<Multicall>(getMulticallAddress(), multiCallAbi, false)
 }

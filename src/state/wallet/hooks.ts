@@ -7,7 +7,6 @@ import { useMulticallContract } from 'hooks/useContract'
 import { isAddress } from 'utils'
 import orderBy from 'lodash/orderBy'
 import { useSingleContractMultipleData, useMultipleContractSingleData } from '../multicall/hooks'
-import MULTICALL_INTERFACE from 'config/abi/multicall'
 
 /**
  * Returns a map of the given addresses to their eventually consistent BNB balances.
@@ -24,8 +23,7 @@ export function useBNBBalances(uncheckedAddresses?: (string | undefined)[]): {
   )
 
   const results = useSingleContractMultipleData(
-    multicallContract._address,
-    MULTICALL_INTERFACE,
+    multicallContract,
     'getEthBalance',
     addresses.map((address) => [address]),
   )

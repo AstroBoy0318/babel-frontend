@@ -14,7 +14,6 @@ import {
   toCallKey,
   ListenerOptions,
 } from './actions'
-import MULTICALL_INTERFACE from 'config/abi/multicall'
 
 export interface Result extends ReadonlyArray<any> {
   readonly [key: string]: any
@@ -164,25 +163,24 @@ function toCallState(
 }
 
 export function useSingleContractMultipleData(
-  contractAddress: string,
-  contractInteface: Interface,
+  contract: Contract | null | undefined,
   methodName: string,
   callInputs: OptionalMethodInputs[],
   options?: ListenerOptions,
 ): CallState[] {
-  const fragment = useMemo(() => contractInteface.getFunction(methodName), [contractInteface, methodName])
+  const fragment = useMemo(() => contract?.interface?.getFunction(methodName), [contract, methodName])
 
   const calls = useMemo(
     () =>
-        contractAddress && contractInteface && fragment && callInputs && callInputs.length > 0
+      contract && fragment && callInputs && callInputs.length > 0
         ? callInputs.map<Call>((inputs) => {
             return {
-              address: contractAddress,
-              callData: MULTICALL_INTERFACE.encodeFunctionData(fragment, inputs),
+              address: contract.address,
+              callData: contract.interface.encodeFunctionData(fragment, inputs),
             }
           })
         : [],
-    [callInputs, contractInteface, fragment],
+    [callInputs, contract, fragment],
   )
 
   const results = useCallsData(calls, options)
@@ -191,8 +189,8 @@ export function useSingleContractMultipleData(
 
   return useMemo(() => {
     const currentBlockNumber = cache.get('blockNumber')
-    return results.map((result) => toCallState(result, contractInteface, fragment, currentBlockNumber))
-  }, [fragment, contractInteface, results, cache])
+    return results.map((result) => toCallState(result, contract?.interface, fragment, currentBlockNumber))
+  }, [fragment, contract, results, cache])
 }
 
 export function useMultipleContractSingleData(

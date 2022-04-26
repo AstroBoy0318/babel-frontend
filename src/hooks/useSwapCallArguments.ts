@@ -30,6 +30,8 @@ export function useSwapCallArguments(
   const deadline = useTransactionDeadline()
 
   return useMemo(() => {
+
+    console.log(trade, recipient, library, account, chainId, deadline)
     if (!trade || !recipient || !library || !account || !chainId || !deadline) return []
 
     const contract = getRouterContract(chainId, library, account)

@@ -146,7 +146,7 @@ export default function Updater(): null {
   const debouncedListeners = useDebounce(state.callListeners, 100)
   const currentBlock = useCurrentBlock()
   const { chainId } = useActiveWeb3React()
-  const multicallContract = useMulticallContract()
+  const multicallContract = useMulticallContract(true)
   const cancellations = useRef<{ blockNumber: number; cancellations: (() => void)[] }>()
 
   const listeningKeys: { [callKey: string]: number } = useMemo(() => {
