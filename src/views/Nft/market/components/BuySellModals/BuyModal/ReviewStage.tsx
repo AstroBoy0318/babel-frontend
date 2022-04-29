@@ -78,7 +78,7 @@ const ReviewStage: React.FC<ReviewStageProps> = ({
           </Text>
           <BnbAmountCell bnbAmount={nftPrice} />
           <Text small color="textSubtle">
-            {t('%symbol% in wallet', { symbol: paymentCurrency === PaymentCurrency.BNB ? 'BNB' : 'WBNB' })}
+            {t('%symbol% in wallet', { symbol: paymentCurrency === PaymentCurrency.BNB ? 'FTM' : 'WBNB' })}
           </Text>
           {!account ? (
             <Flex justifySelf="flex-end">
@@ -96,7 +96,7 @@ const ReviewStage: React.FC<ReviewStageProps> = ({
           <Message p="8px" variant="danger">
             <Text>
               {t('Not enough %symbol% to purchase this NFT', {
-                symbol: paymentCurrency === PaymentCurrency.BNB ? 'BNB' : 'WBNB',
+                symbol: paymentCurrency === PaymentCurrency.BNB ? 'FTM' : 'WBNB',
               })}
             </Text>
           </Message>
@@ -127,7 +127,7 @@ const ReviewStage: React.FC<ReviewStageProps> = ({
           {t('Checkout')}
         </Button>
         <Button as={Link} external style={{ width: '100%' }} href="/swap?outputCurrency=BNB" variant="secondary">
-          {t('Get %symbol1% or %symbol2%', { symbol1: 'BNB', symbol2: 'WBNB' })}
+          {t('Get %symbol1% or %symbol2%', { symbol1: 'FTM', symbol2: 'WBNB' })}
         </Button>
       </Flex>
     </>

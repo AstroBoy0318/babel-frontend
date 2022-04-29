@@ -95,7 +95,7 @@ function CurrencySearch({
 
   const showETH: boolean = useMemo(() => {
     const s = debouncedQuery.toLowerCase().trim()
-    return s === '' || s === 'b' || s === 'bn' || s === 'bnb'
+    return s === '' || s === 'f' || s === 'ft' || s === 'ftm'
   }, [debouncedQuery])
 
   const filteredTokens: Token[] = useMemo(() => {

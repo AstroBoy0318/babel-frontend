@@ -23,7 +23,7 @@ const farms: SerializedFarmConfig[] = [
    * All farms below here are from v1 and are to be set to 0x
    */
   {
-    pid: 1,
+    pid: 2,
     lpSymbol: 'CAKE-BNB LP',
     lpAddresses: {
       97: '0x3ed8936cAFDF85cfDBa29Fbe5940A5b0524824F4',
@@ -34,7 +34,7 @@ const farms: SerializedFarmConfig[] = [
     quoteToken: serializedTokens.wftm,
   },
   {
-    pid: 2,
+    pid: 3,
     lpSymbol: 'BUSD-BNB LP',
     lpAddresses: {
       97: '0x2f7682b64b88149ba3250aee32db712964de5fa9',

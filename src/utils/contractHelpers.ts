@@ -107,6 +107,7 @@ import type {
   Erc721collection,
   PointCenterIfo,
 } from 'config/abi/types'
+import { getContractWeb3 } from 'utils'
 
 const getContract = (abi: any, address: string, signer?: Signer | Provider) => {
   const signerOrProvider = signer ?? simpleRpcProvider
@@ -186,7 +187,9 @@ export const getPredictionsContract = (signer?: Signer | Provider) => {
 export const getChainlinkOracleContract = (signer?: Signer | Provider) => {
   return getContract(chainlinkOracleAbi, getChainlinkOracleAddress(), signer) as ChainlinkOracle
 }
-export const getMulticallContract = () => {
+export const getMulticallContract = (usingweb3?: boolean) => {
+  if(usingweb3)
+    return getContractWeb3(getMulticallAddress(), MultiCallAbi);
   return getContract(MultiCallAbi, getMulticallAddress(), simpleRpcProvider) as Multicall
 }
 export const getBunnySpecialCakeVaultContract = (signer?: Signer | Provider) => {

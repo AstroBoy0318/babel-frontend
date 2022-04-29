@@ -4,11 +4,14 @@ import FarmCard from 'views/Farms/components/FarmCard/FarmCard'
 import { getDisplayApr } from 'views/Farms/Farms'
 import { usePriceCakeBusd } from 'state/farms/hooks'
 import { useWeb3React } from '@web3-react/core'
+import { useCakeBusdPrice } from 'hooks/useBUSDPrice'
+import BigNumber from 'bignumber.js'
 
 const FarmsPage = () => {
   const { account } = useWeb3React()
   const { chosenFarmsMemoized } = useContext(FarmsContext)
-  const cakePrice = usePriceCakeBusd()
+  const price = useCakeBusdPrice();
+  const cakePrice = new BigNumber(price ? price.toFixed(3) : 0)
 
   return (
     <>

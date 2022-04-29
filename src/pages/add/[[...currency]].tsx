@@ -3,7 +3,7 @@ import AddLiquidity from 'views/AddLiquidity'
 
 export default AddLiquidity
 
-const OLD_PATH_STRUCTURE = /^(0x[a-fA-F0-9]{40}|BNB)-(0x[a-fA-F0-9]{40}|BNB)$/
+const OLD_PATH_STRUCTURE = /^(0x[a-fA-F0-9]{40}|FTM)-(0x[a-fA-F0-9]{40}|FTM)$/
 
 export const getStaticPaths: GetStaticPaths = () => {
   return {

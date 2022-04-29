@@ -28,6 +28,7 @@ import Table from './components/FarmTable/FarmTable'
 import FarmTabButtons from './components/FarmTabButtons'
 import { RowProps } from './components/FarmTable/Row'
 import { DesktopColumnSchema, FarmWithStakedValue } from './components/types'
+import { useCakeBusdPrice } from 'hooks/useBUSDPrice'
 
 const ControlContainer = styled.div`
   display: flex;
@@ -117,7 +118,8 @@ const Farms: React.FC = ({ children }) => {
   const { pathname } = useRouter()
   const { t } = useTranslation()
   const { data: farmsLP, userDataLoaded, poolLength } = useFarms()
-  const cakePrice = usePriceCakeBusd()
+  const price = useCakeBusdPrice();
+  const cakePrice = new BigNumber(price ? price.toFixed(3) : 0)
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = useUserFarmsViewMode()
   const { account } = useWeb3React()
