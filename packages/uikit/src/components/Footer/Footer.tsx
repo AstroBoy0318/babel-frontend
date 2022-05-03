@@ -77,13 +77,13 @@ const MenuItem: React.FC<FooterProps> = ({
         >
           <Flex order={[2, null, 1]} alignItems="center">
             <ThemeSwitcher isDark={isDark} toggleTheme={toggleTheme} />
-            <LangSelector
+            {/* <LangSelector
               currentLang={currentLang}
               langs={langs}
               setLang={setLang}
               color={darkColors.textSubtle as keyof Colors}
               dropdownPosition="top-right"
-            />
+            /> */}
           </Flex>
           <Flex order={[1, null, 2]} mb={["24px", null, "0"]} justifyContent="space-between" alignItems="center">
             <Box mr="20px">

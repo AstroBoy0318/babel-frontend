@@ -56,12 +56,12 @@ export const poolsWithVaultSelector = createSelector(
       apr: getAprData(cakeAutoVault, cakeVault.fees.performanceFeeAsDecimal).apr,
       rawApr: cakePool.apr,
     }
-    const ifoPoolWithApr = {
-      ...ifoPoolVault,
-      apr: getAprData(ifoPoolVault, ifoPool.fees.performanceFeeAsDecimal).apr,
-      rawApr: cakePool.apr,
-    }
-    return { pools: [ifoPoolWithApr, cakeAutoVaultWithApr, ...pools], userDataLoaded }
+    // const ifoPoolWithApr = {
+    //   ...ifoPoolVault,
+    //   apr: getAprData(ifoPoolVault, ifoPool.fees.performanceFeeAsDecimal).apr,
+    //   rawApr: cakePool.apr,
+    // }
+    return { pools: [/*ifoPoolWithApr,*/ cakeAutoVaultWithApr, ...pools], userDataLoaded }
   },
 )
 

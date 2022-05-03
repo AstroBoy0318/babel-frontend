@@ -6,6 +6,7 @@ import ConnectWalletButton from 'components/ConnectWalletButton'
 import { PoolCategory } from 'config/constants/types'
 import { useTranslation } from 'contexts/Localization'
 import { useERC20 } from 'hooks/useContract'
+import { useState } from 'react'
 
 import { useVaultPoolByKey } from 'state/pools/hooks'
 import { DeserializedPool } from 'state/types'
@@ -52,12 +53,11 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ pool, userDataLoa
     sousId,
     earningToken.symbol,
   )
-
-  const { isVaultApproved, setLastUpdated } = useCheckVaultApprovalStatus(pool.vaultKey)
-  const { handleApprove: handleVaultApprove, pendingTx: pendingVaultTx } = useVaultApprove(
+  const { isVaultApproved, setLastUpdated } = pool.vaultKey ? useCheckVaultApprovalStatus(pool.vaultKey): { isVaultApproved:false, setLastUpdated:()=>{} }
+  const { handleApprove: handleVaultApprove, pendingTx: pendingVaultTx } = pool.vaultKey ? useVaultApprove(
     pool.vaultKey,
     setLastUpdated,
-  )
+  ) : { handleApprove: ()=>{}, pendingTx: false }
 
   const handleApprove = vaultKey ? handleVaultApprove : handlePoolApprove
   const pendingTx = vaultKey ? pendingVaultTx : pendingPoolTx
