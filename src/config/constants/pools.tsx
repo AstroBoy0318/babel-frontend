@@ -11,7 +11,7 @@ export const vaultPoolConfig = {
     name: <Trans>Auto CAKE</Trans>,
     description: <Trans>Automatic restaking</Trans>,
     autoCompoundFrequency: 5000,
-    gasLimit: 380000,
+    gasLimit: 500000,
     tokenImage: {
       primarySrc: `/images/tokens/${tokens.cake.address}.svg`,
       secondarySrc: '/images/tokens/autorenew.svg',
@@ -37,7 +37,7 @@ const pools: SerializedPoolConfig[] = [
     contractAddress: {
       97: '0x1d32c2945C8FDCBc7156c553B7cEa4325a17f4f9',
       56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
-      4002: '0x51F7a372493a945FBaba9ce5B95e778ECbC4c6BF',
+      4002: '0x4E7761B30DB4deb5A8a62ce5b9844df0824F1cde',
     },
     poolCategory: PoolCategory.CORE,
     harvest: true,

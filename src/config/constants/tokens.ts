@@ -2055,10 +2055,10 @@ export const testnetTokens = defineTokens({
   ),
   cake: new Token(
     TESTNET,
-    '0x6a92dcE48b742F2f2d9c1DD9D1D2081cb272A1db',
+    '0xb9Bf6bd929A22176b49EB0EeD8c6a714d716bC8e',
     18,
-    'BK',
-    'Begoiko',
+    'Babel',
+    'BABEL',
     'https://app.begoiko.com/',
   ),
   busd: new Token(
@@ -2071,10 +2071,10 @@ export const testnetTokens = defineTokens({
   ),
   syrup: new Token(
     TESTNET,
-    '0xBf17865dfc5217531A911B4DDC4C9b8c94d1E35d',
+    '0x793A60A512fDC4Ca9040cbD787AA019A631ff035',
     18,
-    'SYRUP',
-    'SyrupBar Token',
+    'Bank',
+    'Babel Bank Token',
     'https://pancakeswap.finance/',
   ),
   bake: new Token(

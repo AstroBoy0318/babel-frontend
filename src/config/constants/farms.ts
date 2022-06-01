@@ -6,15 +6,15 @@ const serializedTokens = serializeTokens()
 
 const farms: SerializedFarmConfig[] = [
   /**
-   * These 3 farms (PID 0, 251, 252) should always be at the top of the file.
+   * These 3 farms (PID 0, 1, 2) should always be at the top of the file.
    */
   {
     pid: 0,
-    lpSymbol: 'CAKE',
+    lpSymbol: 'BABEL',
     lpAddresses: {
       97: '0x9C21123D94b93361a29B2C2EFB3d5CD8B17e0A9e',
       56: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
-      4002: '0x6a92dcE48b742F2f2d9c1DD9D1D2081cb272A1db',
+      4002: '0xb9Bf6bd929A22176b49EB0EeD8c6a714d716bC8e',
     },
     token: serializedTokens.syrup,
     quoteToken: serializedTokens.wftm,
@@ -23,23 +23,23 @@ const farms: SerializedFarmConfig[] = [
    * All farms below here are from v1 and are to be set to 0x
    */
   {
-    pid: 2,
-    lpSymbol: 'CAKE-BNB LP',
+    pid: 1,
+    lpSymbol: 'BABEL-FTM LP',
     lpAddresses: {
       97: '0x3ed8936cAFDF85cfDBa29Fbe5940A5b0524824F4',
       56: '0xA527a61703D82139F8a06Bc30097cC9CAA2df5A6',
-      4002: '0x823e9e0feceb07716fbf7811ce64ed211ed4864f',
+      4002: '0xf7C2E23f6aEF9E6B89B0363350383c0362813cbd',
     },
     token: serializedTokens.cake,
     quoteToken: serializedTokens.wftm,
   },
   {
-    pid: 3,
-    lpSymbol: 'BUSD-BNB LP',
+    pid: 2,
+    lpSymbol: 'DAI-FTM LP',
     lpAddresses: {
       97: '0x2f7682b64b88149ba3250aee32db712964de5fa9',
       56: '0x1b96b92314c44b159149f7e0303511fb2fc4774f',
-      4002: '0x52beb9eb11e0e0b18ca53369486f0bc6974a3f59',
+      4002: '0x73d7B279FCea15Aa2aa4AeC5e1d5907d19ddD6e5',
     },
     token: serializedTokens.busd,
     quoteToken: serializedTokens.wftm,
