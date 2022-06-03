@@ -6,14 +6,13 @@ import { languageList } from 'config/localization/languages'
 import { useTranslation } from 'contexts/Localization'
 import PhishingWarningBanner from 'components/PhishingWarningBanner'
 import useTheme from 'hooks/useTheme'
-import { usePriceCakeBusd } from 'state/farms/hooks'
 import { usePhishingBannerManager } from 'state/user/hooks'
+import { useCakeBusdPrice } from 'hooks/useBUSDPrice'
 import UserMenu from './UserMenu'
 import { useMenuItems } from './hooks/useMenuItems'
 import GlobalSettings from './GlobalSettings'
 import { getActiveMenuItem, getActiveSubMenuItem } from './utils'
 import { footerLinks } from './config/footerConfig'
-import { useCakeBusdPrice } from 'hooks/useBUSDPrice'
 
 const Menu = (props) => {
   const { isDark, setTheme } = useTheme()

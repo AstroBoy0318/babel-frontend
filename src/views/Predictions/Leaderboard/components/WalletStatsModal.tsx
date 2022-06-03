@@ -67,7 +67,7 @@ const WalletStatsModal: React.FC<WalletStatsModalProps> = ({ account, onDismiss,
       <ModalHeader background={theme.colors.gradients.bubblegum}>
         <Flex alignItems="center" style={{ flex: 1 }}>
           <Box width={['64px', null, null, null, null, null, '96px']} mr="16px">
-            <ProfileAvatar src={profile?.nft?.image?.thumbnail} height={96} width={96} />
+            <ProfileAvatar src={""} height={96} width={96} />
           </Box>
           <Box>
             {profile?.username && (

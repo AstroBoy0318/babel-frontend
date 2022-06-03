@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import CompetitionBanner from '../CompetitionBanner'
-import LotteryBanner from '../LotteryBanner'
 import useIsRenderIfoBanner from './useIsRenderIFOBanner'
 
 /**
