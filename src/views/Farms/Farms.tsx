@@ -3,7 +3,6 @@ import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { Image, Heading, RowType, Toggle, Text, Button, ArrowForwardIcon, Flex } from '@pancakeswap/uikit'
 import { ChainId } from '@pancakeswap/sdk'
-import { NextLinkFromReactRouter } from 'components/NextLink'
 import styled from 'styled-components'
 import FlexLayout from 'components/Layout/Flex'
 import Page from 'components/Layout/Page'
@@ -29,6 +28,7 @@ import FarmTabButtons from './components/FarmTabButtons'
 import { RowProps } from './components/FarmTable/Row'
 import { DesktopColumnSchema, FarmWithStakedValue } from './components/types'
 import { useCakeBusdPrice } from 'hooks/useBUSDPrice'
+import { getMasterchefContract } from 'utils/contractHelpers'
 
 const ControlContainer = styled.div`
   display: flex;
@@ -158,6 +158,10 @@ const Farms: React.FC = ({ children }) => {
     (farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
   )
 
+  const masterchefContract = getMasterchefContract()
+  
+  const [currentMultiplier, setCurrentMultiplier] = useState(1)
+
   const farmsList = useCallback(
     (farmsToDisplay: DeserializedFarm[]): FarmWithStakedValue[] => {
       let farmsToDisplayWithAPR: FarmWithStakedValue[] = farmsToDisplay.map((farm) => {
@@ -169,7 +173,7 @@ const Farms: React.FC = ({ children }) => {
           ? getFarmApr(new BigNumber(farm.poolWeight), cakePrice, totalLiquidity, farm.lpAddresses[ChainId.MAINNET])
           : { cakeRewardsApr: 0, lpRewardsApr: 0 }
 
-        return { ...farm, apr: cakeRewardsApr, lpRewardsApr, liquidity: totalLiquidity }
+        return { ...farm, apr: cakeRewardsApr*currentMultiplier, lpRewardsApr: lpRewardsApr*currentMultiplier, liquidity: totalLiquidity }
       })
 
       if (query) {
@@ -247,6 +251,10 @@ const Farms: React.FC = ({ children }) => {
   chosenFarmsLength.current = chosenFarmsMemoized.length
 
   useEffect(() => {
+    const now = new Date().getTime()/1000
+    masterchefContract.getMultiplier(now.toFixed(0),(now+1).toFixed(0)).then(re => {
+      setCurrentMultiplier(Number(re))
+    })
     if (isIntersecting) {
       setNumberOfFarmsVisible((farmsCurrentlyVisible) => {
         if (farmsCurrentlyVisible <= chosenFarmsLength.current) {

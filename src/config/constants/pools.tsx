@@ -37,11 +37,11 @@ const pools: SerializedPoolConfig[] = [
     contractAddress: {
       97: '0x1d32c2945C8FDCBc7156c553B7cEa4325a17f4f9',
       56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
-      4002: '0x4E7761B30DB4deb5A8a62ce5b9844df0824F1cde',
+      4002: '0xd483E67A042C2A702e13D19BA961F350DA4ef346',
     },
     poolCategory: PoolCategory.CORE,
     harvest: true,
-    tokenPerBlock: '0.001',
+    tokenPerBlock: '0.00003',
     sortOrder: 1,
     isFinished: false,
   },
