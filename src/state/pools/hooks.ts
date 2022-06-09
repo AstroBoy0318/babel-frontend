@@ -76,6 +76,7 @@ export const usePoolsPageFetch = () => {
   const { account } = useWeb3React()
   const dispatch = useAppDispatch()
   useFetchPublicPoolsData()
+  useFetchIfoPool()
 
   useFastRefreshEffect(() => {
     batch(() => {
@@ -127,13 +128,13 @@ export const useCakeVault = () => {
 
 export const useVaultPools = () => {
   const cakeVault = useVaultPoolByKey(VaultKey.CakeVault)
-  const ifoVault = useVaultPoolByKey(VaultKey.IfoPool)
+  // const ifoVault = useVaultPoolByKey(VaultKey.IfoPool)
   const vaults = useMemo(() => {
     return {
       [VaultKey.CakeVault]: cakeVault,
-      [VaultKey.IfoPool]: ifoVault,
+      // [VaultKey.IfoPool]: ifoVault,
     }
-  }, [cakeVault, ifoVault])
+  }, [cakeVault/*, ifoVault*/])
   return vaults
 }
 

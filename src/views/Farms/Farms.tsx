@@ -1,16 +1,16 @@
 import { useEffect, useCallback, useState, useMemo, useRef, createContext } from 'react'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
-import { Image, Heading, RowType, Toggle, Text, Button, ArrowForwardIcon, Flex } from '@pancakeswap/uikit'
+import { Image, Heading, RowType, Toggle, Text, Flex } from '@pancakeswap/uikit'
 import { ChainId } from '@pancakeswap/sdk'
 import styled from 'styled-components'
 import FlexLayout from 'components/Layout/Flex'
 import Page from 'components/Layout/Page'
-import { useFarms, usePollFarmsWithUserData, usePriceCakeBusd } from 'state/farms/hooks'
+import { useFarms, usePollFarmsWithUserData } from 'state/farms/hooks'
 import useIntersectionObserver from 'hooks/useIntersectionObserver'
 import { DeserializedFarm } from 'state/types'
 import { useTranslation } from 'contexts/Localization'
-import { getBalanceNumber } from 'utils/formatBalance'
+import { getBalanceNumber, getBalanceAmount } from 'utils/formatBalance'
 import { getFarmApr } from 'utils/apr'
 import orderBy from 'lodash/orderBy'
 import isArchivedPid from 'utils/farmHelpers'
@@ -161,6 +161,7 @@ const Farms: React.FC = ({ children }) => {
   const masterchefContract = getMasterchefContract()
   
   const [currentMultiplier, setCurrentMultiplier] = useState(1)
+  const [tokenPerSecond, setTokenPerSecond] = useState(new BigNumber(0))
 
   const farmsList = useCallback(
     (farmsToDisplay: DeserializedFarm[]): FarmWithStakedValue[] => {
@@ -170,7 +171,7 @@ const Farms: React.FC = ({ children }) => {
         }
         const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteTokenPriceBusd)
         const { cakeRewardsApr, lpRewardsApr } = isActive
-          ? getFarmApr(new BigNumber(farm.poolWeight), cakePrice, totalLiquidity, farm.lpAddresses[ChainId.MAINNET])
+          ? getFarmApr(tokenPerSecond, new BigNumber(farm.poolWeight), cakePrice, totalLiquidity, farm.lpAddresses[ChainId.MAINNET])
           : { cakeRewardsApr: 0, lpRewardsApr: 0 }
 
         return { ...farm, apr: cakeRewardsApr*currentMultiplier, lpRewardsApr: lpRewardsApr*currentMultiplier, liquidity: totalLiquidity }
@@ -252,9 +253,8 @@ const Farms: React.FC = ({ children }) => {
 
   useEffect(() => {
     const now = new Date().getTime()/1000
-    masterchefContract.getMultiplier(now.toFixed(0),(now+1).toFixed(0)).then(re => {
-      setCurrentMultiplier(Number(re))
-    })
+    masterchefContract.getMultiplier(now.toFixed(0),(now+1).toFixed(0)).then(re => setCurrentMultiplier(Number(re)))
+    masterchefContract.babelPerSecond().then(re => setTokenPerSecond(getBalanceAmount(new BigNumber(re.toString()))))
     if (isIntersecting) {
       setNumberOfFarmsVisible((farmsCurrentlyVisible) => {
         if (farmsCurrentlyVisible <= chosenFarmsLength.current) {
