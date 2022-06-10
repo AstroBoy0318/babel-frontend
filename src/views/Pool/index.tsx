@@ -57,7 +57,7 @@ export default function Pool() {
     if (!account) {
       return (
         <Text color="textSubtle" textAlign="center">
-          {t('Connect to a wallet to view your liquidity.')}
+          {t('Connect wallet to see your liquidity')}
         </Text>
       )
     }
@@ -79,7 +79,7 @@ export default function Pool() {
     }
     return (
       <Text color="textSubtle" textAlign="center">
-        {t('No liquidity found.')}
+        {t('No liquidity found')}
       </Text>
     )
   }
@@ -87,17 +87,17 @@ export default function Pool() {
   return (
     <Page>
       <AppBody>
-        <AppHeader title={t('Your Liquidity')} subtitle={t('Remove liquidity to receive tokens back')} />
+        <AppHeader title={t('Your Liquidity')} subtitle={t('Remove liquidity to receive your tokens back')} />
         <Body>
           {renderBody()}
           {account && !v2IsLoading && (
             <Flex flexDirection="column" alignItems="center" mt="24px">
               <Text color="textSubtle" mb="8px">
-                {t("Don't see a pool you joined?")}
+                {t("Don't see the pool you joined?")}
               </Text>
               <Link href="/find" passHref>
                 <Button id="import-pool-link" variant="secondary" scale="sm" as="a">
-                  {t('Find other LP tokens')}
+                  {t('Find other bB-LP tokens')}
                 </Button>
               </Link>
             </Flex>
