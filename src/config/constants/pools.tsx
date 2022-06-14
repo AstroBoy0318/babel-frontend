@@ -38,6 +38,7 @@ const pools: SerializedPoolConfig[] = [
       97: '0x1d32c2945C8FDCBc7156c553B7cEa4325a17f4f9',
       56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
       4002: '0xd483E67A042C2A702e13D19BA961F350DA4ef346',
+      5777: '0xd483E67A042C2A702e13D19BA961F350DA4ef346',
     },
     poolCategory: PoolCategory.CORE,
     harvest: true,

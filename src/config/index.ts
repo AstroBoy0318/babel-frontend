@@ -12,6 +12,7 @@ export const BSC_BLOCK_TIME = 1
 export const BASE_BSC_SCAN_URLS = {
   [ChainId.MAINNET]: 'https://ftmscan.com',
   [ChainId.TESTNET]: 'https://testnet.ftmscan.com',
+  [ChainId.GANACHE]: 'http://127.0.0.1:7545',
 }
 
 // CAKE_PER_BLOCK details
@@ -24,7 +25,7 @@ export const BASE_BSC_SCAN_URLS = {
 export const CAKE_PER_BLOCK = 0.00001
 export const BLOCKS_PER_YEAR = (60 / BSC_BLOCK_TIME) * 60 * 24 * 365 // 10512000
 export const CAKE_PER_YEAR = CAKE_PER_BLOCK * BLOCKS_PER_YEAR
-export const BASE_URL = 'https://pancakeswap.finance'
+export const BASE_URL = 'https://bbswap.fi'
 export const BASE_ADD_LIQUIDITY_URL = `${BASE_URL}/add`
 export const BASE_BSC_SCAN_URL = BASE_BSC_SCAN_URLS[ChainId.MAINNET]
 export const DEFAULT_TOKEN_DECIMAL = BIG_TEN.pow(18)

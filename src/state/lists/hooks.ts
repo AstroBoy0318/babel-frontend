@@ -61,6 +61,7 @@ export type TokenAddressMap = Readonly<{
 const EMPTY_LIST: TokenAddressMap = {
   [ChainId.MAINNET]: {},
   [ChainId.TESTNET]: {},
+  [ChainId.GANACHE]: {},
 }
 
 // -------------------------------------

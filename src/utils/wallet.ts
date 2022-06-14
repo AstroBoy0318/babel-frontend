@@ -14,6 +14,10 @@ const NETWORK_CONFIG = {
     name: 'BNB Smart Chain Testnet',
     scanURL: BASE_BSC_SCAN_URLS[ChainId.TESTNET],
   },
+  [ChainId.GANACHE]: {
+    name: 'BNB Smart Chain Testnet',
+    scanURL: BASE_BSC_SCAN_URLS[ChainId.GANACHE],
+  },
 }
 
 /**

@@ -13,6 +13,7 @@ export interface Address {
   97?: string
   56: string
   4002?: string
+  5777?: string
 }
 
 export interface SerializedToken {

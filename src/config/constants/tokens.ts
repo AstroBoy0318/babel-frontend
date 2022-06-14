@@ -3,7 +3,7 @@ import { serializeToken } from 'state/user/hooks/helpers'
 import { CHAIN_ID } from './networks'
 import { SerializedToken } from './types'
 
-const { MAINNET, TESTNET } = ChainId
+const { MAINNET, TESTNET, GANACHE } = ChainId
 
 interface TokenList {
   [symbol: string]: Token
@@ -2084,6 +2084,41 @@ export const testnetTokens = defineTokens({
     'BAKE',
     'Bakeryswap Token',
     'https://www.bakeryswap.org/',
+  ),
+} as const)
+
+export const ganacheTokens = defineTokens({
+  wftm: new Token(
+    GANACHE,
+    '0x07b9c47452c41e8e00f98ac4c075f5c443281d2a',
+    18,
+    'WFTM',
+    'Wrapped FTM',
+    '',
+  ),
+  cake: new Token(
+    GANACHE,
+    '0x024f9c23b9999b34315648c858023809b2eaC57c',
+    18,
+    'Babel',
+    'BABEL',
+    'https://app.begoiko.com/',
+  ),
+  busd: new Token(
+    GANACHE,
+    '0x3A5b6631aD2Bd2b82fd3C5c4007937F14fa809b9',
+    18,
+    'DAI',
+    'FTMTEST DAI',
+    'https://www.paxos.com/busd/',
+  ),
+  syrup: new Token(
+    GANACHE,
+    '0x852B068F3B57eF6e0bE6bBC722D558A49C5437F9',
+    18,
+    'Bank',
+    'Babel Bank Token',
+    'https://pancakeswap.finance/',
   ),
 } as const)
 

@@ -1,10 +1,11 @@
 import { ChainId, JSBI, Percent, Token } from '@pancakeswap/sdk'
 import { BigNumber } from '@ethersproject/bignumber'
-import { mainnetTokens, testnetTokens } from './tokens'
+import { mainnetTokens, testnetTokens, ganacheTokens } from './tokens'
 
 export const ROUTER_ADDRESS = {
   [ChainId.MAINNET]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
   [ChainId.TESTNET]: '0x2F6b1f314Db8938c41eCf34F0960af68AdA58E86',
+  [ChainId.GANACHE]: '0x2F6b1f314Db8938c41eCf34F0960af68AdA58E86',
 }
 
 // a list of tokens by chain
@@ -25,6 +26,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     mainnetTokens.usdc,
   ],
   [ChainId.TESTNET]: [testnetTokens.wftm, testnetTokens.cake, testnetTokens.busd],
+  [ChainId.GANACHE]: [ganacheTokens.wftm, ganacheTokens.cake, ganacheTokens.busd],
 }
 
 /**
@@ -48,12 +50,14 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 export const SUGGESTED_BASES: ChainTokenList = {
   [ChainId.MAINNET]: [mainnetTokens.busd, mainnetTokens.cake, mainnetTokens.btcb],
   [ChainId.TESTNET]: [testnetTokens.wftm, testnetTokens.cake, testnetTokens.busd],
+  [ChainId.GANACHE]: [ganacheTokens.wftm, ganacheTokens.cake, ganacheTokens.busd],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   [ChainId.MAINNET]: [mainnetTokens.wftm, mainnetTokens.dai, mainnetTokens.busd, mainnetTokens.usdt],
   [ChainId.TESTNET]: [testnetTokens.wftm, testnetTokens.cake, testnetTokens.busd],
+  [ChainId.GANACHE]: [ganacheTokens.wftm, ganacheTokens.cake, ganacheTokens.busd],
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
