@@ -1,5 +1,5 @@
 import { gql } from 'graphql-request'
-import { infoClient } from 'utils/graphql'
+import { infoClient1 } from 'utils/graphql'
 import { ChartEntry } from 'state/info/types'
 import { PCS_V2_START } from 'config/constants/info'
 import { PairDayDatasResponse } from '../types'
@@ -22,7 +22,7 @@ const getPoolChartData = async (skip: number, address: string): Promise<{ data?:
         }
       }
     `
-    const { pairDayDatas } = await infoClient.request<PairDayDatasResponse>(query, {
+    const { pairDayDatas } = await infoClient1.request<PairDayDatasResponse>(query, {
       startTime: PCS_V2_START,
       skip,
       address,

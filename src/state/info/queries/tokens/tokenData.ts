@@ -2,7 +2,7 @@
 import { gql } from 'graphql-request'
 import { useEffect, useState } from 'react'
 import { TokenData } from 'state/info/types'
-import { infoClient } from 'utils/graphql'
+import { infoClient1 } from 'utils/graphql'
 import { useBlocksFromTimestamps } from 'views/Info/hooks/useBlocksFromTimestamps'
 import { getAmountChange, getChangeForPeriod, getPercentChange } from 'views/Info/utils/infoDataHelpers'
 import { getDeltaTimestamps } from 'views/Info/utils/infoQueryHelpers'
@@ -76,7 +76,7 @@ const fetchTokenData = async (
         twoWeeksAgo: ${TOKEN_AT_BLOCK(block14d, tokenAddresses)}
       }
     `
-    const data = await infoClient.request<TokenQueryResponse>(query)
+    const data = await infoClient1.request<TokenQueryResponse>(query)
     return { data, error: false }
   } catch (error) {
     console.error('Failed to fetch token data', error)

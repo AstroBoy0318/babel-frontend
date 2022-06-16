@@ -82,7 +82,6 @@ export const fetchCakePoolPublicDataAsync = () => async (dispatch, getState) => 
   const earningTokenAddress = cakePool.earningToken.address ? cakePool.earningToken.address.toLowerCase() : null
   const earningTokenPrice = earningTokenAddress ? prices[earningTokenAddress] : 0
   const totalStaking = await cakeContract.balanceOf(cakePoolAddress)
-  console.log(totalStaking, "totalStaking")
   const now = new Date().getTime()/1000
   const perSecond = await masterChefContract.babelPerSecond()
   const multiplier = await masterChefContract.getMultiplier(now.toFixed(0), (now+1).toFixed(0))

@@ -59,6 +59,11 @@ const config: (t: ContextApi['t'], languageCode?: string) => ConfigMenuItemsType
       },
     ],
   },
+  {
+    label: 'Info',
+    href: '/info',
+    items: []
+  },
   // {
   //   label: t('Win'),
   //   href: '/prediction',

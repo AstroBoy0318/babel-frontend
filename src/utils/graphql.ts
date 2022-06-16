@@ -1,4 +1,4 @@
-import { INFO_CLIENT } from 'config/constants/endpoints'
+import { INFO_CLIENT, INFO_CLIENT1 } from 'config/constants/endpoints'
 import { GraphQLClient } from 'graphql-request'
 
 // Extra headers
@@ -19,6 +19,8 @@ export const getGQLHeaders = (endpoint: string) => {
 }
 
 export const infoClient = new GraphQLClient(INFO_CLIENT, { headers: getGQLHeaders(INFO_CLIENT) })
+
+export const infoClient1 = new GraphQLClient(INFO_CLIENT1, { headers: getGQLHeaders(INFO_CLIENT1) })
 
 export const infoServerClient = new GraphQLClient(INFO_CLIENT, {
   headers: {

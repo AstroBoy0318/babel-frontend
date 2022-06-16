@@ -2,7 +2,7 @@ import { gql } from 'graphql-request'
 import { mapBurns, mapMints, mapSwaps } from 'state/info/queries/helpers'
 import { BurnResponse, MintResponse, SwapResponse } from 'state/info/queries/types'
 import { Transaction } from 'state/info/types'
-import { infoClient } from 'utils/graphql'
+import { infoClient1 } from 'utils/graphql'
 
 /**
  * Data to display transaction table on Token page
@@ -135,7 +135,7 @@ interface TransactionResults {
 
 const fetchTokenTransactions = async (address: string): Promise<{ data?: Transaction[]; error: boolean }> => {
   try {
-    const data = await infoClient.request<TransactionResults>(TOKEN_TRANSACTIONS, {
+    const data = await infoClient1.request<TransactionResults>(TOKEN_TRANSACTIONS, {
       address,
     })
     const mints0 = data.mintsAs0.map(mapMints)

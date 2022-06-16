@@ -2,7 +2,7 @@
 import { gql } from 'graphql-request'
 import { useEffect, useState } from 'react'
 import { PoolData } from 'state/info/types'
-import { infoClient } from 'utils/graphql'
+import { infoClient1 } from 'utils/graphql'
 import { useBlocksFromTimestamps } from 'views/Info/hooks/useBlocksFromTimestamps'
 import { getChangeForPeriod, getLpFeesAndApr, getPercentChange } from 'views/Info/utils/infoDataHelpers'
 import { getDeltaTimestamps } from 'views/Info/utils/infoQueryHelpers'
@@ -96,7 +96,7 @@ const fetchPoolData = async (
         twoWeeksAgo: ${POOL_AT_BLOCK(block14d, poolAddresses)}
       }
     `
-    const data = await infoClient.request<PoolsQueryResponse>(query)
+    const data = await infoClient1.request<PoolsQueryResponse>(query)
     return { data, error: false }
   } catch (error) {
     console.error('Failed to fetch pool data', error)

@@ -2,7 +2,7 @@ import { gql } from 'graphql-request'
 import { mapBurns, mapMints, mapSwaps } from 'state/info/queries/helpers'
 import { BurnResponse, MintResponse, SwapResponse } from 'state/info/queries/types'
 import { Transaction } from 'state/info/types'
-import { infoClient } from 'utils/graphql'
+import { infoClient1 } from 'utils/graphql'
 
 /**
  * Transactions for Transaction table on the Home page
@@ -75,7 +75,7 @@ interface TransactionResults {
 
 const fetchTopTransactions = async (): Promise<Transaction[] | undefined> => {
   try {
-    const data = await infoClient.request<TransactionResults>(GLOBAL_TRANSACTIONS)
+    const data = await infoClient1.request<TransactionResults>(GLOBAL_TRANSACTIONS)
 
     if (!data) {
       return undefined

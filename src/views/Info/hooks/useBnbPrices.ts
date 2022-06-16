@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request'
 import { useEffect, useState } from 'react'
-import { infoClient } from 'utils/graphql'
+import { infoClient1 } from 'utils/graphql'
 import { useBlocksFromTimestamps } from 'views/Info/hooks/useBlocksFromTimestamps'
 import { getDeltaTimestamps } from 'views/Info/utils/infoQueryHelpers'
 
@@ -49,7 +49,7 @@ const fetchBnbPrices = async (
   blockWeek: number,
 ): Promise<{ bnbPrices: BnbPrices | undefined; error: boolean }> => {
   try {
-    const data = await infoClient.request<PricesResponse>(BNB_PRICES, {
+    const data = await infoClient1.request<PricesResponse>(BNB_PRICES, {
       block24,
       block48,
       blockWeek,

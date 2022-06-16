@@ -1,6 +1,6 @@
 import { TOKEN_BLACKLIST } from 'config/constants/info'
 import { gql } from 'graphql-request'
-import { infoClient } from 'utils/graphql'
+import { infoClient1 } from 'utils/graphql'
 
 /**
  * Data for showing Pools table on the Token page
@@ -42,7 +42,7 @@ const fetchPoolsForToken = async (
   addresses?: string[]
 }> => {
   try {
-    const data = await infoClient.request<PoolsForTokenResponse>(POOLS_FOR_TOKEN, {
+    const data = await infoClient1.request<PoolsForTokenResponse>(POOLS_FOR_TOKEN, {
       address,
       blacklist: TOKEN_BLACKLIST,
     })
