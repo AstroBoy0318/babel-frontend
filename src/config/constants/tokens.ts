@@ -12,7 +12,7 @@ interface TokenList {
 const defineTokens = <T extends TokenList>(t: T) => t
 
 export const mainnetTokens = defineTokens({
-  wftm: new Token(
+  wbnb: new Token(
     MAINNET,
     '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
     18,
@@ -21,7 +21,7 @@ export const mainnetTokens = defineTokens({
     'https://www.binance.com/',
   ),
   // bnb here points to the wbnb contract. Wherever the currency BNB is required, conditional checks for the symbol 'FTM' can be used
-  bnb: new Token(MAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'FTM', 'FTM', 'https://www.binance.com/'),
+  bnb: new Token(MAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'BNB', 'BNB', 'https://www.binance.com/'),
   cake: new Token(
     MAINNET,
     '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
@@ -2045,17 +2045,17 @@ export const mainnetTokens = defineTokens({
 } as const)
 
 export const testnetTokens = defineTokens({
-  wftm: new Token(
+  wbnb: new Token(
     TESTNET,
-    '0x07b9c47452c41e8e00f98ac4c075f5c443281d2a',
+    '0xD33473641D0b1E83D55725c403c6a735b39D8656',
     18,
-    'WFTM',
-    'Wrapped FTM',
+    'WBNB',
+    'Wrapped BNB',
     '',
   ),
   cake: new Token(
     TESTNET,
-    '0x024f9c23b9999b34315648c858023809b2eaC57c',
+    '0x13f096f7A33ccCe64e2867AffCeB190521232ef0',
     18,
     'Babel',
     'BABEL',
@@ -2063,15 +2063,15 @@ export const testnetTokens = defineTokens({
   ),
   busd: new Token(
     TESTNET,
-    '0x3A5b6631aD2Bd2b82fd3C5c4007937F14fa809b9',
+    '0x483037C4a61F3683109C9A3Eb8a95D612CCC2279',
     18,
-    'DAI',
-    'FTMTEST DAI',
+    'BUSD',
+    'BUSD',
     'https://www.paxos.com/busd/',
   ),
   syrup: new Token(
     TESTNET,
-    '0x852B068F3B57eF6e0bE6bBC722D558A49C5437F9',
+    '0x7d20130a0C609D16444989613f8896A22A70D120',
     18,
     'Bank',
     'Babel Bank Token',
@@ -2088,9 +2088,9 @@ export const testnetTokens = defineTokens({
 } as const)
 
 export const ganacheTokens = defineTokens({
-  wftm: new Token(
+  wbnb: new Token(
     GANACHE,
-    '0x07b9c47452c41e8e00f98ac4c075f5c443281d2a',
+    '0x8a2608F3d08622B2EAc2ec125E6b976194b6Fd2d',
     18,
     'WFTM',
     'Wrapped FTM',
@@ -2098,7 +2098,7 @@ export const ganacheTokens = defineTokens({
   ),
   cake: new Token(
     GANACHE,
-    '0x024f9c23b9999b34315648c858023809b2eaC57c',
+    '0xf5a2BEfD9018C45DBc87859C72Fc116EF2052599',
     18,
     'Babel',
     'BABEL',
@@ -2106,7 +2106,7 @@ export const ganacheTokens = defineTokens({
   ),
   busd: new Token(
     GANACHE,
-    '0x3A5b6631aD2Bd2b82fd3C5c4007937F14fa809b9',
+    '0xd06cd35Dc73Dd7395093b020043e88Bd8c946912',
     18,
     'DAI',
     'FTMTEST DAI',
@@ -2114,7 +2114,7 @@ export const ganacheTokens = defineTokens({
   ),
   syrup: new Token(
     GANACHE,
-    '0x852B068F3B57eF6e0bE6bBC722D558A49C5437F9',
+    '0xdA837D0dfD481bb8010F9E4370914713884A0947',
     18,
     'Bank',
     'Babel Bank Token',

@@ -17,7 +17,7 @@ import masterChef from 'config/abi/masterchef.json'
 import { getAddress, getMasterChefAddress } from 'utils/addressHelpers'
 import { getPoolApr } from 'utils/apr'
 import { BIG_ZERO } from 'utils/bigNumber'
-import { getCakeContract, getMasterchefContract } from 'utils/contractHelpers'
+import { getCakeContract, getMasterchefContract, getMulticallContract } from 'utils/contractHelpers'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { simpleRpcProvider } from 'utils/providers'
 import { multicallv2 } from 'utils/multicall'
@@ -75,6 +75,7 @@ const cakePool = poolsConfig.find((pool) => pool.sousId === 0)
 const cakePoolAddress = getAddress(cakePool.contractAddress)
 const cakeContract = getCakeContract()
 const masterChefContract = getMasterchefContract()
+
 export const fetchCakePoolPublicDataAsync = () => async (dispatch, getState) => {
   const prices = getTokenPricesFromFarm(getState().farms.data)
   const stakingTokenAddress = cakePool.stakingToken.address ? cakePool.stakingToken.address.toLowerCase() : null
@@ -82,13 +83,14 @@ export const fetchCakePoolPublicDataAsync = () => async (dispatch, getState) => 
   const earningTokenAddress = cakePool.earningToken.address ? cakePool.earningToken.address.toLowerCase() : null
   const earningTokenPrice = earningTokenAddress ? prices[earningTokenAddress] : 0
   const totalStaking = await cakeContract.balanceOf(cakePoolAddress)
-  const now = new Date().getTime()/1000
-  const perSecond = await masterChefContract.babelPerSecond()
-  const multiplier = await masterChefContract.getMultiplier(now.toFixed(0), (now+1).toFixed(0))
-  const poolInfos = await masterChefContract.poolInfo(0)
-  const totalAlloc = await masterChefContract.totalAllocPoint()
+  const now = await simpleRpcProvider.getBlockNumber()
+  const perSecond = await masterChefContract.babelPerBlock()
+  const multiplier = await masterChefContract.getMultiplier(Number(now), Number(now)+1)
+  // const poolInfos = await masterChefContract.poolInfo(0)
+  // const totalAlloc = await masterChefContract.totalAllocPoint()
   
-  const tokenPerBlock = Number(poolInfos.allocPoint)/Number(totalAlloc)*Number(perSecond)*Number(multiplier)
+  // const tokenPerBlock = Number(poolInfos.allocPoint)/Number(totalAlloc)*Number(perSecond)*Number(multiplier)
+  const tokenPerBlock = Number(perSecond)*Number(multiplier)/5
   const apr = getPoolApr(
     stakingTokenPrice,
     earningTokenPrice,

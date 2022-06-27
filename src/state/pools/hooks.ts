@@ -81,11 +81,11 @@ export const usePoolsPageFetch = () => {
   useFastRefreshEffect(() => {
     batch(() => {
       dispatch(fetchCakeVaultPublicData())
-      dispatch(fetchIfoPoolPublicData())
+      // dispatch(fetchIfoPoolPublicData())
       if (account) {
         dispatch(fetchPoolsUserDataAsync(account))
         dispatch(fetchCakeVaultUserData({ account }))
-        dispatch(fetchIfoPoolUserAndCredit({ account }))
+        // dispatch(fetchIfoPoolUserAndCredit({ account }))
       }
     })
   }, [account, dispatch])

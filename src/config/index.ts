@@ -7,11 +7,11 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
-export const BSC_BLOCK_TIME = 1
+export const BSC_BLOCK_TIME = 3
 
 export const BASE_BSC_SCAN_URLS = {
-  [ChainId.MAINNET]: 'https://ftmscan.com',
-  [ChainId.TESTNET]: 'https://testnet.ftmscan.com',
+  [ChainId.MAINNET]: 'https://bscscan.com',
+  [ChainId.TESTNET]: 'https://testnet.bscscan.com',
   [ChainId.GANACHE]: 'http://127.0.0.1:7545',
 }
 

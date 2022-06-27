@@ -29,6 +29,7 @@ import { RowProps } from './components/FarmTable/Row'
 import { DesktopColumnSchema, FarmWithStakedValue } from './components/types'
 import { useCakeBusdPrice } from 'hooks/useBUSDPrice'
 import { getMasterchefContract } from 'utils/contractHelpers'
+import { useCurrentBlock } from 'state/block/hooks'
 
 const ControlContainer = styled.div`
   display: flex;
@@ -171,7 +172,7 @@ const Farms: React.FC = ({ children }) => {
         }
         const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteTokenPriceBusd)
         const { cakeRewardsApr, lpRewardsApr } = isActive
-          ? getFarmApr(tokenPerSecond, new BigNumber(farm.poolWeight), cakePrice, totalLiquidity, farm.lpAddresses[ChainId.MAINNET])
+          ? getFarmApr(tokenPerSecond, new BigNumber(farm.poolWeight), cakePrice, totalLiquidity, farm.lpAddresses[ChainId.TESTNET])
           : { cakeRewardsApr: 0, lpRewardsApr: 0 }
 
         return { ...farm, apr: cakeRewardsApr*currentMultiplier, lpRewardsApr: lpRewardsApr*currentMultiplier, liquidity: totalLiquidity }
@@ -193,7 +194,8 @@ const Farms: React.FC = ({ children }) => {
   }
 
   const [numberOfFarmsVisible, setNumberOfFarmsVisible] = useState(NUMBER_OF_FARMS_VISIBLE)
-
+  const currentBlock = useCurrentBlock()
+  
   const chosenFarmsMemoized = useMemo(() => {
     let chosenFarms = []
 
@@ -252,9 +254,8 @@ const Farms: React.FC = ({ children }) => {
   chosenFarmsLength.current = chosenFarmsMemoized.length
 
   useEffect(() => {
-    const now = new Date().getTime()/1000
-    masterchefContract.getMultiplier(now.toFixed(0),(now+1).toFixed(0)).then(re => setCurrentMultiplier(Number(re)))
-    masterchefContract.babelPerSecond().then(re => setTokenPerSecond(getBalanceAmount(new BigNumber(re.toString()))))
+    masterchefContract.getMultiplier(currentBlock.toString() ,(currentBlock+1).toString()).then(re => setCurrentMultiplier(Number(re)))
+    masterchefContract.babelPerBlock().then(re => setTokenPerSecond(getBalanceAmount(new BigNumber(re.toString()))))
     if (isIntersecting) {
       setNumberOfFarmsVisible((farmsCurrentlyVisible) => {
         if (farmsCurrentlyVisible <= chosenFarmsLength.current) {

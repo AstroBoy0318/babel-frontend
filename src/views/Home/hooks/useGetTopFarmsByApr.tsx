@@ -8,6 +8,7 @@ import orderBy from 'lodash/orderBy'
 import { DeserializedFarm } from 'state/types'
 import { FetchStatus } from 'config/constants/types'
 import { FarmWithStakedValue } from '../../Farms/components/types'
+import BigNumber from 'bignumber.js'
 
 const useGetTopFarmsByApr = (isIntersecting: boolean) => {
   const dispatch = useAppDispatch()
@@ -47,10 +48,11 @@ const useGetTopFarmsByApr = (isIntersecting: boolean) => {
       const farmsWithApr: FarmWithStakedValue[] = farmsWithPrices.map((farm) => {
         const totalLiquidity = farm.lpTotalInQuoteToken.times(farm.quoteTokenPriceBusd)
         const { cakeRewardsApr, lpRewardsApr } = getFarmApr(
+          new BigNumber(1),
           farm.poolWeight,
           cakePriceBusd,
           totalLiquidity,
-          farm.lpAddresses[ChainId.MAINNET],
+          farm.lpAddresses[ChainId.TESTNET],
         )
         return { ...farm, apr: cakeRewardsApr, lpRewardsApr }
       })

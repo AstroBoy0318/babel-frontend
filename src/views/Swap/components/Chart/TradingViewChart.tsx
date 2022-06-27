@@ -30,7 +30,7 @@ const LoadingWrapper = styled.div<{ $isDark: boolean }>`
   }
 `
 
-const bnbToWBNBSymbol = (sym: string) => (sym === 'FTM' ? 'WBNB' : sym)
+const bnbToWBNBSymbol = (sym: string) => (sym === 'BNB' ? 'WBNB' : sym)
 
 const ID = 'TV_SWAP_CHART'
 const SYMBOL_PREFIX = 'PANCAKESWAP:'

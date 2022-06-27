@@ -10,13 +10,18 @@
                 "type": "address"
             },
             {
-                "internalType": "contract IMasterFarmer",
-                "name": "_masterfarmer",
+                "internalType": "contract IbBChef",
+                "name": "_chef",
                 "type": "address"
             },
             {
                 "internalType": "address",
                 "name": "_admin",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_distributor",
                 "type": "address"
             }
         ],
@@ -365,6 +370,17 @@
         "type": "function"
     },
     {
+        "inputs": [],
+        "name": "chef",
+        "outputs": [{
+            "internalType": "contract IbBChef",
+            "name": "",
+            "type": "address"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [{
             "internalType": "uint256",
             "name": "_amount",
@@ -373,6 +389,17 @@
         "name": "deposit",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "distributor",
+        "outputs": [{
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+        }],
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -418,17 +445,6 @@
             "internalType": "uint256",
             "name": "",
             "type": "uint256"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "masterfarmer",
-        "outputs": [{
-            "internalType": "contract IMasterFarmer",
-            "name": "",
-            "type": "address"
         }],
         "stateMutability": "view",
         "type": "function"

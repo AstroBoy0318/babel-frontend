@@ -1,32 +1,32 @@
 [{
         "inputs": [{
-                "internalType": "contract BabelToken",
+                "internalType": "contract bBToken",
                 "name": "_babel",
                 "type": "address"
             },
             {
-                "internalType": "contract BabelBank",
+                "internalType": "contract bBBank",
                 "name": "_bank",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_treasuryAddr",
+                "name": "_distributor",
                 "type": "address"
             },
             {
                 "internalType": "uint256",
-                "name": "_babelPerSecond",
+                "name": "_babelPerBlock",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "_startTime",
+                "name": "_startBlock",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "_MultiplierAfterTime",
+                "name": "_MultiplierAfterBlock",
                 "type": "uint256"
             }
         ],
@@ -37,26 +37,20 @@
         "anonymous": false,
         "inputs": [{
                 "indexed": true,
-                "internalType": "address",
-                "name": "user",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "contract IERC20",
-                "name": "pair",
-                "type": "address"
-            },
-            {
-                "indexed": false,
                 "internalType": "uint256",
-                "name": "allocpoint",
+                "name": "pid",
                 "type": "uint256"
             },
             {
                 "indexed": false,
+                "internalType": "address",
+                "name": "lpToken",
+                "type": "address"
+            },
+            {
+                "indexed": false,
                 "internalType": "uint256",
-                "name": "harvestInterval",
+                "name": "allocPoint",
                 "type": "uint256"
             }
         ],
@@ -164,30 +158,6 @@
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "pending",
-                "type": "uint256"
-            }
-        ],
-        "name": "RewardsLocked",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [{
-                "indexed": true,
-                "internalType": "address",
-                "name": "user",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "uint256",
-                "name": "pid",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
                 "name": "newPoint",
                 "type": "uint256"
             }
@@ -198,19 +168,23 @@
     {
         "anonymous": false,
         "inputs": [{
-                "indexed": true,
-                "internalType": "address",
-                "name": "user",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "newTreasury",
-                "type": "address"
-            }
-        ],
-        "name": "SetTreasury",
+            "indexed": false,
+            "internalType": "address",
+            "name": "newDistributor",
+            "type": "address"
+        }],
+        "name": "SetDistributor",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [{
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "babelPerBlock",
+            "type": "uint256"
+        }],
+        "name": "UpdateEmissionRate",
         "type": "event"
     },
     {
@@ -243,7 +217,7 @@
             "name": "",
             "type": "uint256"
         }],
-        "name": "CHANGE_MULTIPLIER_AT_TIME",
+        "name": "CHANGE_MULTIPLIER_AT_BLOCK",
         "outputs": [{
             "internalType": "uint256",
             "name": "",
@@ -254,18 +228,7 @@
     },
     {
         "inputs": [],
-        "name": "FINISH_BONUS_AT_TIME",
-        "outputs": [{
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "MAX_HARVEST_INTERVAL",
+        "name": "FINISH_BONUS_AT_BLOCK",
         "outputs": [{
             "internalType": "uint256",
             "name": "",
@@ -301,17 +264,6 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "TotalRewardsLocked",
-        "outputs": [{
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [{
                 "internalType": "contract IERC20",
                 "name": "_lpToken",
@@ -320,11 +272,6 @@
             {
                 "internalType": "uint256",
                 "name": "_allocPoint",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_harvestInterval",
                 "type": "uint256"
             },
             {
@@ -342,7 +289,7 @@
         "inputs": [],
         "name": "babel",
         "outputs": [{
-            "internalType": "contract BabelToken",
+            "internalType": "contract bBToken",
             "name": "",
             "type": "address"
         }],
@@ -362,7 +309,7 @@
     },
     {
         "inputs": [],
-        "name": "babelPerSecond",
+        "name": "babelPerBlock",
         "outputs": [{
             "internalType": "uint256",
             "name": "",
@@ -375,20 +322,9 @@
         "inputs": [],
         "name": "bank",
         "outputs": [{
-            "internalType": "contract BabelBank",
+            "internalType": "contract bBBank",
             "name": "",
             "type": "address"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "currentSupply",
-        "outputs": [{
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
         }],
         "stateMutability": "view",
         "type": "function"
@@ -408,6 +344,17 @@
         "name": "deposit",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "distributor",
+        "outputs": [{
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+        }],
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -435,27 +382,6 @@
     {
         "inputs": [{
                 "internalType": "uint256",
-                "name": "_pid",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "_user",
-                "type": "address"
-            }
-        ],
-        "name": "getHarvestUntil",
-        "outputs": [{
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-                "internalType": "uint256",
                 "name": "_from",
                 "type": "uint256"
             },
@@ -470,27 +396,6 @@
             "internalType": "uint256",
             "name": "",
             "type": "uint256"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-                "internalType": "uint256",
-                "name": "_pid",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "_user",
-                "type": "address"
-            }
-        ],
-        "name": "icanHarvest",
-        "outputs": [{
-            "internalType": "bool",
-            "name": "",
-            "type": "bool"
         }],
         "stateMutability": "view",
         "type": "function"
@@ -583,17 +488,12 @@
             },
             {
                 "internalType": "uint256",
-                "name": "lastRewardPerTime",
+                "name": "lastRewardPerBlock",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
                 "name": "accBabelPerShare",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "harvestInterval",
                 "type": "uint256"
             },
             {
@@ -648,17 +548,17 @@
     {
         "inputs": [{
             "internalType": "address",
-            "name": "_treasuryAddr",
+            "name": "_distributor",
             "type": "address"
         }],
-        "name": "setTreasury",
+        "name": "setDistributor",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
         "inputs": [],
-        "name": "startTime",
+        "name": "startBlock",
         "outputs": [{
             "internalType": "uint256",
             "name": "",
@@ -690,14 +590,14 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "treasuryAddr",
-        "outputs": [{
-            "internalType": "address",
-            "name": "",
-            "type": "address"
+        "inputs": [{
+            "internalType": "uint256",
+            "name": "_bBPerBlock",
+            "type": "uint256"
         }],
-        "stateMutability": "view",
+        "name": "updateEmissionRate",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -732,16 +632,6 @@
             {
                 "internalType": "uint256",
                 "name": "rewardDebt",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "rewardsLocked",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "nextHarvestUntil",
                 "type": "uint256"
             }
         ],

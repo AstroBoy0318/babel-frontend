@@ -4,7 +4,7 @@ import { mainnetTokens, testnetTokens, ganacheTokens } from './tokens'
 
 export const ROUTER_ADDRESS = {
   [ChainId.MAINNET]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
-  [ChainId.TESTNET]: '0x2F6b1f314Db8938c41eCf34F0960af68AdA58E86',
+  [ChainId.TESTNET]: '0x82C7E3cF3c2bA50E135322725510E25EdB7fdD21',
   [ChainId.GANACHE]: '0x2F6b1f314Db8938c41eCf34F0960af68AdA58E86',
 }
 
@@ -16,7 +16,7 @@ type ChainTokenList = {
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.MAINNET]: [
-    mainnetTokens.wftm,
+    mainnetTokens.wbnb,
     mainnetTokens.cake,
     mainnetTokens.busd,
     mainnetTokens.usdt,
@@ -25,8 +25,8 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     mainnetTokens.eth,
     mainnetTokens.usdc,
   ],
-  [ChainId.TESTNET]: [testnetTokens.wftm, testnetTokens.cake, testnetTokens.busd],
-  [ChainId.GANACHE]: [ganacheTokens.wftm, ganacheTokens.cake, ganacheTokens.busd],
+  [ChainId.TESTNET]: [testnetTokens.wbnb, testnetTokens.cake, testnetTokens.busd],
+  [ChainId.GANACHE]: [ganacheTokens.wbnb, ganacheTokens.cake, ganacheTokens.busd],
 }
 
 /**
@@ -49,20 +49,20 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
   [ChainId.MAINNET]: [mainnetTokens.busd, mainnetTokens.cake, mainnetTokens.btcb],
-  [ChainId.TESTNET]: [testnetTokens.wftm, testnetTokens.cake, testnetTokens.busd],
-  [ChainId.GANACHE]: [ganacheTokens.wftm, ganacheTokens.cake, ganacheTokens.busd],
+  [ChainId.TESTNET]: [testnetTokens.wbnb, testnetTokens.cake, testnetTokens.busd],
+  [ChainId.GANACHE]: [ganacheTokens.wbnb, ganacheTokens.cake, ganacheTokens.busd],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
-  [ChainId.MAINNET]: [mainnetTokens.wftm, mainnetTokens.dai, mainnetTokens.busd, mainnetTokens.usdt],
-  [ChainId.TESTNET]: [testnetTokens.wftm, testnetTokens.cake, testnetTokens.busd],
-  [ChainId.GANACHE]: [ganacheTokens.wftm, ganacheTokens.cake, ganacheTokens.busd],
+  [ChainId.MAINNET]: [mainnetTokens.wbnb, mainnetTokens.dai, mainnetTokens.busd, mainnetTokens.usdt],
+  [ChainId.TESTNET]: [testnetTokens.wbnb, testnetTokens.cake, testnetTokens.busd],
+  [ChainId.GANACHE]: [ganacheTokens.wbnb, ganacheTokens.cake, ganacheTokens.busd],
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
   [ChainId.MAINNET]: [
-    [mainnetTokens.cake, mainnetTokens.wftm],
+    [mainnetTokens.cake, mainnetTokens.wbnb],
     [mainnetTokens.busd, mainnetTokens.usdt],
     [mainnetTokens.dai, mainnetTokens.usdt],
   ],

@@ -153,8 +153,8 @@ export default function AddLiquidity() {
     let value: BigNumber | null
     if (currencyA === ETHER || currencyB === ETHER) {
       const tokenBIsETH = currencyB === ETHER
-      estimate = routerContract.estimateGas.addLiquidityETH
-      method = routerContract.addLiquidityETH
+      estimate = routerContract.estimateGas.addLiquidityBNB
+      method = routerContract.addLiquidityBNB
       args = [
         wrappedCurrency(tokenBIsETH ? currencyA : currencyB, chainId)?.address ?? '', // token
         (tokenBIsETH ? parsedAmountA : parsedAmountB).raw.toString(), // token desired
@@ -240,7 +240,7 @@ export default function AddLiquidity() {
           router.replace(`/add/${newCurrencyIdB}`, undefined, { shallow: true })
         }
       } else {
-        router.replace(`/add/${currencyIdA || 'FTM'}/${newCurrencyIdB}`, undefined, { shallow: true })
+        router.replace(`/add/${currencyIdA || 'BNB'}/${newCurrencyIdB}`, undefined, { shallow: true })
       }
     },
     [currencyIdA, router, currencyIdB],
