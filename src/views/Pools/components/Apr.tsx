@@ -44,8 +44,6 @@ const Apr: React.FC<AprProps> = ({ pool, showIcon, stakedBalance, performanceFee
 
   const apyModalLink = stakingToken.address ? `/swap?outputCurrency=${stakingToken.address}` : '/swap'
 
-  console.log(pool)
-
   const [onPresentApyModal] = useModal(
     <RoiCalculatorModal
       earningTokenPrice={earningTokenPrice}
