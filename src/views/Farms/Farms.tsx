@@ -254,7 +254,7 @@ const Farms: React.FC = ({ children }) => {
   chosenFarmsLength.current = chosenFarmsMemoized.length
 
   useEffect(() => {
-    masterchefContract.getMultiplier(currentBlock.toString() ,(currentBlock+1).toString()).then(re => setCurrentMultiplier(Number(re)))
+    masterchefContract.getMultiplierEx(currentBlock.toString() ,(currentBlock+1).toString()).then(re => setCurrentMultiplier(Number(re)))
     masterchefContract.babelPerBlock().then(re => setTokenPerSecond(getBalanceAmount(new BigNumber(re.toString()))))
     if (isIntersecting) {
       setNumberOfFarmsVisible((farmsCurrentlyVisible) => {

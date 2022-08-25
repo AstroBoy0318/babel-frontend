@@ -85,7 +85,7 @@ export const fetchCakePoolPublicDataAsync = () => async (dispatch, getState) => 
   const totalStaking = await cakeContract.balanceOf(cakePoolAddress)
   const now = await simpleRpcProvider.getBlockNumber()
   const perSecond = await masterChefContract.babelPerBlock()
-  const multiplier = await masterChefContract.getMultiplier(Number(now), Number(now)+1)
+  const multiplier = await masterChefContract.getMultiplierEx(Number(now), Number(now)+1)
   // const poolInfos = await masterChefContract.poolInfo(0)
   // const totalAlloc = await masterChefContract.totalAllocPoint()  
   // const tokenPerBlock = Number(poolInfos.allocPoint)/Number(totalAlloc)*Number(perSecond)*Number(multiplier)

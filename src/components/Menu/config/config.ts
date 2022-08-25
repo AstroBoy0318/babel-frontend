@@ -60,6 +60,11 @@ const config: (t: ContextApi['t'], languageCode?: string) => ConfigMenuItemsType
     ],
   },
   {
+    label: 'Genesis',
+    href: '/genesis',
+    items: []
+  },
+  {
     label: 'Info',
     href: '/info',
     items: []

@@ -15,9 +15,9 @@
                 "type": "address"
             },
             {
-                "internalType": "uint256",
-                "name": "_babelPerBlock",
-                "type": "uint256"
+                "internalType": "address",
+                "name": "_admin",
+                "type": "address"
             },
             {
                 "internalType": "uint256",
@@ -52,27 +52,15 @@
                 "internalType": "uint256",
                 "name": "allocPoint",
                 "type": "uint256"
-            }
-        ],
-        "name": "Add",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [{
-                "indexed": true,
-                "internalType": "address",
-                "name": "from",
-                "type": "address"
             },
             {
                 "indexed": false,
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
+                "internalType": "uint16",
+                "name": "depositFeeBP",
+                "type": "uint16"
             }
         ],
-        "name": "BabelBurn",
+        "name": "Add",
         "type": "event"
     },
     {
@@ -128,24 +116,6 @@
         "inputs": [{
                 "indexed": true,
                 "internalType": "address",
-                "name": "previousOwner",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "newOwner",
-                "type": "address"
-            }
-        ],
-        "name": "OwnershipTransferred",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [{
-                "indexed": true,
-                "internalType": "address",
                 "name": "user",
                 "type": "address"
             },
@@ -160,6 +130,12 @@
                 "internalType": "uint256",
                 "name": "newPoint",
                 "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint16",
+                "name": "newDepositFeeBP",
+                "type": "uint16"
             }
         ],
         "name": "Set",
@@ -180,11 +156,44 @@
         "anonymous": false,
         "inputs": [{
             "indexed": false,
+            "internalType": "address",
+            "name": "newTreasury",
+            "type": "address"
+        }],
+        "name": "SetTreasury",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [{
+            "indexed": false,
+            "internalType": "address",
+            "name": "newAdmin",
+            "type": "address"
+        }],
+        "name": "TransferAdmin",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [{
+            "indexed": false,
             "internalType": "uint256",
             "name": "babelPerBlock",
             "type": "uint256"
         }],
         "name": "UpdateEmissionRate",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [{
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "newStartBlock",
+            "type": "uint256"
+        }],
+        "name": "UpdateStartBlock",
         "type": "event"
     },
     {
@@ -275,6 +284,11 @@
                 "type": "uint256"
             },
             {
+                "internalType": "uint16",
+                "name": "_depositFeeBP",
+                "type": "uint16"
+            },
+            {
                 "internalType": "bool",
                 "name": "_withUpdate",
                 "type": "bool"
@@ -287,9 +301,9 @@
     },
     {
         "inputs": [],
-        "name": "babel",
+        "name": "admin",
         "outputs": [{
-            "internalType": "contract bBToken",
+            "internalType": "address",
             "name": "",
             "type": "address"
         }],
@@ -297,14 +311,14 @@
         "type": "function"
     },
     {
-        "inputs": [{
-            "internalType": "uint256",
-            "name": "_amount",
-            "type": "uint256"
+        "inputs": [],
+        "name": "babel",
+        "outputs": [{
+            "internalType": "contract bBToken",
+            "name": "",
+            "type": "address"
         }],
-        "name": "babelBurn",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -391,7 +405,7 @@
                 "type": "uint256"
             }
         ],
-        "name": "getMultiplier",
+        "name": "getMultiplierEx",
         "outputs": [{
             "internalType": "uint256",
             "name": "",
@@ -424,11 +438,11 @@
     },
     {
         "inputs": [],
-        "name": "owner",
+        "name": "minPerBlock",
         "outputs": [{
-            "internalType": "address",
+            "internalType": "uint256",
             "name": "",
-            "type": "address"
+            "type": "uint256"
         }],
         "stateMutability": "view",
         "type": "function"
@@ -487,6 +501,11 @@
                 "type": "uint256"
             },
             {
+                "internalType": "uint16",
+                "name": "depositFeeBP",
+                "type": "uint16"
+            },
+            {
                 "internalType": "uint256",
                 "name": "lastRewardPerBlock",
                 "type": "uint256"
@@ -517,13 +536,6 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "renounceOwnership",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
         "inputs": [{
                 "internalType": "uint256",
                 "name": "_pid",
@@ -533,6 +545,11 @@
                 "internalType": "uint256",
                 "name": "_allocPoint",
                 "type": "uint256"
+            },
+            {
+                "internalType": "uint16",
+                "name": "_depositFeeBP",
+                "type": "uint16"
             },
             {
                 "internalType": "bool",
@@ -552,6 +569,17 @@
             "type": "address"
         }],
         "name": "setDistributor",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "address",
+            "name": "_treasury",
+            "type": "address"
+        }],
+        "name": "settreasury",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -581,12 +609,23 @@
     {
         "inputs": [{
             "internalType": "address",
-            "name": "newOwner",
+            "name": "_newAdmin",
             "type": "address"
         }],
-        "name": "transferOwnership",
+        "name": "transferAdmin",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "treasury",
+        "outputs": [{
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+        }],
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -603,10 +642,10 @@
     {
         "inputs": [{
             "internalType": "uint256",
-            "name": "_pid",
+            "name": "_newStartBlock",
             "type": "uint256"
         }],
-        "name": "updatePool",
+        "name": "updateStartBlock",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"

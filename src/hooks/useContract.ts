@@ -31,6 +31,7 @@ import {
   getPancakeSquadContract,
   getErc721CollectionContract,
   getBunnySpecialXmasContract,
+  getGenesisContract,
 } from 'utils/contractHelpers'
 import { getMulticallAddress } from 'utils/addressHelpers'
 import { VaultKey } from 'state/types'
@@ -335,4 +336,9 @@ export function useMulticallContract(usingWeb3?: boolean) {
     return useContractWeb3<Multicall>(getMulticallAddress(), multiCallAbi, false)
   else
     return useContract<Multicall>(getMulticallAddress(), multiCallAbi, false)
+}
+
+export function useGenesisContract() {
+  const { library } = useActiveWeb3React()
+  return useMemo(() => getGenesisContract(library.getSigner()), [library])
 }
