@@ -34,6 +34,8 @@ import {
   getTradingCompetitionAddressV2,
   getBunnySpecialXmasAddress,
   getGenesisAddress,
+  getNftChefAddress,
+  getPositionNftAddress,
 } from 'utils/addressHelpers'
 
 // ABI
@@ -72,6 +74,8 @@ import nftSaleAbi from 'config/abi/nftSale.json'
 import pancakeSquadAbi from 'config/abi/pancakeSquad.json'
 import erc721CollectionAbi from 'config/abi/erc721collection.json'
 import genesisAbi from 'config/abi/genesis.json'
+import nftchefAbi from 'config/abi/nftChef.json'
+import positionNft from 'config/abi/positionNft.json'
 
 // Types
 import type {
@@ -226,4 +230,10 @@ export const getErc721CollectionContract = (signer?: Signer | Provider, address?
 }
 export const getGenesisContract = (signer?: Signer | Provider) => {
   return getContract(genesisAbi, getGenesisAddress(), signer)
+}
+export const getNftChefContract = (signer?: Signer | Provider) => {
+  return getContract(nftchefAbi, getNftChefAddress(), signer)
+}
+export const getPositionNftContract = (signer?: Signer | Provider) => {
+  return getContract(positionNft, getPositionNftAddress(), signer)
 }

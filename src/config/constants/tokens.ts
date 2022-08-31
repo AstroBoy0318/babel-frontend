@@ -2055,7 +2055,7 @@ export const testnetTokens = defineTokens({
   ),
   cake: new Token(
     TESTNET,
-    '0xDc0Cc579f99a23f162496fc20F3461e04FBFD854',
+    '0x1715424F68F3245F9e0910964370bEC1735Db92f',
     18,
     'Babel',
     'BABEL',
@@ -2071,7 +2071,7 @@ export const testnetTokens = defineTokens({
   ),
   syrup: new Token(
     TESTNET,
-    '0x386d8898f1640E7f794a88d2e793804e3319c0A0',
+    '0xeF930C43f34a10060010800E0261e02FFeb5d508',
     18,
     'Bank',
     'Babel Bank Token',

@@ -15,6 +15,7 @@ import {
 import storage from 'redux-persist/lib/storage'
 import burn from './burn/reducer'
 import farmsReducer from './farms'
+import nftChefReducer from './nftChef'
 import { updateVersion } from './global/actions'
 import infoReducer from './info'
 import lists from './lists/reducer'
@@ -59,6 +60,7 @@ const persistedReducer = persistReducer(
     predictions: predictionsReducer,
     info: infoReducer,
     limitOrders,
+    nftFarms: nftChefReducer,
 
     // Exchange
     user,

@@ -1,12 +1,12 @@
 [{
         "inputs": [{
                 "internalType": "contract IERC20",
-                "name": "native_",
+                "name": "_token",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "admin_",
+                "name": "_admin",
                 "type": "address"
             }
         ],
@@ -18,41 +18,17 @@
         "inputs": [{
                 "indexed": false,
                 "internalType": "address",
-                "name": "to",
+                "name": "sentBy",
                 "type": "address"
             },
             {
                 "indexed": false,
-                "internalType": "uint256",
-                "name": "RewardAmount",
-                "type": "uint256"
+                "internalType": "uint128",
+                "name": "deposit",
+                "type": "uint128"
             }
         ],
-        "name": "Claim",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [{
-                "indexed": false,
-                "internalType": "address",
-                "name": "sentby",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "bytes32[]",
-                "name": "proof",
-                "type": "bytes32[]"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "RewardAmount",
-                "type": "uint256"
-            }
-        ],
-        "name": "ClaimFromFrontend",
+        "name": "AddToGenesis",
         "type": "event"
     },
     {
@@ -65,66 +41,18 @@
             },
             {
                 "indexed": false,
+                "internalType": "uint256",
+                "name": "time",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
                 "internalType": "bytes32",
                 "name": "root",
                 "type": "bytes32"
             }
         ],
         "name": "CreateTree",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [{
-                "indexed": false,
-                "internalType": "address",
-                "name": "sentBy",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "bool",
-                "name": "isFreeze",
-                "type": "bool"
-            }
-        ],
-        "name": "SetFreeze",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [{
-                "indexed": false,
-                "internalType": "address",
-                "name": "sentBy",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "contract IERC20",
-                "name": "RewardToken",
-                "type": "address"
-            }
-        ],
-        "name": "SetRewardToken",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [{
-                "indexed": false,
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "Withdraw",
         "type": "event"
     },
     {
@@ -153,9 +81,9 @@
         "inputs": [],
         "name": "RewardAmount",
         "outputs": [{
-            "internalType": "uint256",
+            "internalType": "uint128",
             "name": "",
-            "type": "uint256"
+            "type": "uint128"
         }],
         "stateMutability": "view",
         "type": "function"
@@ -172,8 +100,19 @@
         "type": "function"
     },
     {
+        "inputs": [{
+            "internalType": "address",
+            "name": "wallet",
+            "type": "address"
+        }],
+        "name": "addToGenesis",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
         "inputs": [],
-        "name": "_admin",
+        "name": "admin",
         "outputs": [{
             "internalType": "address",
             "name": "",
@@ -184,7 +123,7 @@
     },
     {
         "inputs": [],
-        "name": "_native",
+        "name": "busd",
         "outputs": [{
             "internalType": "contract IERC20",
             "name": "",
@@ -195,42 +134,11 @@
     },
     {
         "inputs": [{
-            "internalType": "address",
-            "name": "_account",
-            "type": "address"
+            "internalType": "bytes32[]",
+            "name": "_proof",
+            "type": "bytes32[]"
         }],
-        "name": "addFriendToGenesis",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "addToGenesis",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "claim",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-            },
-            {
-                "internalType": "bytes32[]",
-                "name": "_proof",
-                "type": "bytes32[]"
-            }
-        ],
-        "name": "claimFromFrontend",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -257,9 +165,9 @@
         "inputs": [],
         "name": "deposit",
         "outputs": [{
-            "internalType": "uint256",
+            "internalType": "uint128",
             "name": "",
-            "type": "uint256"
+            "type": "uint128"
         }],
         "stateMutability": "view",
         "type": "function"
@@ -305,9 +213,9 @@
         "inputs": [],
         "name": "maxTime",
         "outputs": [{
-            "internalType": "uint256",
+            "internalType": "uint64",
             "name": "",
-            "type": "uint256"
+            "type": "uint64"
         }],
         "stateMutability": "view",
         "type": "function"
@@ -363,6 +271,17 @@
             "internalType": "uint256",
             "name": "",
             "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "viewProof",
+        "outputs": [{
+            "internalType": "bytes32[]",
+            "name": "_proof",
+            "type": "bytes32[]"
         }],
         "stateMutability": "view",
         "type": "function"

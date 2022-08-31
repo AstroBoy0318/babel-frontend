@@ -1,4 +1,5 @@
 export { fetchFarmsPublicDataAsync, fetchFarmUserDataAsync } from './farms'
+export { fetchNftFarmsPublicDataAsync, fetchNftFarmUserDataAsync } from './nftChef'
 export {
   fetchPoolsPublicDataAsync,
   fetchPoolsUserDataAsync,

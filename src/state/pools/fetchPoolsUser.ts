@@ -68,7 +68,6 @@ export const fetchUserStakeBalances = async (account) => {
 
   // Cake / Cake pool
   const { amount: masterPoolAmount } = await masterChefContract.userInfo('0', account)
-  console.log(stakedBalances, masterPoolAmount.toString(), account)
 
   return { ...stakedBalances, 0: new BigNumber(masterPoolAmount.toString()).toJSON() }
 }

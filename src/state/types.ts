@@ -13,6 +13,7 @@ import {
   TranslatableText,
   DeserializedFarmConfig,
   FetchStatus,
+  FarmConfigBaseProps,
 } from 'config/constants/types'
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, State, unknown, AnyAction>
@@ -33,10 +34,26 @@ interface SerializedFarmUserData {
   earnings: string
 }
 
+interface SerializedNftFarmUserData {
+  tokenBalance: string
+  tokenBalanceIDs: Array<Array<BigNumber>>
+  stakedBalance: string
+  stakedBalanceIDs: Array<Array<BigNumber>>
+  earnings: string
+}
+
 export interface DeserializedFarmUserData {
   allowance: BigNumber
   tokenBalance: BigNumber
   stakedBalance: BigNumber
+  earnings: BigNumber
+}
+
+export interface DeserializedNftFarmUserData {
+  tokenBalance: BigNumber
+  tokenBalanceIDs: Array<Array<BigNumber>>
+  stakedBalance: BigNumber
+  stakedBalanceIDs: Array<Array<BigNumber>>
   earnings: BigNumber
 }
 
@@ -52,6 +69,16 @@ export interface SerializedFarm extends SerializedFarmConfig {
   userData?: SerializedFarmUserData
 }
 
+export interface SerializedNftFarm extends FarmConfigBaseProps {
+  tokenAmountTotal?: SerializedBigNumber
+  quoteTokenAmountTotal?: SerializedBigNumber
+  lpTotalInQuoteToken?: SerializedBigNumber
+  lpTotalSupply?: SerializedBigNumber
+  tokenPriceVsQuote?: SerializedBigNumber
+  poolWeight?: SerializedBigNumber
+  userData?: SerializedNftFarmUserData
+}
+
 export interface DeserializedFarm extends DeserializedFarmConfig {
   tokenPriceBusd?: string
   quoteTokenPriceBusd?: string
@@ -62,6 +89,18 @@ export interface DeserializedFarm extends DeserializedFarmConfig {
   tokenPriceVsQuote?: BigNumber
   poolWeight?: BigNumber
   userData?: DeserializedFarmUserData
+}
+
+export interface DeserializedNftFarm extends FarmConfigBaseProps {
+  tokenPriceBusd?: string
+  quoteTokenPriceBusd?: string
+  tokenAmountTotal?: BigNumber
+  quoteTokenAmountTotal?: BigNumber
+  lpTotalInQuoteToken?: BigNumber
+  lpTotalSupply?: BigNumber
+  tokenPriceVsQuote?: BigNumber
+  poolWeight?: BigNumber
+  userData?: DeserializedNftFarmUserData
 }
 
 export enum VaultKey {
@@ -133,8 +172,23 @@ export interface SerializedFarmsState {
   poolLength?: number
 }
 
+export interface SerializedNftFarmsState {
+  data: SerializedNftFarm[]
+  loadArchivedFarmsData: boolean
+  userDataLoaded: boolean
+  loadingKeys: Record<string, boolean>
+  poolLength?: number
+}
+
 export interface DeserializedFarmsState {
   data: DeserializedFarm[]
+  loadArchivedFarmsData: boolean
+  userDataLoaded: boolean
+  poolLength?: number
+}
+
+export interface DeserializedNftFarmsState {
+  data: DeserializedNftFarm[]
   loadArchivedFarmsData: boolean
   userDataLoaded: boolean
   poolLength?: number
@@ -565,4 +619,5 @@ export interface State {
   pools: PoolsState
   predictions: PredictionsState
   lottery: LotteryState
+  nftFarms: SerializedNftFarmsState
 }

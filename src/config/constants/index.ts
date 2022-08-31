@@ -4,7 +4,7 @@ import { mainnetTokens, testnetTokens, ganacheTokens } from './tokens'
 
 export const ROUTER_ADDRESS = {
   [ChainId.MAINNET]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
-  [ChainId.TESTNET]: '0x64b2439a7B9946B04DcA63684fAF5ec1198355aE',
+  [ChainId.TESTNET]: '0x011b07969DDe64EB8a4E7892093ab82CBA206Ad3',
   [ChainId.GANACHE]: '0x2F6b1f314Db8938c41eCf34F0960af68AdA58E86',
 }
 
@@ -106,6 +106,7 @@ export const BLOCKED_ADDRESSES: string[] = [
 ]
 
 export { default as farmsConfig } from './farms'
+export { default as nftchef } from './nftchef'
 export { default as poolsConfig } from './pools'
 export { default as ifosConfig } from './ifo'
 

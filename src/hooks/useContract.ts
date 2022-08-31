@@ -32,6 +32,8 @@ import {
   getErc721CollectionContract,
   getBunnySpecialXmasContract,
   getGenesisContract,
+  getNftChefContract,
+  getPositionNftContract,
 } from 'utils/contractHelpers'
 import { getMulticallAddress } from 'utils/addressHelpers'
 import { VaultKey } from 'state/types'
@@ -342,3 +344,14 @@ export function useGenesisContract() {
   const { library } = useActiveWeb3React()
   return useMemo(() => getGenesisContract(library.getSigner()), [library])
 }
+
+export function useNftChefContract() {
+  const { library } = useActiveWeb3React()
+  return useMemo(() => getNftChefContract(library.getSigner()), [library])
+}
+
+export function usePositionNftContract() {
+  const { library } = useActiveWeb3React()
+  return useMemo(() => getPositionNftContract(library.getSigner()), [library])
+}
+

@@ -65,6 +65,11 @@ const config: (t: ContextApi['t'], languageCode?: string) => ConfigMenuItemsType
     items: []
   },
   {
+    label: 'Nft Farm',
+    href: '/nftchef',
+    items: []
+  },
+  {
     label: 'Info',
     href: '/info',
     items: []

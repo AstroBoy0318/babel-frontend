@@ -65,7 +65,7 @@ export enum PoolCategory {
   'AUTO' = 'Auto',
 }
 
-interface FarmConfigBaseProps {
+export interface FarmConfigBaseProps {
   pid: number
   lpSymbol: string
   lpAddresses: Address
