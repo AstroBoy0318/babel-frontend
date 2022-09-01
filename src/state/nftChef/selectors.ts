@@ -2,6 +2,7 @@ import BigNumber from 'bignumber.js'
 import { BIG_ZERO } from 'utils/bigNumber'
 import { createSelector } from '@reduxjs/toolkit'
 import { State, DeserializedNftFarm, SerializedNftFarm, DeserializedNftFarmUserData } from '../types'
+import { deserializeToken } from 'state/user/hooks/helpers'
 
 const selectFarmByKey = (key: string, value: string | number) => (state: State) =>
   state.nftFarms.data.find((f) => f[key] === value)
@@ -24,7 +25,10 @@ const deserializeFarm = (farm: SerializedNftFarm): DeserializedNftFarm => {
         dual,
         multiplier,
         isCommunity,
+        token: deserializeToken(farm.token),
+        quoteToken: deserializeToken(farm.quoteToken),
         userData: deserializeFarmUserData(farm),
+        totalStakedLP: farm.totalStakedLP ? new BigNumber(farm.totalStakedLP) : BIG_ZERO,
         tokenAmountTotal: farm.tokenAmountTotal ? new BigNumber(farm.tokenAmountTotal) : BIG_ZERO,
         quoteTokenAmountTotal: farm.quoteTokenAmountTotal ? new BigNumber(farm.quoteTokenAmountTotal) : BIG_ZERO,
         lpTotalInQuoteToken: farm.lpTotalInQuoteToken ? new BigNumber(farm.lpTotalInQuoteToken) : BIG_ZERO,

@@ -12,14 +12,14 @@ import Multiplier, { MultiplierProps } from './Multiplier'
 import Liquidity, { LiquidityProps } from './Liquidity'
 import ActionPanel from './Actions/ActionPanel'
 import CellLayout from './CellLayout'
-import { DesktopColumnSchema, MobileColumnSchema, FarmWithStakedValue } from '../types'
+import { DesktopColumnSchema, MobileColumnSchema, NftFarmWithStakedValue } from '../types'
 
 export interface RowProps {
   farm: FarmProps
   earned: EarnedProps
   multiplier: MultiplierProps
   liquidity: LiquidityProps
-  details: FarmWithStakedValue
+  details: NftFarmWithStakedValue
 }
 
 interface RowPropsWithLoading extends RowProps {

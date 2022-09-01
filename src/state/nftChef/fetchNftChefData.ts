@@ -1,10 +1,10 @@
 import masterchefABI from 'config/abi/nftChef.json'
 import chunk from 'lodash/chunk'
 import { multicallv2 } from 'utils/multicall'
-import { FarmConfigBaseProps } from '../../config/constants/types'
 import { SerializedNftFarm } from '../types'
 import { getNftChefAddress } from '../../utils/addressHelpers'
 import { getNftChefContract } from '../../utils/contractHelpers'
+import { SerializedNftFarmConfig } from 'config/constants/types'
 
 const masterChefAddress = getNftChefAddress()
 const masterChefContract = getNftChefContract()
@@ -31,7 +31,7 @@ const nftChefFarmCalls = (farm: SerializedNftFarm) => {
     : [null, null]
 }
 
-export const fetchNftChefData = async (farms: FarmConfigBaseProps[]): Promise<any[]> => {
+export const fetchNftChefData = async (farms: SerializedNftFarmConfig[]): Promise<any[]> => {
   const masterChefCalls = farms.map((farm) => nftChefFarmCalls(farm))
   const chunkSize = masterChefCalls.flat().length / farms.length
   const masterChefAggregatedCalls = masterChefCalls

@@ -13,7 +13,8 @@ import {
   TranslatableText,
   DeserializedFarmConfig,
   FetchStatus,
-  FarmConfigBaseProps,
+  DeserializedNftFarmConfig,
+  SerializedNftFarmConfig,
 } from 'config/constants/types'
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, State, unknown, AnyAction>
@@ -69,7 +70,7 @@ export interface SerializedFarm extends SerializedFarmConfig {
   userData?: SerializedFarmUserData
 }
 
-export interface SerializedNftFarm extends FarmConfigBaseProps {
+export interface SerializedNftFarm extends SerializedNftFarmConfig {
   tokenAmountTotal?: SerializedBigNumber
   quoteTokenAmountTotal?: SerializedBigNumber
   lpTotalInQuoteToken?: SerializedBigNumber
@@ -77,6 +78,7 @@ export interface SerializedNftFarm extends FarmConfigBaseProps {
   tokenPriceVsQuote?: SerializedBigNumber
   poolWeight?: SerializedBigNumber
   userData?: SerializedNftFarmUserData
+  totalStakedLP?: SerializedBigNumber
 }
 
 export interface DeserializedFarm extends DeserializedFarmConfig {
@@ -91,7 +93,7 @@ export interface DeserializedFarm extends DeserializedFarmConfig {
   userData?: DeserializedFarmUserData
 }
 
-export interface DeserializedNftFarm extends FarmConfigBaseProps {
+export interface DeserializedNftFarm extends DeserializedNftFarmConfig {
   tokenPriceBusd?: string
   quoteTokenPriceBusd?: string
   tokenAmountTotal?: BigNumber
@@ -101,6 +103,7 @@ export interface DeserializedNftFarm extends FarmConfigBaseProps {
   tokenPriceVsQuote?: BigNumber
   poolWeight?: BigNumber
   userData?: DeserializedNftFarmUserData
+  totalStakedLP?: BigNumber
 }
 
 export enum VaultKey {

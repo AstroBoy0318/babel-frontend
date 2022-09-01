@@ -10,7 +10,7 @@ import { getAddress } from 'utils/addressHelpers'
 import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
 import DetailsSection from './DetailsSection'
 import CardHeading from './CardHeading'
-import { FarmWithStakedValue } from '../types'
+import { NftFarmWithStakedValue } from '../types'
 import CardActionsContainer from './CardActionsContainer'
 import ApyButton from './ApyButton'
 
@@ -31,20 +31,21 @@ const ExpandingWrapper = styled.div`
 `
 
 interface FarmCardProps {
-  farm: FarmWithStakedValue
+  farm: NftFarmWithStakedValue
+  displayApr: string
   removed: boolean
   cakePrice?: BigNumber
   account?: string
 }
 
-const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account }) => {
+const FarmCard: React.FC<FarmCardProps> = ({ farm, displayApr, removed, cakePrice, account }) => {
   const { t } = useTranslation()
 
   const [showExpandableSection, setShowExpandableSection] = useState(false)
 
   const totalValueFormatted =
-    farm.lpTotalSupply && farm.lpTotalSupply.gt(0)
-      ? `${farm.lpTotalSupply.toNumber().toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+    farm.totalStakedLP && farm.totalStakedLP.gt(0)
+      ? `${farm.totalStakedLP.toNumber().toLocaleString(undefined, { maximumFractionDigits: 0 })}`
       : ''
 
   const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANCAKE', '')
@@ -63,6 +64,10 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account }
           quoteToken={farm.quoteToken}
         />
         <Flex justifyContent="space-between">
+          <Text>{t('APR')}:</Text>
+          {displayApr?<Text bold>{displayApr}%</Text>:<Skeleton width={75} height={25} />}
+        </Flex>
+        <Flex justifyContent="space-between">
           <Text>{t('Earn')}:</Text>
           <Text bold>{earnLabel}</Text>
         </Flex>
@@ -72,7 +77,6 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account }
           account={account}
         />
       </FarmCardInnerContainer>
-
       <ExpandingWrapper>
         <ExpandableSectionButton
           onClick={() => setShowExpandableSection(!showExpandableSection)}

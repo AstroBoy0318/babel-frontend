@@ -5,7 +5,7 @@ import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
 import { getAddress } from 'utils/addressHelpers'
 import { getBscScanLink } from 'utils'
 import { FarmAuctionTag, CoreTag, DualTag } from 'components/Tags'
-import { FarmWithStakedValue } from '../../types'
+import { NftFarmWithStakedValue } from '../../types'
 
 import HarvestAction from './HarvestAction'
 import StakedAction from './StakedAction'
@@ -15,7 +15,7 @@ import Liquidity, { LiquidityProps } from '../Liquidity'
 export interface ActionPanelProps {
   multiplier: MultiplierProps
   liquidity: LiquidityProps
-  details: FarmWithStakedValue
+  details: NftFarmWithStakedValue
   userDataReady: boolean
   expanded: boolean
 }

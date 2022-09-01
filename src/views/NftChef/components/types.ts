@@ -101,4 +101,5 @@ export interface FarmWithStakedValue extends DeserializedFarm {
 }
 export interface NftFarmWithStakedValue extends DeserializedNftFarm {
   liquidity?: BigNumber
+  totalStakedLP?: BigNumber
 }

@@ -10,7 +10,7 @@ import { useAppDispatch } from 'state'
 import { fetchNftFarmUserDataAsync } from 'state/nftChef'
 import styled from 'styled-components'
 import { getAddress } from 'utils/addressHelpers'
-import { FarmWithStakedValue } from '../types'
+import { NftFarmWithStakedValue } from '../types'
 import useApproveFarm from '../../hooks/useApproveFarm'
 import HarvestAction from './HarvestAction'
 import StakeAction from './StakeAction'
@@ -20,7 +20,7 @@ const Action = styled.div`
 `
 
 interface FarmCardActionsProps {
-  farm: FarmWithStakedValue
+  farm: NftFarmWithStakedValue
   account?: string
   addLiquidityUrl?: string
   lpLabel?: string
@@ -32,9 +32,8 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
   const { toastSuccess } = useToast()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
   const { pid, lpAddresses } = farm
-  const { allowance, earnings } = farm.userData || {}
+  const { earnings } = farm.userData || {}
   const lpAddress = getAddress(lpAddresses)
-  const isApproved = account && allowance && allowance.isGreaterThan(0)
   const dispatch = useAppDispatch()
 
   const lpContract = useERC20(lpAddress)

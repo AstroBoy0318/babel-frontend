@@ -4,9 +4,9 @@ import nftABI from 'config/abi/positionNft.json'
 import nftChefABI from 'config/abi/nftChef.json'
 import multicall from 'utils/multicall'
 import { getAddress, getNftChefAddress, getPositionNftAddress } from 'utils/addressHelpers'
-import { SerializedFarmConfig, FarmConfigBaseProps } from 'config/constants/types'
+import { SerializedNftFarmConfig } from 'config/constants/types'
 
-export const fetchFarmUserTokenBalances = async (account: string, farmsToFetch: FarmConfigBaseProps[]) => {
+export const fetchFarmUserTokenBalances = async (account: string, farmsToFetch: SerializedNftFarmConfig[]) => {
   const nftAddress = getPositionNftAddress()
   const calls = farmsToFetch.map((farm) => {
     const lpContractAddress = getAddress(farm.lpAddresses)
@@ -41,7 +41,7 @@ export const fetchFarmUserTokenBalances = async (account: string, farmsToFetch: 
   return [parsedTokenBalances, parsedBalanceIDs]
 }
 
-export const fetchFarmUserStakedBalances = async (account: string, farmsToFetch: FarmConfigBaseProps[]) => {
+export const fetchFarmUserStakedBalances = async (account: string, farmsToFetch: SerializedNftFarmConfig[]) => {
   const nftChefAddress = getNftChefAddress()
 
   const calls = farmsToFetch.map((farm) => {
@@ -99,7 +99,7 @@ export const fetchFarmUserStakedBalances = async (account: string, farmsToFetch:
   return [parsedStakedBalances, parsedStakedBalanceIDs]
 }
 
-export const fetchFarmUserEarnings = async (account: string, farmsToFetch: FarmConfigBaseProps[]) => {
+export const fetchFarmUserEarnings = async (account: string, farmsToFetch: SerializedNftFarmConfig[]) => {
   const masterChefAddress = getNftChefAddress()
 
   const calls = farmsToFetch.map((farm) => {

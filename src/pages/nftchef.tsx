@@ -18,6 +18,7 @@ const NftChefPage = () => {
         <FarmCard
           key={farm.pid}
           farm={farm}
+          displayApr={getDisplayApr(farm.apr, farm.lpRewardsApr)}
           cakePrice={cakePrice}
           account={account}
           removed={false}

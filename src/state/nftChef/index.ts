@@ -20,6 +20,7 @@ import type {
   import { fetchNftChefFarmPoolLength } from './fetchNftChefData'
   import { resetUserState } from '../global/actions'
 import { BigNumber } from '@ethersproject/bignumber'
+import getFarmsPrices from './getNftFarmsPrices'
   
   const noAccountFarmConfig = nftchef.map((farm) => ({
     ...farm,
@@ -58,7 +59,6 @@ import { BigNumber } from '@ethersproject/bignumber'
       // Add price helper farms
       // const farmsWithPriceHelpers = farmsCanFetch.concat(priceHelperLpsConfig)
       const farmsWithPriceHelpers = farmsCanFetch
-  
       const farms = await fetchFarms(farmsWithPriceHelpers)
   
       // Filter out price helper LP config farms

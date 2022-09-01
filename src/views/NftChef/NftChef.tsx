@@ -26,10 +26,11 @@ import ToggleView from 'components/ToggleView/ToggleView'
 import Table from './components/FarmTable/FarmTable'
 import FarmTabButtons from './components/FarmTabButtons'
 import { RowProps } from './components/FarmTable/Row'
-import { DesktopColumnSchema, FarmWithStakedValue, NftFarmWithStakedValue } from './components/types'
-import { useCakeBusdPrice } from 'hooks/useBUSDPrice'
-import { getMasterchefContract } from 'utils/contractHelpers'
+import { NftFarmWithStakedValue } from './components/types'
+import { useCakeBusdPrice, useBNBBusdPrice } from 'hooks/useBUSDPrice'
+import { getNftChefContract } from 'utils/contractHelpers'
 import { useCurrentBlock } from 'state/block/hooks'
+import getFarmsPrices from 'state/nftChef/getNftFarmsPrices'
 
 const ControlContainer = styled.div`
   display: flex;
@@ -119,7 +120,8 @@ const NftChef: React.FC = ({ children }) => {
   const { pathname } = useRouter()
   const { t } = useTranslation()
   const { data: farmsLP, userDataLoaded, poolLength } = useNftFarms()
-  const price = useCakeBusdPrice();
+  const price = useCakeBusdPrice()
+  const bnbPrice = useBNBBusdPrice()
   const cakePrice = new BigNumber(price ? price.toFixed(3) : 0)
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = useUserFarmsViewMode()
@@ -159,7 +161,7 @@ const NftChef: React.FC = ({ children }) => {
     (farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
   )
 
-  const masterchefContract = getMasterchefContract()
+  const nftchefContract = getNftChefContract()
   
   const [currentMultiplier, setCurrentMultiplier] = useState(1)
   const [tokenPerSecond, setTokenPerSecond] = useState(new BigNumber(0))
@@ -167,10 +169,15 @@ const NftChef: React.FC = ({ children }) => {
   const farmsList = useCallback(
     (farmsToDisplay: DeserializedNftFarm[]): NftFarmWithStakedValue[] => {
       let farmsToDisplayWithAPR: NftFarmWithStakedValue[] = farmsToDisplay.map((farm) => {
-        if (!farm.lpTotalInQuoteToken || !farm.quoteTokenPriceBusd) {
+        // if (!farm.lpTotalInQuoteToken || !farm.quoteTokenPriceBusd) {
+        //   return farm
+        // }
+        if (!farm.lpTotalInQuoteToken) {
           return farm
         }
-        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteTokenPriceBusd)
+        const farmWithCorrectPrice = getFarmsPrices([farm], bnbPrice)[0]
+        
+        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farmWithCorrectPrice.quoteTokenPriceBusd)
         const { cakeRewardsApr, lpRewardsApr } = isActive
           ? getFarmApr(tokenPerSecond, new BigNumber(farm.poolWeight), cakePrice, totalLiquidity, farm.lpAddresses[ChainId.TESTNET])
           : { cakeRewardsApr: 0, lpRewardsApr: 0 }
@@ -199,24 +206,24 @@ const NftChef: React.FC = ({ children }) => {
   const chosenFarmsMemoized = useMemo(() => {
     let chosenFarms = []
 
-    const sortFarms = (farms: FarmWithStakedValue[]): FarmWithStakedValue[] => {
+    const sortFarms = (farms: NftFarmWithStakedValue[]): NftFarmWithStakedValue[] => {
       switch (sortOption) {
         case 'multiplier':
           return orderBy(
             farms,
-            (farm: FarmWithStakedValue) => (farm.multiplier ? Number(farm.multiplier.slice(0, -1)) : 0),
+            (farm: NftFarmWithStakedValue) => (farm.multiplier ? Number(farm.multiplier.slice(0, -1)) : 0),
             'desc',
           )
         case 'earned':
           return orderBy(
             farms,
-            (farm: FarmWithStakedValue) => (farm.userData ? Number(farm.userData.earnings) : 0),
+            (farm: NftFarmWithStakedValue) => (farm.userData ? Number(farm.userData.earnings) : 0),
             'desc',
           )
         case 'liquidity':
-          return orderBy(farms, (farm: FarmWithStakedValue) => Number(farm.liquidity), 'desc')
+          return orderBy(farms, (farm: NftFarmWithStakedValue) => Number(farm.liquidity), 'desc')
         case 'latest':
-          return orderBy(farms, (farm: FarmWithStakedValue) => Number(farm.pid), 'desc')
+          return orderBy(farms, (farm: NftFarmWithStakedValue) => Number(farm.pid), 'desc')
         default:
           return farms
       }
@@ -252,8 +259,8 @@ const NftChef: React.FC = ({ children }) => {
   chosenFarmsLength.current = chosenFarmsMemoized.length
 
   useEffect(() => {
-    masterchefContract.getMultiplierEx(currentBlock.toString() ,(currentBlock+1).toString()).then(re => setCurrentMultiplier(Number(re)))
-    masterchefContract.babelPerBlock().then(re => setTokenPerSecond(getBalanceAmount(new BigNumber(re.toString()))))
+    nftchefContract.getMultiplierEx(currentBlock.toString() ,(currentBlock+1).toString()).then(re => setCurrentMultiplier(Number(re)))
+    nftchefContract.babelPerBlock().then(re => setTokenPerSecond(getBalanceAmount(new BigNumber(re.toString()))))
     if (isIntersecting) {
       setNumberOfFarmsVisible((farmsCurrentlyVisible) => {
         if (farmsCurrentlyVisible <= chosenFarmsLength.current) {

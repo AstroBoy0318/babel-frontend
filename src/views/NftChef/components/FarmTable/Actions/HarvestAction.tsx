@@ -12,11 +12,11 @@ import { fetchFarmUserDataAsync } from 'state/farms'
 import { usePriceCakeBusd } from 'state/farms/hooks'
 import { BIG_ZERO } from 'utils/bigNumber'
 import { getBalanceAmount } from 'utils/formatBalance'
-import { FarmWithStakedValue } from '../../types'
+import { NftFarmWithStakedValue } from '../../types'
 import useHarvestNftFarm from '../../../hooks/useHarvestNftFarm'
 import { ActionContainer, ActionContent, ActionTitles } from './styles'
 
-interface HarvestActionProps extends FarmWithStakedValue {
+interface HarvestActionProps extends NftFarmWithStakedValue {
   userDataReady: boolean
 }
 

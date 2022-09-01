@@ -21,14 +21,14 @@ import useUnstakeNftFarms from '../../../hooks/useUnstakeNftFarms'
 import DepositModal from '../../DepositModal'
 import WithdrawModal from '../../WithdrawModal'
 import { ActionContainer, ActionContent, ActionTitles } from './styles'
-import { FarmWithStakedValue } from '../../types'
+import { NftFarmWithStakedValue } from '../../types'
 import StakedLP from '../../StakedLP'
 
 const IconButtonWrapper = styled.div`
   display: flex;
 `
 
-interface StackedActionProps extends FarmWithStakedValue {
+interface StackedActionProps extends NftFarmWithStakedValue {
   userDataReady: boolean
   lpLabel?: string
   displayApr?: string

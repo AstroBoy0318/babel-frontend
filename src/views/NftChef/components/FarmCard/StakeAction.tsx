@@ -14,10 +14,10 @@ import DepositModal from '../DepositModal'
 import WithdrawModal from '../WithdrawModal'
 import useUnstakeNftFarms from '../../hooks/useUnstakeNftFarms'
 import useStakeNftFarms from '../../hooks/useStakeNftFarms'
-import { FarmWithStakedValue } from '../types'
+import { NftFarmWithStakedValue } from '../types'
 import StakedLP from '../StakedLP'
 
-interface FarmCardActionsProps extends FarmWithStakedValue {
+interface FarmCardActionsProps extends NftFarmWithStakedValue {
   lpLabel?: string
   addLiquidityUrl?: string
   displayApr?: string

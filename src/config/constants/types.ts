@@ -65,7 +65,7 @@ export enum PoolCategory {
   'AUTO' = 'Auto',
 }
 
-export interface FarmConfigBaseProps {
+interface FarmConfigBaseProps {
   pid: number
   lpSymbol: string
   lpAddresses: Address
@@ -84,6 +84,16 @@ export interface SerializedFarmConfig extends FarmConfigBaseProps {
 }
 
 export interface DeserializedFarmConfig extends FarmConfigBaseProps {
+  token: Token
+  quoteToken: Token
+}
+
+export interface SerializedNftFarmConfig extends FarmConfigBaseProps {
+  token: SerializedToken
+  quoteToken: SerializedToken
+}
+
+export interface DeserializedNftFarmConfig extends FarmConfigBaseProps {
   token: Token
   quoteToken: Token
 }
