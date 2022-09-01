@@ -117,7 +117,7 @@ export const fetchFarmUserEarnings = async (account: string, farmsToFetch: Seria
   return parsedEarnings
 }
 
-function non_zero(a) {  
+export const non_zero = (a)=>{  
   let result = []
   for (let i = 0; i < a.length; i++)
       if (a[i] != 0)
@@ -125,7 +125,7 @@ function non_zero(a) {
   return result;
 }
 
-function non_zero_cnt(a) {  
+export const non_zero_cnt = (a)=>{  
   let count = 0;
   for (let i = 0; i < a.length; i++)
       if (a[i] != 0)

@@ -53,6 +53,12 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, displayApr, removed, cakePric
 
   const lpAddress = getAddress(farm.lpAddresses)
 
+  const liquidityUrlPathParts = getLiquidityUrlPathParts({
+    quoteTokenAddress: farm.quoteToken.address,
+    tokenAddress: farm.token.address,
+  })
+  const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
+
   return (
     <StyledCard>
       <FarmCardInnerContainer>
@@ -89,6 +95,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, displayApr, removed, cakePric
             infoAddress={`/info/pool/${lpAddress}`}
             totalValueFormatted={totalValueFormatted}
             lpLabel={lpLabel}
+            addLiquidityUrl={addLiquidityUrl}
           />
         )}
       </ExpandingWrapper>

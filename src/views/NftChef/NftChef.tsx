@@ -121,7 +121,8 @@ const NftChef: React.FC = ({ children }) => {
   const { t } = useTranslation()
   const { data: farmsLP, userDataLoaded, poolLength } = useNftFarms()
   const price = useCakeBusdPrice()
-  const bnbPrice = useBNBBusdPrice()
+  const bnbprice = useBNBBusdPrice()
+  const bnbPrice = new BigNumber(bnbprice ? bnbprice.toFixed(3) : 0)
   const cakePrice = new BigNumber(price ? price.toFixed(3) : 0)
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = useUserFarmsViewMode()
@@ -193,7 +194,7 @@ const NftChef: React.FC = ({ children }) => {
       }
       return farmsToDisplayWithAPR
     },
-    [cakePrice, query, isActive],
+    [cakePrice, query, isActive, bnbPrice],
   )
 
   const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {

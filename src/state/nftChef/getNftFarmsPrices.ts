@@ -86,11 +86,11 @@ const getFarmQuoteTokenPrice = (
   return BIG_ZERO
 }
 
-const getFarmsPrices = (farms: DeserializedNftFarm[], bnbPriceBusd:Price) => {
+const getFarmsPrices = (farms: DeserializedNftFarm[], bnbPriceBusd:BigNumber) => {
   const farmsWithPrices = farms.map((farm) => {
     const quoteTokenFarm = getFarmFromTokenSymbol(farms, farm.quoteToken.symbol)
-    const tokenPriceBusd = getFarmBaseTokenPrice(farm, quoteTokenFarm, new BigNumber(bnbPriceBusd.toFixed(3)))
-    const quoteTokenPriceBusd = getFarmQuoteTokenPrice(farm, quoteTokenFarm, new BigNumber(bnbPriceBusd.toFixed(3)))
+    const tokenPriceBusd = getFarmBaseTokenPrice(farm, quoteTokenFarm, bnbPriceBusd)
+    const quoteTokenPriceBusd = getFarmQuoteTokenPrice(farm, quoteTokenFarm, bnbPriceBusd)
 
     return {
       ...farm,

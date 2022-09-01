@@ -4,6 +4,7 @@ import { fetchPublicFarmsData } from './fetchPublicNftFarmData'
 import { fetchNftChefData } from './fetchNftChefData'
 import { SerializedNftFarm } from '../types'
 import { SerializedNftFarmConfig } from 'config/constants/types'
+import { non_zero_cnt } from './fetchNftFarmUser'
 
 const fetchFarms = async (farmsToFetch: SerializedNftFarmConfig[]): Promise<SerializedNftFarm[]> => {
   const farmResult = await fetchPublicFarmsData(farmsToFetch)
@@ -40,7 +41,7 @@ const fetchFarms = async (farmsToFetch: SerializedNftFarmConfig[]): Promise<Seri
       lpTotalInQuoteToken: lpTotalInQuoteToken.toJSON(),
       tokenPriceVsQuote: quoteTokenAmountTotal.div(tokenAmountTotal).toJSON(),
       lpTotalSupply: lpTotalSupply,
-      totalStakedLP: new BigNumber(totalStakedLP[0].length).toJSON(),
+      totalStakedLP: new BigNumber(non_zero_cnt(totalStakedLP[0])).toJSON(),
       poolWeight: poolWeight.toJSON(),
       multiplier: `${allocPoint.div(100).toString()}X`,
     }

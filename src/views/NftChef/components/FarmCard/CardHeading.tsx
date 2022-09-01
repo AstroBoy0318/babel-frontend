@@ -25,10 +25,12 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({ lpLabel, multiplier, is
   return (
     <Wrapper justifyContent="space-between" alignItems="center" mb="12px">
       {/* <TokenPairImage variant="inverted" primaryToken={token} secondaryToken={quoteToken} width={64} height={64} /> */}
-      <Flex flexDirection="column" alignItems="flex-end">
-        <Heading mb="4px">{lpLabel.split(' ')[0]}</Heading>
-        <Flex justifyContent="center">
-          <CoreTag />
+      <Flex flexDirection="column" alignItems="center" flex={1}>
+        <img src="/images/babel_logo.svg"/>
+        {/* <Heading mb="4px">{lpLabel.split(' ')[0]}</Heading> */}
+        <Flex justifyContent="center" mt={20}>
+          {/* <CoreTag /> */}
+          <Heading mb="4px">{lpLabel.split(' ')[0]}</Heading>
           {multiplier ? (
             <MultiplierTag variant="secondary">{multiplier}</MultiplierTag>
           ) : (
