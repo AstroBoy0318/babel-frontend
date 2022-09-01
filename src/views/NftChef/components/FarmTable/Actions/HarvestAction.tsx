@@ -13,7 +13,7 @@ import { usePriceCakeBusd } from 'state/farms/hooks'
 import { BIG_ZERO } from 'utils/bigNumber'
 import { getBalanceAmount } from 'utils/formatBalance'
 import { FarmWithStakedValue } from '../../types'
-import useHarvestFarm from '../../../hooks/useHarvestFarm'
+import useHarvestNftFarm from '../../../hooks/useHarvestNftFarm'
 import { ActionContainer, ActionContent, ActionTitles } from './styles'
 
 interface HarvestActionProps extends FarmWithStakedValue {
@@ -36,7 +36,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
     displayBalance = earnings.toFixed(3, BigNumber.ROUND_DOWN)
   }
 
-  const { onReward } = useHarvestFarm(pid)
+  const { onReward } = useHarvestNftFarm(pid)
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const { account } = useWeb3React()

@@ -8,7 +8,7 @@ import FlexLayout from 'components/Layout/Flex'
 import Page from 'components/Layout/Page'
 import { useNftFarms, usePollFarmsWithUserData } from 'state/nftChef/hooks'
 import useIntersectionObserver from 'hooks/useIntersectionObserver'
-import { DeserializedFarm } from 'state/types'
+import { DeserializedFarm, DeserializedNftFarm } from 'state/types'
 import { useTranslation } from 'contexts/Localization'
 import { getBalanceNumber, getBalanceAmount } from 'utils/formatBalance'
 import { getFarmApr } from 'utils/apr'
@@ -26,7 +26,7 @@ import ToggleView from 'components/ToggleView/ToggleView'
 import Table from './components/FarmTable/FarmTable'
 import FarmTabButtons from './components/FarmTabButtons'
 import { RowProps } from './components/FarmTable/Row'
-import { DesktopColumnSchema, FarmWithStakedValue } from './components/types'
+import { DesktopColumnSchema, FarmWithStakedValue, NftFarmWithStakedValue } from './components/types'
 import { useCakeBusdPrice } from 'hooks/useBUSDPrice'
 import { getMasterchefContract } from 'utils/contractHelpers'
 import { useCurrentBlock } from 'state/block/hooks'
@@ -165,8 +165,8 @@ const NftChef: React.FC = ({ children }) => {
   const [tokenPerSecond, setTokenPerSecond] = useState(new BigNumber(0))
 
   const farmsList = useCallback(
-    (farmsToDisplay: DeserializedFarm[]): FarmWithStakedValue[] => {
-      let farmsToDisplayWithAPR: FarmWithStakedValue[] = farmsToDisplay.map((farm) => {
+    (farmsToDisplay: DeserializedNftFarm[]): NftFarmWithStakedValue[] => {
+      let farmsToDisplayWithAPR: NftFarmWithStakedValue[] = farmsToDisplay.map((farm) => {
         if (!farm.lpTotalInQuoteToken || !farm.quoteTokenPriceBusd) {
           return farm
         }
@@ -180,7 +180,7 @@ const NftChef: React.FC = ({ children }) => {
 
       if (query) {
         const lowercaseQuery = latinise(query.toLowerCase())
-        farmsToDisplayWithAPR = farmsToDisplayWithAPR.filter((farm: FarmWithStakedValue) => {
+        farmsToDisplayWithAPR = farmsToDisplayWithAPR.filter((farm: NftFarmWithStakedValue) => {
           return latinise(farm.lpSymbol.toLowerCase()).includes(lowercaseQuery)
         })
       }

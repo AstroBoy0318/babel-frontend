@@ -8,6 +8,7 @@ import { useTranslation } from 'contexts/Localization'
 import { getFullDisplayBalance, formatNumber } from 'utils/formatBalance'
 import { getInterestBreakdown } from 'utils/compoundApyHelpers'
 import { BIG_ZERO } from 'utils/bigNumber'
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber'
 
 const TokenItems = styled(Flex) <{ selected?: boolean }>`
   cursor: pointer;
@@ -27,7 +28,7 @@ interface DepositModalProps {
   onConfirm: (amount: string) => void
   onDismiss?: () => void
   tokenName?: string
-  tokenIDs: Array<Array<BigNumber>>
+  tokenIDs?: Array<Array<EthersBigNumber>>
   addLiquidityUrl?: string
   cakePrice?: BigNumber
 }

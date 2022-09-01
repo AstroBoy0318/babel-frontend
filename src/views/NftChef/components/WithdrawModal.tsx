@@ -5,6 +5,7 @@ import { ModalActions, ModalInput } from 'components/Modal'
 import { useTranslation } from 'contexts/Localization'
 import { getFullDisplayBalance } from 'utils/formatBalance'
 import styled from 'styled-components'
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber'
 
 const TokenItems = styled(Flex) <{ selected?: boolean }>`
   cursor: pointer;
@@ -18,7 +19,7 @@ const TokenItems = styled(Flex) <{ selected?: boolean }>`
 
 interface WithdrawModalProps {
   max: BigNumber
-  tokenIDs: Array<Array<BigNumber>>
+  tokenIDs?: Array<Array<EthersBigNumber>>
   onConfirm: (amount: string) => void
   onDismiss?: () => void
   tokenName?: string

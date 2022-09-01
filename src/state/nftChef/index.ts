@@ -25,9 +25,9 @@ import { BigNumber } from '@ethersproject/bignumber'
     ...farm,
     userData: {
       tokenBalance: '0',
-      tokenBalanceIDs: [],
+      tokenBalanceIDs: new Array<Array<BigNumber>>(),
       stakedBalance: '0',
-      stakedBalanceIDs: [],
+      stakedBalanceIDs: new Array<Array<BigNumber>>(),
       earnings: '0',
     },
   }))
@@ -152,9 +152,9 @@ import { BigNumber } from '@ethersproject/bignumber'
             ...farm,
             userData: {
               tokenBalance: '0',
-              tokenBalanceIDs: [[]],
+              tokenBalanceIDs: new Array<Array<BigNumber>>(),
               stakedBalance: '0',
-              stakedBalanceIDs: [[]],
+              stakedBalanceIDs: new Array<Array<BigNumber>>(),
               earnings: '0',
             },
           }

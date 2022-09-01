@@ -16,8 +16,8 @@ import styled from 'styled-components'
 import { getAddress } from 'utils/addressHelpers'
 import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
 import useApproveFarm from '../../../hooks/useApproveFarm'
-import useStakeFarms from '../../../hooks/useStakeFarms'
-import useUnstakeFarms from '../../../hooks/useUnstakeFarms'
+import useStakeNftFarms from '../../../hooks/useStakeNftFarms'
+import useUnstakeNftFarms from '../../../hooks/useUnstakeNftFarms'
 import DepositModal from '../../DepositModal'
 import WithdrawModal from '../../WithdrawModal'
 import { ActionContainer, ActionContent, ActionTitles } from './styles'
@@ -53,8 +53,8 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
   const { account } = useWeb3React()
   const { allowance, tokenBalance, stakedBalance } = useFarmUser(pid)
-  const { onStake } = useStakeFarms(pid)
-  const { onUnstake } = useUnstakeFarms(pid)
+  const { onStake } = useStakeNftFarms(pid)
+  const { onUnstake } = useUnstakeNftFarms(pid)
   const router = useRouter()
   const lpPrice = useLpTokenPrice(lpSymbol)
   const cakePrice = usePriceCakeBusd()
@@ -102,7 +102,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
     <DepositModal
       max={tokenBalance}
       lpLabel={lpLabel}
-      displayApr={displayApr}
+      // displayApr={displayApr}
       stakedBalance={stakedBalance}
       onConfirm={handleStake}
       tokenName={lpSymbol}
@@ -112,7 +112,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
     />,
   )
   const [onPresentWithdraw] = useModal(
-    <WithdrawModal max={stakedBalance} onConfirm={handleUnstake} tokenName={lpSymbol} />,
+    <WithdrawModal max={stakedBalance} onConfirm={handleUnstake} /*tokenName={lpSymbol}*/ />,
   )
   const lpContract = useERC20(lpAddress)
   const dispatch = useAppDispatch()

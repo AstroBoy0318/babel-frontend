@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import { DeserializedFarm } from 'state/types'
+import { DeserializedFarm, DeserializedNftFarm } from 'state/types'
 
 export type TableProps = {
   data?: TableDataTypes[]
@@ -97,5 +97,8 @@ export const DesktopColumnSchema: ColumnsDefTypes[] = [
 ]
 
 export interface FarmWithStakedValue extends DeserializedFarm {
+  liquidity?: BigNumber
+}
+export interface NftFarmWithStakedValue extends DeserializedNftFarm {
   liquidity?: BigNumber
 }

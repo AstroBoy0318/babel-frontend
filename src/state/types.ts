@@ -36,9 +36,9 @@ interface SerializedFarmUserData {
 
 interface SerializedNftFarmUserData {
   tokenBalance: string
-  tokenBalanceIDs: Array<Array<BigNumber>>
+  tokenBalanceIDs: Array<Array<EthersBigNumber>>
   stakedBalance: string
-  stakedBalanceIDs: Array<Array<BigNumber>>
+  stakedBalanceIDs: Array<Array<EthersBigNumber>>
   earnings: string
 }
 
@@ -51,9 +51,9 @@ export interface DeserializedFarmUserData {
 
 export interface DeserializedNftFarmUserData {
   tokenBalance: BigNumber
-  tokenBalanceIDs: Array<Array<BigNumber>>
+  tokenBalanceIDs: Array<Array<EthersBigNumber>>
   stakedBalance: BigNumber
-  stakedBalanceIDs: Array<Array<BigNumber>>
+  stakedBalanceIDs: Array<Array<EthersBigNumber>>
   earnings: BigNumber
 }
 
