@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Page from "views/Page"
 import styled from 'styled-components'
 import { AutoColumn } from '../../components/Layout/Column'
@@ -7,8 +7,13 @@ import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { useWeb3React } from '@web3-react/core'
 import { Flex, Button } from '@pancakeswap/uikit'
 import ConnectWalletButton from 'components/ConnectWalletButton'
-import { useGenesisContract } from 'hooks/useContract'
+import { useGenesisContract, useTokenContract } from 'hooks/useContract'
 import useToast from 'hooks/useToast'
+import tokens from 'config/constants/tokens'
+import { getGenesisAddress } from 'utils/addressHelpers'
+import { getBalanceNumber } from 'utils/formatBalance'
+import BigNumber from 'bignumber.js'
+import { MaxUint256 } from '@ethersproject/constants'
 
 const InputPanel = styled.div`
   display: flex;
@@ -76,7 +81,10 @@ export default function Genesis() {
     const [myAddress, setMyAddress] = useState(account)
     const [friendAddress, setFriendAddress] = useState("")
     const genesisContract = useGenesisContract();
+    const busdContract = useTokenContract(tokens.busd.address, true)
     const { toastSuccess, toastError } = useToast()
+    const [ pending, setPending ] = useState(false)
+    const [ isOpened, setOpened ] = useState(true)
 
     const handleInput1 = useCallback(
         (event) => {
@@ -100,10 +108,19 @@ export default function Genesis() {
 
     const addToGenesis = async () => {
         try{
-            await genesisContract.addToGenesis();
+            setPending(true)
+            const busdApproved = await busdContract.allowance(account, getGenesisAddress())
+            if(getBalanceNumber(new BigNumber(busdApproved._hex)) < 1) {
+                const tx = await busdContract.approve(getGenesisAddress(), MaxUint256)
+                await tx.wait()
+            }
+            const tx = await genesisContract.addToGenesis(account);
+            await tx.wait();
+            setPending(false)
         } catch (error: any) {
             const errorDescription = `${error.message} - ${error.data?.message}`
             toastError('Failed to Add', errorDescription)
+            setPending(false)
         }
     }
 
@@ -115,6 +132,26 @@ export default function Genesis() {
             toastError('Failed to Add', errorDescription)
         }
     }
+
+    const claim = async () => {
+        try{
+            setPending(true)
+            const proof = await genesisContract.viewProof()
+            const tx = await genesisContract.claim(proof)
+            await tx.wait()
+            setPending(false)
+        } catch (error: any) {
+            const errorDescription = `${error.message} - ${error.data?.message}`
+            toastError('Failed to Add', errorDescription)
+            setPending(false)
+        }
+    }
+
+    useEffect(()=>{
+        genesisContract.isGenesisOpen().then((re) => {
+            setOpened(re)
+        })
+    }, [genesisContract, setOpened])
     return (
         <Page>
             {account ? (<Flex flexDirection="column" width="100%">
@@ -137,9 +174,9 @@ export default function Genesis() {
                             </AutoColumn>
                         </InputContainer>
                     </ContainerRow>
-                    <Button mt={3} onClick={addToGenesis}>Add To Genesis</Button>
+                    <Button disabled={pending || !isOpened} mt={3} onClick={addToGenesis}>Add To Genesis</Button>
                 </InputPanel>
-                <InputPanel>
+                {/* <InputPanel>
                     <ContainerRow error={error2}>
                         <InputContainer>
                             <AutoColumn gap="md">
@@ -159,7 +196,10 @@ export default function Genesis() {
                         </InputContainer>
                     </ContainerRow>
                     <Button onClick={addFriendToGenesis} mt={3}>Add Friend To Genesis</Button>
-                </InputPanel>
+                </InputPanel> */}
+                <Flex justifyContent="space-around">
+                    <Button disabled={pending || isOpened} onClick={claim} mt={3}>Claim</Button>
+                </Flex>
             </Flex>) : (<ConnectWalletButton />)}
         </Page >
     )
