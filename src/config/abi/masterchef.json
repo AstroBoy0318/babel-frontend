@@ -11,6 +11,11 @@
             },
             {
                 "internalType": "address",
+                "name": "_treasury",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
                 "name": "_distributor",
                 "type": "address"
             },
@@ -73,9 +78,9 @@
             },
             {
                 "indexed": true,
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "pid",
-                "type": "uint256"
+                "type": "uint8"
             },
             {
                 "indexed": false,
@@ -121,9 +126,9 @@
             },
             {
                 "indexed": true,
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "pid",
-                "type": "uint256"
+                "type": "uint8"
             },
             {
                 "indexed": false,
@@ -206,9 +211,9 @@
             },
             {
                 "indexed": true,
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "pid",
-                "type": "uint256"
+                "type": "uint8"
             },
             {
                 "indexed": false,
@@ -265,9 +270,9 @@
         }],
         "name": "REWARD_MULTIPLIER",
         "outputs": [{
-            "internalType": "uint256",
+            "internalType": "uint16",
             "name": "",
-            "type": "uint256"
+            "type": "uint16"
         }],
         "stateMutability": "view",
         "type": "function"
@@ -345,9 +350,9 @@
     },
     {
         "inputs": [{
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "_pid",
-                "type": "uint256"
+                "type": "uint8"
             },
             {
                 "internalType": "uint256",
@@ -449,9 +454,9 @@
     },
     {
         "inputs": [{
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "_pid",
-                "type": "uint256"
+                "type": "uint8"
             },
             {
                 "internalType": "address",
@@ -501,11 +506,6 @@
                 "type": "uint256"
             },
             {
-                "internalType": "uint16",
-                "name": "depositFeeBP",
-                "type": "uint16"
-            },
-            {
                 "internalType": "uint256",
                 "name": "lastRewardPerBlock",
                 "type": "uint256"
@@ -519,6 +519,11 @@
                 "internalType": "uint256",
                 "name": "lpSupply",
                 "type": "uint256"
+            },
+            {
+                "internalType": "uint16",
+                "name": "depositFeeBP",
+                "type": "uint16"
             }
         ],
         "stateMutability": "view",
@@ -537,9 +542,9 @@
     },
     {
         "inputs": [{
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "_pid",
-                "type": "uint256"
+                "type": "uint8"
             },
             {
                 "internalType": "uint256",
@@ -679,9 +684,9 @@
     },
     {
         "inputs": [{
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "_pid",
-                "type": "uint256"
+                "type": "uint8"
             },
             {
                 "internalType": "uint256",

@@ -37,8 +37,8 @@ const deserializeFarm = (farm: SerializedFarm): DeserializedFarm => {
     poolWeight: farm.poolWeight ? new BigNumber(farm.poolWeight) : BIG_ZERO,
   }
 }
-
-const selectCakeFarm = (state: State) => state.farms.data.find((f) => f.pid === 1)
+// cake-bnb farm
+const selectCakeFarm = (state: State) => state.farms.data.find((f) => f.pid === 8)
 const selectFarmByKey = (key: string, value: string | number) => (state: State) =>
   state.farms.data.find((f) => f[key] === value)
 

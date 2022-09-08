@@ -90,7 +90,7 @@ export const mainnetTokens = defineTokens({
     'Tether USD',
     'https://tether.to/',
   ),
-  btcb: new Token(
+  wbtc: new Token(
     MAINNET,
     '0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c',
     18,
@@ -106,7 +106,7 @@ export const mainnetTokens = defineTokens({
     'Wrapped UST Token',
     'https://mirror.finance/',
   ),
-  eth: new Token(
+  weth: new Token(
     MAINNET,
     '0x2170Ed0880ac9A755fd29B2688956BD959F933F8',
     18,
@@ -476,7 +476,7 @@ export const mainnetTokens = defineTokens({
     'Multiplier Token',
     'https://multiplier.finance/',
   ),
-  iotx: new Token(
+  iota: new Token(
     MAINNET,
     '0x9678E42ceBEb63F23197D726B29b1CB20d0064E5',
     18,
@@ -500,7 +500,7 @@ export const mainnetTokens = defineTokens({
     'OPEN Governance Token',
     'https://opendao.io/',
   ),
-  dodo: new Token(
+  cardano: new Token(
     MAINNET,
     '0x67ee3Cb086F8a16f34beE3ca72FAD36F7Db929e2',
     18,
@@ -516,7 +516,7 @@ export const mainnetTokens = defineTokens({
     'Swingby Network Token',
     'https://swingby.network/',
   ),
-  zee: new Token(
+  maker: new Token(
     MAINNET,
     '0x44754455564474A89358B2C2265883DF993b12F0',
     18,
@@ -798,7 +798,7 @@ export const mainnetTokens = defineTokens({
     'Binance Beacon ETH',
     'https://ethereum.org/en/eth2/beacon-chain/',
   ),
-  mamzn: new Token(
+  avax: new Token(
     MAINNET,
     '0x3947B992DC0147D2D89dF0392213781b04B25075',
     18,
@@ -862,7 +862,7 @@ export const mainnetTokens = defineTokens({
     'Binance-Peg Polkadot Token',
     'https://polkadot.network/',
   ),
-  eos: new Token(
+  inch: new Token(
     MAINNET,
     '0x56b6fB708fC5732DEC1Afc8D8556423A2EDcCbD6',
     18,
@@ -894,7 +894,7 @@ export const mainnetTokens = defineTokens({
     'Binance-Peg Cosmos Token',
     'https://cosmos.network/',
   ),
-  yfii: new Token(
+  shiba: new Token(
     MAINNET,
     '0x7F70642d88cf1C4a3a7abb072B53B929b653edA5',
     18,
@@ -1014,7 +1014,7 @@ export const mainnetTokens = defineTokens({
     'LTO Network Token',
     'https://ltonetwork.com/',
   ),
-  pcws: new Token(
+  aave: new Token(
     MAINNET,
     '0xbcf39F0EDDa668C58371E519AF37CA705f2bFcbd',
     18,
@@ -1022,7 +1022,7 @@ export const mainnetTokens = defineTokens({
     'PolyCrowns Token',
     'https://game.seascape.network/',
   ),
-  zil: new Token(
+  realcake: new Token(
     MAINNET,
     '0xb86AbCb37C3A4B64f74f59301AFF131a1BEcC787',
     12,
@@ -2034,7 +2034,7 @@ export const mainnetTokens = defineTokens({
     'https://www.stepn.com/',
   ),
   bsw: new Token(MAINNET, '0x965F527D9159dCe6288a2219DB51fc6Eef120dD1', 18, 'BSW', 'Biswap', 'https://biswap.org/'),
-  tem: new Token(
+  mim: new Token(
     MAINNET,
     '0x19e6BfC1A6e4B042Fb20531244D47E252445df01',
     9,
@@ -2055,7 +2055,7 @@ export const testnetTokens = defineTokens({
   ),
   cake: new Token(
     TESTNET,
-    '0x1715424F68F3245F9e0910964370bEC1735Db92f',
+    '0xAD2625ac1F2587b8419E8407dc8E04815fdA7E33',
     18,
     'Babel',
     'BABEL',
@@ -2071,7 +2071,7 @@ export const testnetTokens = defineTokens({
   ),
   syrup: new Token(
     TESTNET,
-    '0xeF930C43f34a10060010800E0261e02FFeb5d508',
+    '0xFe8eA6813caF5cA245Ca5010780c1e3B379B0874',
     18,
     'Bank',
     'Babel Bank Token',
@@ -2082,6 +2082,174 @@ export const testnetTokens = defineTokens({
     '0xE02dF9e3e622DeBdD69fb838bB799E3F168902c5',
     18,
     'BAKE',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  dai: new Token(
+    TESTNET,
+    '0x1e7a6B24C0664887c61074d2E6762c2fd6eD009E',
+    18,
+    'DAI',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  usdc: new Token(
+    TESTNET,
+    '0xD661994DA238Ce2df1b377C65b31c90dd5C745bf',
+    18,
+    'USDC',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  usdt: new Token(
+    TESTNET,
+    '0x5c8c76b5d12be7dF12C8C674A307eb2D652AE73E',
+    6,
+    'USDT',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  wbtc: new Token(
+    TESTNET,
+    '0x3DfA2CB5f062BB0Acf7e939013F0DeB61CCf8D97',
+    8,
+    'WBTC',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  weth: new Token(
+    TESTNET,
+    '0xd3c7513D4ab73770347bB8ffbdDa211E8FA147ec',
+    18,
+    'WETH',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),  
+  iota: new Token(
+    TESTNET,
+    '0x0feB031b2a0E4271e41E8b615C250f19e9D0Fc1d',
+    6,
+    'IOTA',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ), 
+  shiba: new Token(
+    TESTNET,
+    '0x00b9995F46A602cDC50b95d9D22145e3B5f7dF6E',
+    18,
+    'SHIBA',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  doge: new Token(
+    TESTNET,
+    '0xAFDEA83F4CE4D6EF98c71777E915355D4D1ebE3f',
+    8,
+    'DOGE',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  cardano: new Token(
+    TESTNET,
+    '0xA84244A845eB7756B745C688eb85C4F2F179CcCc',
+    18,
+    'CARDANO',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  maker: new Token(
+    TESTNET,
+    '0x35e5C3a0965fF5d94228Bd938a10d6970F5A72f1',
+    18,
+    'MAKER',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  aave: new Token(
+    TESTNET,
+    '0x535F93eab6080aebddCC3A2d8f1915d8dFCaFA48',
+    18,
+    'AAVE',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  realcake: new Token(
+    TESTNET,
+    '0x44bfbBBb544Dd6B4ee85F12Ee91275c653A5127C',
+    18,
+    'CAKE',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  comp: new Token(
+    TESTNET,
+    '0xd74881e8333ff3DB98852fb9e04a48A180D6AE7c',
+    18,
+    'COMPOUND',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  inch: new Token(
+    TESTNET,
+    '0x8A1382B704AF0c48597d1c7Ed3BBF7072Eff85Ae',
+    18,
+    'INCH',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  bbadger: new Token(
+    TESTNET,
+    '0x4C7E7F89aF91ED9b84200B16455F5741633d3231',
+    18,
+    'BADGER',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  xvs: new Token(
+    TESTNET,
+    '0x42260EC1F8771aeF9B93878F672C85E806E30cC2',
+    18,
+    'VENUS',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  mim: new Token(
+    TESTNET,
+    '0xBeEAf24585ca7B35138577E1e9100a2c7065dD71',
+    18,
+    'MIM',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  xrp: new Token(
+    TESTNET,
+    '0x913111F386F2C4612C0e3fa7e8f18DFC45e57Cfd',
+    18,
+    'RIPPLE',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  dot: new Token(
+    TESTNET,
+    '0xAc5009a95dE56ECCBfAFE1C2D899F412cc425d85',
+    18,
+    'POLKADOT',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  uni: new Token(
+    TESTNET,
+    '0x60fddcD089546ac364450C13f4128815e6C557C5',
+    18,
+    'UNISWAP',
+    'Bakeryswap Token',
+    'https://www.bakeryswap.org/',
+  ),
+  avax: new Token(
+    TESTNET,
+    '0x510A0183BB2Ba254fdBE975c82E9f2F2B21787dd',
+    18,
+    'AVAX',
     'Bakeryswap Token',
     'https://www.bakeryswap.org/',
   ),

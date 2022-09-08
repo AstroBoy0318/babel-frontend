@@ -114,8 +114,8 @@ export default function Genesis() {
                 const tx = await busdContract.approve(getGenesisAddress(), MaxUint256)
                 await tx.wait()
             }
-            const tx = await genesisContract.addToGenesis(account);
-            await tx.wait();
+            const tx = await genesisContract.addToGenesis(account)
+            await tx.wait()
             setPending(false)
         } catch (error: any) {
             const errorDescription = `${error.message} - ${error.data?.message}`
@@ -126,10 +126,18 @@ export default function Genesis() {
 
     const addFriendToGenesis = async () => {
         try{
-            await genesisContract.addFriendToGenesis(friendAddress);
+            setPending(true)
+            const busdApproved = await busdContract.allowance(account, getGenesisAddress())
+            if(getBalanceNumber(new BigNumber(busdApproved._hex)) < 1) {
+                const tx = await busdContract.approve(getGenesisAddress(), MaxUint256)
+                await tx.wait()
+            }
+            const tx = await genesisContract.addToGenesis(friendAddress)
+            await tx.wait()
         } catch (error: any) {
             const errorDescription = `${error.message} - ${error.data?.message}`
             toastError('Failed to Add', errorDescription)
+            setPending(false)
         }
     }
 
@@ -176,7 +184,7 @@ export default function Genesis() {
                     </ContainerRow>
                     <Button disabled={pending || !isOpened} mt={3} onClick={addToGenesis}>Add To Genesis</Button>
                 </InputPanel>
-                {/* <InputPanel>
+                <InputPanel>
                     <ContainerRow error={error2}>
                         <InputContainer>
                             <AutoColumn gap="md">
@@ -196,7 +204,7 @@ export default function Genesis() {
                         </InputContainer>
                     </ContainerRow>
                     <Button onClick={addFriendToGenesis} mt={3}>Add Friend To Genesis</Button>
-                </InputPanel> */}
+                </InputPanel>
                 <Flex justifyContent="space-around">
                     <Button disabled={pending || isOpened} onClick={claim} mt={3}>Claim</Button>
                 </Flex>

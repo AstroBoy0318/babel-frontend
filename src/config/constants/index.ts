@@ -4,7 +4,7 @@ import { mainnetTokens, testnetTokens, ganacheTokens } from './tokens'
 
 export const ROUTER_ADDRESS = {
   [ChainId.MAINNET]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
-  [ChainId.TESTNET]: '0x011b07969DDe64EB8a4E7892093ab82CBA206Ad3',
+  [ChainId.TESTNET]: '0xd4dB82D0DD7bE7FE0611B4730d733247743E29cE',
   [ChainId.GANACHE]: '0x2F6b1f314Db8938c41eCf34F0960af68AdA58E86',
 }
 
@@ -20,9 +20,9 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     mainnetTokens.cake,
     mainnetTokens.busd,
     mainnetTokens.usdt,
-    mainnetTokens.btcb,
+    // mainnetTokens.btcb,
     mainnetTokens.ust,
-    mainnetTokens.eth,
+    // mainnetTokens.eth,
     mainnetTokens.usdc,
   ],
   [ChainId.TESTNET]: [testnetTokens.wbnb, testnetTokens.cake, testnetTokens.busd],
@@ -48,7 +48,7 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
-  [ChainId.MAINNET]: [mainnetTokens.busd, mainnetTokens.cake, mainnetTokens.btcb],
+  [ChainId.MAINNET]: [mainnetTokens.busd, mainnetTokens.cake/*, mainnetTokens.btcb*/],
   [ChainId.TESTNET]: [testnetTokens.wbnb, testnetTokens.cake, testnetTokens.busd],
   [ChainId.GANACHE]: [ganacheTokens.wbnb, ganacheTokens.cake, ganacheTokens.busd],
 }

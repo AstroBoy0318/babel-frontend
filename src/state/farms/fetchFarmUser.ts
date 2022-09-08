@@ -12,7 +12,6 @@ export const fetchFarmUserAllowances = async (account: string, farmsToFetch: Ser
     const lpContractAddress = getAddress(farm.lpAddresses)
     return { address: lpContractAddress, name: 'allowance', params: [account, masterChefAddress] }
   })
-
   const rawLpAllowances = await multicall<BigNumber[]>(erc20ABI, calls)
   const parsedLpAllowances = rawLpAllowances.map((lpBalance) => {
     return new BigNumber(lpBalance).toJSON()
@@ -65,7 +64,6 @@ export const fetchFarmUserEarnings = async (account: string, farmsToFetch: Seria
       params: [farm.pid, account],
     }
   })
-
   const rawEarnings = await multicall(masterchefABI, calls)
   const parsedEarnings = rawEarnings.map((earnings) => {
     return new BigNumber(earnings).toJSON()
