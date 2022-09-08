@@ -79,13 +79,17 @@ let store: ReturnType<typeof makeStore>
 export function makeStore(preloadedState = undefined) {
   return configureStore({
     reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        thunk: true,
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-      }),
+    // middleware: (getDefaultMiddleware) =>
+    //   getDefaultMiddleware({
+    //     thunk: true,
+    //     serializableCheck: {
+    //       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    //     },
+    //   }),
+    middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
     devTools: process.env.NODE_ENV === 'development',
     preloadedState,
   })

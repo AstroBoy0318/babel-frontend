@@ -58,6 +58,5 @@ export const fetchPublicFarmsData = async (farms: SerializedNftFarmConfig[]): Pr
   const chunkSize = farmCalls.length / farms.length
   
   const farmMultiCallResult = await multicallv2(positionNft, farmCalls)
-  
   return chunk(farmMultiCallResult, chunkSize)
 }

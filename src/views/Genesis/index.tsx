@@ -203,7 +203,7 @@ export default function Genesis() {
                             </AutoColumn>
                         </InputContainer>
                     </ContainerRow>
-                    <Button onClick={addFriendToGenesis} mt={3}>Add Friend To Genesis</Button>
+                    <Button disabled={pending || !isOpened} onClick={addFriendToGenesis} mt={3}>Add Friend To Genesis</Button>
                 </InputPanel>
                 <Flex justifyContent="space-around">
                     <Button disabled={pending || isOpened} onClick={claim} mt={3}>Claim</Button>
