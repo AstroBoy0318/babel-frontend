@@ -75,9 +75,7 @@ export const fetchUserStakeBalances = async (account) => {
     name: 'userInfo',
     params: [p.sousId, account],
   }))
-  console.log(calls1)
   const userInfo1 = await multicall(masterChefABI, calls1)
-  console.log(userInfo1)
   const stakedBalances1 = masterPools.reduce(
     (acc, pool, index) => ({
       ...acc,

@@ -10,7 +10,7 @@ import chunk from 'lodash/chunk'
 import sousChefV2 from '../../config/abi/sousChefV2.json'
 import sousChefV3 from '../../config/abi/sousChefV3.json'
 
-const poolsWithEnd = poolsConfig.filter((p) => p.sousId !== 0)
+const poolsWithEnd = poolsConfig.filter((p) => p.sousId !== 0 && p.version !== undefined)
 
 const startEndBlockCalls = poolsWithEnd.flatMap((poolConfig) => {
   return [

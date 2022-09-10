@@ -16,12 +16,12 @@
             },
             {
                 "internalType": "address",
-                "name": "_admin",
+                "name": "_distributor",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "_distributor",
+                "name": "_admin",
                 "type": "address"
             }
         ],
@@ -96,24 +96,11 @@
     {
         "anonymous": false,
         "inputs": [{
-                "indexed": true,
-                "internalType": "address",
-                "name": "previousOwner",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "newOwner",
-                "type": "address"
-            }
-        ],
-        "name": "OwnershipTransferred",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [],
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "thisTime",
+            "type": "uint256"
+        }],
         "name": "Pause",
         "type": "event"
     },
@@ -126,24 +113,6 @@
             "type": "address"
         }],
         "name": "Paused",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [{
-                "indexed": true,
-                "internalType": "address",
-                "name": "sender",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "newAdmin",
-                "type": "address"
-            }
-        ],
-        "name": "SetAdmin",
         "type": "event"
     },
     {
@@ -220,7 +189,23 @@
     },
     {
         "anonymous": false,
-        "inputs": [],
+        "inputs": [{
+            "indexed": false,
+            "internalType": "address",
+            "name": "newAdmin",
+            "type": "address"
+        }],
+        "name": "TransferAdmin",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [{
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "thisTime",
+            "type": "uint256"
+        }],
         "name": "Unpause",
         "type": "event"
     },
@@ -451,17 +436,6 @@
     },
     {
         "inputs": [],
-        "name": "owner",
-        "outputs": [{
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "pause",
         "outputs": [],
         "stateMutability": "nonpayable",
@@ -498,24 +472,6 @@
             "type": "address"
         }],
         "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "renounceOwnership",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-            "internalType": "address",
-            "name": "_admin",
-            "type": "address"
-        }],
-        "name": "setAdmin",
-        "outputs": [],
-        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -587,10 +543,10 @@
     {
         "inputs": [{
             "internalType": "address",
-            "name": "newOwner",
+            "name": "_newAdmin",
             "type": "address"
         }],
-        "name": "transferOwnership",
+        "name": "transferAdmin",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
