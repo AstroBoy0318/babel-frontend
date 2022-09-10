@@ -17,7 +17,7 @@ import masterChef from 'config/abi/masterchef.json'
 import { getAddress, getMasterChefAddress } from 'utils/addressHelpers'
 import { getPoolApr } from 'utils/apr'
 import { BIG_ZERO } from 'utils/bigNumber'
-import { getCakeContract, getMasterchefContract, getMulticallContract } from 'utils/contractHelpers'
+import { getBep20Contract, getCakeContract, getMasterchefContract, getMulticallContract } from 'utils/contractHelpers'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { simpleRpcProvider } from 'utils/providers'
 import { multicallv2 } from 'utils/multicall'
@@ -71,79 +71,86 @@ const initialState: PoolsState = {
 }
 
 // Thunks
-const cakePool = poolsConfig.find((pool) => pool.sousId === 0)
-const cakePoolAddress = getAddress(cakePool.contractAddress)
-const cakeContract = getCakeContract()
+const cakePools = poolsConfig.filter((pool) => pool.version === undefined)
+// const cakePoolAddresse = getAddress(cakePool.contractAddress)
+// const cakeContract = getCakeContract()
 const masterChefContract = getMasterchefContract()
 
 export const fetchCakePoolPublicDataAsync = () => async (dispatch, getState) => {
-  const prices = getTokenPricesFromFarm(getState().farms.data)
-  const stakingTokenAddress = cakePool.stakingToken.address ? cakePool.stakingToken.address.toLowerCase() : null
-  const stakingTokenPrice = stakingTokenAddress ? prices[stakingTokenAddress] : 0
-  const earningTokenAddress = cakePool.earningToken.address ? cakePool.earningToken.address.toLowerCase() : null
-  const earningTokenPrice = earningTokenAddress ? prices[earningTokenAddress] : 0
-  const totalStaking = await cakeContract.balanceOf(cakePoolAddress)
-  const now = await simpleRpcProvider.getBlockNumber()
-  const perSecond = await masterChefContract.babelPerBlock()
-  const multiplier = await masterChefContract.getMultiplierEx(Number(now), Number(now)+1)
-  // const poolInfos = await masterChefContract.poolInfo(0)
-  // const totalAlloc = await masterChefContract.totalAllocPoint()  
-  // const tokenPerBlock = Number(poolInfos.allocPoint)/Number(totalAlloc)*Number(perSecond)*Number(multiplier)
-  const tokenPerBlock = Number(perSecond)*Number(multiplier)/5
-  const apr = getPoolApr(
-    stakingTokenPrice,
-    earningTokenPrice,
-    getBalanceNumber(new BigNumber(totalStaking ? totalStaking.toString() : 0), cakePool.stakingToken.decimals),
-    // parseFloat(cakePool.tokenPerBlock),
-    getBalanceNumber(new BigNumber(tokenPerBlock)),
-  )
-
-  dispatch(
-    setPoolPublicData({
-      sousId: 0,
-      data: {
-        totalStaked: new BigNumber(totalStaking.toString()).toJSON(),
-        stakingTokenPrice,
-        earningTokenPrice,
-        apr,
-      },
-    }),
-  )
+  cakePools.forEach(async (cakePool, idx)=>{
+    const prices = getTokenPricesFromFarm(getState().farms.data)
+    const stakingTokenAddress = cakePool.stakingToken.address ? cakePool.stakingToken.address.toLowerCase() : null
+    const stakingTokenPrice = stakingTokenAddress ? prices[stakingTokenAddress] : 0
+    const earningTokenAddress = cakePool.earningToken.address ? cakePool.earningToken.address.toLowerCase() : null
+    const earningTokenPrice = earningTokenAddress ? prices[earningTokenAddress] : 0
+    const cakeContract = getBep20Contract(stakingTokenAddress);
+    const totalStaking = await cakeContract.balanceOf(getAddress(cakePool.contractAddress))
+    const now = await simpleRpcProvider.getBlockNumber()
+    const perSecond = await masterChefContract.babelPerBlock()
+    const multiplier = await masterChefContract.getMultiplierEx(Number(now), Number(now)+1)
+    const poolInfos = await masterChefContract.poolInfo(cakePool.sousId)
+    const totalAlloc = await masterChefContract.totalAllocPoint()  
+    const tokenPerBlock = Number(poolInfos.allocPoint)/Number(totalAlloc)*Number(perSecond)*Number(multiplier)
+    // const tokenPerBlock = Number(perSecond)*Number(multiplier)/5
+    const apr = getPoolApr(
+      stakingTokenPrice,
+      earningTokenPrice,
+      getBalanceNumber(new BigNumber(totalStaking ? totalStaking.toString() : 0), cakePool.stakingToken.decimals),
+      // parseFloat(cakePool.tokenPerBlock),
+      getBalanceNumber(new BigNumber(tokenPerBlock)),
+    )
+  
+    dispatch(
+      setPoolPublicData({
+        sousId: cakePool.sousId,
+        data: {
+          totalStaked: new BigNumber(totalStaking.toString()).toJSON(),
+          stakingTokenPrice,
+          earningTokenPrice,
+          apr,
+        },
+      }),
+    )
+  })
 }
 
 export const fetchCakePoolUserDataAsync = (account: string) => async (dispatch) => {
-  const allowanceCall = {
-    address: tokens.cake.address,
-    name: 'allowance',
-    params: [account, cakePoolAddress],
-  }
-  const balanceOfCall = {
-    address: tokens.cake.address,
-    name: 'balanceOf',
-    params: [account],
-  }
-  const cakeContractCalls = [allowanceCall, balanceOfCall]
-  const [[allowance], [stakingTokenBalance]] = await multicallv2(cakeAbi, cakeContractCalls)
+  cakePools.forEach(async (cakePool, idx)=>{
+    const cakePoolAddress = getAddress(cakePool.contractAddress)
+    const stakingTokenAddress = cakePool.stakingToken.address ? cakePool.stakingToken.address.toLowerCase() : null
+    const allowanceCall = {
+      address: stakingTokenAddress,
+      name: 'allowance',
+      params: [account, cakePoolAddress],
+    }
+    const balanceOfCall = {
+      address: stakingTokenAddress,
+      name: 'balanceOf',
+      params: [account],
+    }
+    const cakeContractCalls = [allowanceCall, balanceOfCall]
+    const [[allowance], [stakingTokenBalance]] = await multicallv2(cakeAbi, cakeContractCalls)
 
-  const masterChefCalls = ['pendingBabel', 'userInfo'].map((method) => ({
-    address: getMasterChefAddress(),
-    name: method,
-    params: ['0', account],
-  }))
+    const masterChefCalls = ['pendingBabel', 'userInfo'].map((method) => ({
+      address: getMasterChefAddress(),
+      name: method,
+      params: [cakePool.sousId, account],
+    }))
 
-  const [[pendingReward], { amount: masterPoolAmount }] = await multicallv2(masterChef, masterChefCalls)
+    const [[pendingReward], { amount: masterPoolAmount }] = await multicallv2(masterChef, masterChefCalls)
 
-  dispatch(
-    setPoolUserData({
-      sousId: 0,
-      data: {
-        allowance: new BigNumber(allowance.toString()).toJSON(),
-        stakingTokenBalance: new BigNumber(stakingTokenBalance.toString()).toJSON(),
-        pendingReward: new BigNumber(pendingReward.toString()).toJSON(),
-        stakedBalances: new BigNumber(masterPoolAmount.toString()).toJSON(),
-      },
-    }),
-  )
+    dispatch(
+      setPoolUserData({
+        sousId: cakePool.sousId,
+        data: {
+          allowance: new BigNumber(allowance.toString()).toJSON(),
+          stakingTokenBalance: new BigNumber(stakingTokenBalance.toString()).toJSON(),
+          pendingReward: new BigNumber(pendingReward.toString()).toJSON(),
+          stakedBalances: new BigNumber(masterPoolAmount.toString()).toJSON(),
+        },
+      }),
+    )
+  })
 }
 
 export const fetchPoolsPublicDataAsync = (currentBlockNumber: number) => async (dispatch, getState) => {

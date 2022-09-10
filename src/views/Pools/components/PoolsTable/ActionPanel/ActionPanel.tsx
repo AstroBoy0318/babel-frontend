@@ -175,7 +175,7 @@ const ActionPanel: React.FC<ActionPanelProps> = ({ account, pool, userDataLoaded
     ? cakeAsBigNumber.plus(stakingTokenBalance)
     : stakedBalance.plus(stakingTokenBalance)
 
-  const isManualCakePool = sousId === 0
+  const isManualCakePool = sousId === 0 || pool.version === undefined
 
   const getTotalStakedBalance = () => {
     if (vaultKey) {

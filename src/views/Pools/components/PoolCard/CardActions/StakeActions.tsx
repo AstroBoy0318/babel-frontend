@@ -25,6 +25,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
   isLoading = false,
 }) => {
   const { stakingToken, stakingTokenPrice, stakingLimit, isFinished, userData } = pool
+  console.log(pool)
   const { t } = useTranslation()
   const stakedTokenBalance = getBalanceNumber(stakedBalance, stakingToken.decimals)
   const stakedTokenDollarBalance = getBalanceNumber(

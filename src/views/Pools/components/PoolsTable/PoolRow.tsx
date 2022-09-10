@@ -38,7 +38,7 @@ const PoolRow: React.FC<PoolRowProps> = ({ pool, account, userDataLoaded }) => {
     setExpanded((prev) => !prev)
   }
 
-  const isCakePool = pool.sousId === 0
+  const isCakePool = pool.sousId === 0 || pool.version === undefined
 
   return (
     <>
