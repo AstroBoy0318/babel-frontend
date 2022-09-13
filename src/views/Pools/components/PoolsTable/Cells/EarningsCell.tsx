@@ -48,6 +48,7 @@ const EarningsCell: React.FC<EarningsCellProps> = ({ pool, account, userDataLoad
       sousId={sousId}
       isBnbPool={isBnbPool}
       isCompoundPool={isManualCakePool}
+      isMaster={pool.version === undefined}
     />,
   )
 

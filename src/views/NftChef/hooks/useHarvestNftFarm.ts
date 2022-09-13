@@ -1,13 +1,13 @@
 import { useCallback } from 'react'
 import { harvestNftFarm } from 'utils/calls'
-import { useMasterchef } from 'hooks/useContract'
+import { useNftChefContract } from 'hooks/useContract'
 
 const useHarvestNftFarm = (farmPid: number) => {
-  const masterChefContract = useMasterchef()
+  const nftChefContract = useNftChefContract()
 
   const handleHarvest = useCallback(async () => {
-    return harvestNftFarm(masterChefContract, farmPid)
-  }, [farmPid, masterChefContract])
+    return harvestNftFarm(nftChefContract, farmPid)
+  }, [farmPid, nftChefContract])
 
   return { onReward: handleHarvest }
 }

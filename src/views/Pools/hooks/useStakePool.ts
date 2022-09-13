@@ -33,7 +33,7 @@ const useStakePool = (sousId: number, isUsingBnb = false, isMasterChef = false) 
   const handleStake = useCallback(
     async (amount: string, decimals: number) => {
       if (sousId === 0 || isMasterChef) {
-        return stakeFarm(masterChefContract, sousId, amount)
+        return stakeFarm(masterChefContract, sousId, amount, BIG_TEN.pow(decimals))
       }
       if (isUsingBnb) {
         return sousStakeBnb(sousChefContract, amount)

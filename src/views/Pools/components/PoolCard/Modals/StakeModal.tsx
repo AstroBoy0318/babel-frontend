@@ -70,7 +70,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const { t } = useTranslation()
   const { theme } = useTheme()
   const { onStake } = useStakePool(sousId, isBnbPool, pool.version === undefined)
-  const { onUnstake } = useUnstakePool(sousId, pool.enableEmergencyWithdraw)
+  const { onUnstake } = useUnstakePool(sousId, pool.enableEmergencyWithdraw, pool.version === undefined)
   const { toastSuccess } = useToast()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
   const [stakeAmount, setStakeAmount] = useState('')

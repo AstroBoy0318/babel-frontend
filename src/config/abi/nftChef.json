@@ -5,11 +5,6 @@
                 "type": "address"
             },
             {
-                "internalType": "contract bBBank",
-                "name": "_bank",
-                "type": "address"
-            },
-            {
                 "internalType": "address",
                 "name": "_admin",
                 "type": "address"
@@ -72,9 +67,9 @@
             },
             {
                 "indexed": true,
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "pid",
-                "type": "uint256"
+                "type": "uint8"
             },
             {
                 "indexed": false,
@@ -159,9 +154,9 @@
             },
             {
                 "indexed": true,
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "pid",
-                "type": "uint256"
+                "type": "uint8"
             },
             {
                 "indexed": false,
@@ -292,21 +287,10 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "bank",
-        "outputs": [{
-            "internalType": "contract bBBank",
-            "name": "",
-            "type": "address"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [{
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "_pid",
-                "type": "uint256"
+                "type": "uint8"
             },
             {
                 "internalType": "uint256",
@@ -353,9 +337,35 @@
     },
     {
         "inputs": [{
+                "internalType": "uint8",
+                "name": "pid",
+                "type": "uint8"
+            },
+            {
                 "internalType": "uint256",
-                "name": "_pid",
+                "name": "tokenId",
                 "type": "uint256"
+            },
+            {
+                "internalType": "uint8",
+                "name": "order",
+                "type": "uint8"
+            }
+        ],
+        "name": "getPriceOfTokenID",
+        "outputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "uint8",
+                "name": "_pid",
+                "type": "uint8"
             },
             {
                 "internalType": "address",
@@ -421,9 +431,9 @@
     },
     {
         "inputs": [{
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "_pid",
-                "type": "uint256"
+                "type": "uint8"
             },
             {
                 "internalType": "address",
@@ -592,14 +602,14 @@
                 "type": "uint256"
             },
             {
-                "internalType": "uint8",
-                "name": "depositedCount",
-                "type": "uint8"
-            },
-            {
                 "internalType": "uint256",
                 "name": "rewardDebt",
                 "type": "uint256"
+            },
+            {
+                "internalType": "uint8",
+                "name": "depositedCount",
+                "type": "uint8"
             }
         ],
         "stateMutability": "view",
@@ -607,9 +617,9 @@
     },
     {
         "inputs": [{
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "_pid",
-                "type": "uint256"
+                "type": "uint8"
             },
             {
                 "internalType": "uint256",

@@ -54,7 +54,7 @@ export const fetchFarmUserStakedBalances = async (account: string, farmsToFetch:
 
   const rawStakedBalances = await multicall(nftChefABI, calls)
   const parsedStakedBalances = rawStakedBalances.map((stakedBalance) => {
-    return new BigNumber(stakedBalance[1]).toJSON()
+    return new BigNumber(stakedBalance.depositedCount).toJSON()
   })
 
   const nftAddress = getPositionNftAddress()

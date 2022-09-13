@@ -22,6 +22,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({
   userData,
   userDataLoaded,
   earningTokenPrice,
+  version
 }) => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
@@ -44,6 +45,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({
       sousId={sousId}
       isBnbPool={isBnbPool}
       isCompoundPool={isCompoundPool}
+      isMaster={version === undefined}
     />,
   )
 
