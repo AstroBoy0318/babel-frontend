@@ -5,7 +5,9 @@ import {
   ImageProps,
 } from '@pancakeswap/uikit'
 import tokens from 'config/constants/tokens'
-import { Token } from '@pancakeswap/sdk'
+import { ChainId, Token } from '@pancakeswap/sdk'
+import { CHAIN_ID } from '../../config/constants/networks'
+
 
 interface TokenPairImageProps extends Omit<UIKitTokenPairImageProps, 'primarySrc' | 'secondarySrc'> {
   primaryToken: Token
@@ -13,8 +15,13 @@ interface TokenPairImageProps extends Omit<UIKitTokenPairImageProps, 'primarySrc
 }
 
 const getImageUrlFromToken = (token: Token) => {
-  const address = token.symbol === 'BNB' ? tokens.wbnb.address : token.address
-  return `/images/tokens/${address}.svg`
+  if(CHAIN_ID == ChainId.MAINNET.toString()) {
+    const address = token.symbol === 'BNB' ? tokens.wbnb.address : token.address
+    return `/images/tokens/${address}.svg`
+  } else if(CHAIN_ID == ChainId.TESTNET.toString()) {  
+    const address = token.symbol
+    return `/images/tokens/testnet/${address}.png`
+  }
 }
 
 export const TokenPairImage: React.FC<TokenPairImageProps> = ({ primaryToken, secondaryToken, ...props }) => {
