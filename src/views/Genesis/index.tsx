@@ -134,6 +134,7 @@ export default function Genesis() {
             }
             const tx = await genesisContract.addToGenesis(friendAddress)
             await tx.wait()
+            setPending(false)
         } catch (error: any) {
             const errorDescription = `${error.message} - ${error.data?.message}`
             toastError('Failed to Add', errorDescription)
