@@ -35,7 +35,7 @@ import {
   getNftChefContract,
   getPositionNftContract,
 } from 'utils/contractHelpers'
-import { getMulticallAddress } from 'utils/addressHelpers'
+import { getGenesisAddress, getMulticallAddress } from 'utils/addressHelpers'
 import { VaultKey } from 'state/types'
 import {
   CakeVault,
@@ -342,16 +342,25 @@ export function useMulticallContract(usingWeb3?: boolean) {
 
 export function useGenesisContract() {
   const { library } = useActiveWeb3React()
-  return useMemo(() => getGenesisContract(library.getSigner()), [library])
+  return useMemo(() => {
+    if (!library) return null
+    return getGenesisContract(library.getSigner(getGenesisAddress()))
+  }, [library])
 }
 
 export function useNftChefContract() {
   const { library } = useActiveWeb3React()
-  return useMemo(() => getNftChefContract(library.getSigner()), [library])
+  return useMemo(() => {
+    if (!library) return null
+    return getNftChefContract(library.getSigner())
+  }, [library])
 }
 
 export function usePositionNftContract() {
   const { library } = useActiveWeb3React()
-  return useMemo(() => getPositionNftContract(library.getSigner()), [library])
+  return useMemo(() => {
+    if (!library) return null
+    return getPositionNftContract(library.getSigner())
+  }, [library])
 }
 

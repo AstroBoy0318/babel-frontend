@@ -80,7 +80,7 @@ export default function Genesis() {
     const { account } = useWeb3React()
     const [myAddress, setMyAddress] = useState(account)
     const [friendAddress, setFriendAddress] = useState("")
-    const genesisContract = useGenesisContract();
+    const genesisContract = useGenesisContract()
     const busdContract = useTokenContract(tokens.busd.address, true)
     const { toastSuccess, toastError } = useToast()
     const [ pending, setPending ] = useState(false)
@@ -157,9 +157,11 @@ export default function Genesis() {
     }
 
     useEffect(()=>{
-        genesisContract.isGenesisOpen().then((re) => {
-            setOpened(re)
-        })
+        if(genesisContract) {
+            genesisContract.isGenesisOpen().then((re) => {
+                setOpened(re)
+            })
+        }
     }, [genesisContract, setOpened])
     return (
         <Page>
