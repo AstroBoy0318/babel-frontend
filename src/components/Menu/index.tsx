@@ -26,9 +26,9 @@ const Menu = (props) => {
   const activeMenuItem = getActiveMenuItem({ menuConfig: menuItems, pathname })
   const activeSubMenuItem = getActiveSubMenuItem({ menuItem: activeMenuItem, pathname })
 
-  const toggleTheme = useMemo(() => {
-    return () => setTheme(isDark ? 'light' : 'dark')
-  }, [setTheme, isDark])
+  useMemo(() => {
+    setTheme('dark')
+  },[])
 
   return (
     <UikitMenu
@@ -39,17 +39,17 @@ const Menu = (props) => {
       globalMenu={<GlobalSettings />}
       banner={showPhishingWarningBanner && typeof window !== 'undefined' && <PhishingWarningBanner />}
       isDark={isDark}
-      toggleTheme={toggleTheme}
-      currentLang={currentLanguage.code}
-      langs={languageList}
-      setLang={setLanguage}
+      // toggleTheme={toggleTheme}
+      // currentLang={currentLanguage.code}
+      // langs={languageList}
+      // setLang={setLanguage}
       cakePriceUsd={cakePriceUsd}
       links={menuItems}
       subLinks={activeMenuItem?.hideSubNav ? [] : activeMenuItem?.items}
       footerLinks={footerLinks(t)}
       activeItem={activeMenuItem?.href}
       activeSubItem={activeSubMenuItem?.href}
-      buyCakeLabel={t('Buy CAKE')}
+      buyCakeLabel={t('Buy BABEL')}
       {...props}
     />
   )

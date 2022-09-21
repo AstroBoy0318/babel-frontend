@@ -43,7 +43,7 @@ const config: (t: ContextApi['t'], languageCode?: string) => ConfigMenuItemsType
       // },
     ],
   },
-  {
+ {
     label: t('Earn'),
     href: '/farms',
     icon: EarnIcon,
@@ -65,7 +65,7 @@ const config: (t: ContextApi['t'], languageCode?: string) => ConfigMenuItemsType
     items: []
   },
   {
-    label: 'Nft Farm',
+    label: 'NFT Farm',
     href: '/nftchef',
     items: []
   },
