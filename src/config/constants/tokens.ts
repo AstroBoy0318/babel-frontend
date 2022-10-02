@@ -2047,7 +2047,7 @@ export const mainnetTokens = defineTokens({
 export const testnetTokens = defineTokens({
   wbnb: new Token(
     TESTNET,
-    '0xD33473641D0b1E83D55725c403c6a735b39D8656',
+    '0x2140608F118F78c84445D5F6269D6b5439689B4D',
     18,
     'WBNB',
     'Wrapped BNB',
@@ -2055,7 +2055,7 @@ export const testnetTokens = defineTokens({
   ),
   cake: new Token(
     TESTNET,
-    '0xbCf37EEca0fC65f8D4436173741e19b022Ab40FA',
+    '0x1A7eFD77F62eeBE30F7ca70221Cece93f010aEcA',
     18,
     'Babel',
     'BABEL',
@@ -2063,7 +2063,7 @@ export const testnetTokens = defineTokens({
   ),
   busd: new Token(
     TESTNET,
-    '0x483037C4a61F3683109C9A3Eb8a95D612CCC2279',
+    '0x542aaC0219079Cd114a2D20674Ce186351902aaC',
     18,
     'BUSD',
     'BUSD',
@@ -2071,7 +2071,7 @@ export const testnetTokens = defineTokens({
   ),
   syrup: new Token(
     TESTNET,
-    '0xFbb7ad3942bACfeC6B5Ce15aa2dF559d98b9bb8d',
+    '0xDA84E13E6666730ad28d651d13244E1BC90Aa081',
     18,
     'Bank',
     'Babel Bank Token',
@@ -2087,7 +2087,7 @@ export const testnetTokens = defineTokens({
   ),
   dai: new Token(
     TESTNET,
-    '0x1e7a6B24C0664887c61074d2E6762c2fd6eD009E',
+    '0x176FF9E5e32C4ef65f1354aAEa6A916d7946961e',
     18,
     'DAI',
     'Bakeryswap Token',
@@ -2095,7 +2095,7 @@ export const testnetTokens = defineTokens({
   ),
   usdc: new Token(
     TESTNET,
-    '0xD661994DA238Ce2df1b377C65b31c90dd5C745bf',
+    '0x4291fe847E8cd896c49bF7e723335AF9Fac62168',
     18,
     'USDC',
     'Bakeryswap Token',
@@ -2103,7 +2103,7 @@ export const testnetTokens = defineTokens({
   ),
   usdt: new Token(
     TESTNET,
-    '0x5c8c76b5d12be7dF12C8C674A307eb2D652AE73E',
+    '0xfa31d485bF1Df9e9826B9fbc349e379601eD8DF7',
     6,
     'USDT',
     'Bakeryswap Token',
@@ -2111,7 +2111,7 @@ export const testnetTokens = defineTokens({
   ),
   wbtc: new Token(
     TESTNET,
-    '0x3DfA2CB5f062BB0Acf7e939013F0DeB61CCf8D97',
+    '0x65b1899987c519D2462cAE0f90d17694B05fed69',
     8,
     'WBTC',
     'Bakeryswap Token',
@@ -2119,7 +2119,7 @@ export const testnetTokens = defineTokens({
   ),
   weth: new Token(
     TESTNET,
-    '0xd3c7513D4ab73770347bB8ffbdDa211E8FA147ec',
+    '0x45144dfcBF96b2d914aCC2B72Adfc0D72CF9BA17',
     18,
     'WETH',
     'Bakeryswap Token',
@@ -2127,7 +2127,7 @@ export const testnetTokens = defineTokens({
   ),  
   iota: new Token(
     TESTNET,
-    '0x0feB031b2a0E4271e41E8b615C250f19e9D0Fc1d',
+    '0x1703e398CF102d141C7040C4CAc191E4473Dbbcc',
     6,
     'IOTA',
     'Bakeryswap Token',
@@ -2135,7 +2135,7 @@ export const testnetTokens = defineTokens({
   ), 
   shiba: new Token(
     TESTNET,
-    '0x00b9995F46A602cDC50b95d9D22145e3B5f7dF6E',
+    '0xa9203f6C2f70Eb88C2ead26233403c9cfedFC198',
     18,
     'SHIBA',
     'Bakeryswap Token',
@@ -2143,7 +2143,7 @@ export const testnetTokens = defineTokens({
   ),
   doge: new Token(
     TESTNET,
-    '0xAFDEA83F4CE4D6EF98c71777E915355D4D1ebE3f',
+    '0x6Adcbe37F5694606f4432505843AB0ddC960c53b',
     8,
     'DOGE',
     'Bakeryswap Token',
@@ -2151,7 +2151,7 @@ export const testnetTokens = defineTokens({
   ),
   cardano: new Token(
     TESTNET,
-    '0xA84244A845eB7756B745C688eb85C4F2F179CcCc',
+    '0xBFE127CaD443830A021A2100ccd4607969A3B903',
     18,
     'CARDANO',
     'Bakeryswap Token',
@@ -2159,7 +2159,7 @@ export const testnetTokens = defineTokens({
   ),
   maker: new Token(
     TESTNET,
-    '0x35e5C3a0965fF5d94228Bd938a10d6970F5A72f1',
+    '0x5f1654a7e7162b5e56e6A813605842CBD7aDCd26',
     18,
     'MAKER',
     'Bakeryswap Token',
@@ -2167,7 +2167,7 @@ export const testnetTokens = defineTokens({
   ),
   aave: new Token(
     TESTNET,
-    '0x535F93eab6080aebddCC3A2d8f1915d8dFCaFA48',
+    '0x0050Aa5f57D6555762F4BDc1f48f05Ad7A727BE7',
     18,
     'AAVE',
     'Bakeryswap Token',
@@ -2183,7 +2183,7 @@ export const testnetTokens = defineTokens({
   ),
   comp: new Token(
     TESTNET,
-    '0xd74881e8333ff3DB98852fb9e04a48A180D6AE7c',
+    '0xC77b6955dCcEb92D37B1F33c4C7B4466Fee2bCbb',
     18,
     'COMPOUND',
     'Bakeryswap Token',
@@ -2191,7 +2191,7 @@ export const testnetTokens = defineTokens({
   ),
   inch: new Token(
     TESTNET,
-    '0x8A1382B704AF0c48597d1c7Ed3BBF7072Eff85Ae',
+    '0x1BfD5eF526Ee19c03eC5EB812a81e42aD0267AB1',
     18,
     'INCH',
     'Bakeryswap Token',
@@ -2199,7 +2199,7 @@ export const testnetTokens = defineTokens({
   ),
   bbadger: new Token(
     TESTNET,
-    '0x4C7E7F89aF91ED9b84200B16455F5741633d3231',
+    '0xfcA03D733e983734F8a875756C01bd6a3BD0B5A8',
     18,
     'BADGER',
     'Bakeryswap Token',
@@ -2207,7 +2207,7 @@ export const testnetTokens = defineTokens({
   ),
   xvs: new Token(
     TESTNET,
-    '0x42260EC1F8771aeF9B93878F672C85E806E30cC2',
+    '0xe108a0129E2EFf2c29Df15214f26c88DF16a45fd',
     18,
     'VENUS',
     'Bakeryswap Token',
@@ -2215,7 +2215,7 @@ export const testnetTokens = defineTokens({
   ),
   mim: new Token(
     TESTNET,
-    '0xBeEAf24585ca7B35138577E1e9100a2c7065dD71',
+    '0x5D7be9384855f32A8EDa55a6CA735889551110af',
     18,
     'MIM',
     'Bakeryswap Token',
@@ -2223,7 +2223,7 @@ export const testnetTokens = defineTokens({
   ),
   xrp: new Token(
     TESTNET,
-    '0x913111F386F2C4612C0e3fa7e8f18DFC45e57Cfd',
+    '0x6f5907816d4CB076763Cc587844709986bF6c202',
     18,
     'RIPPLE',
     'Bakeryswap Token',
@@ -2231,7 +2231,7 @@ export const testnetTokens = defineTokens({
   ),
   dot: new Token(
     TESTNET,
-    '0xAc5009a95dE56ECCBfAFE1C2D899F412cc425d85',
+    '0x64520556dDd0604933067dF25645A2EB7f83F1fD',
     18,
     'POLKADOT',
     'Bakeryswap Token',
@@ -2239,7 +2239,7 @@ export const testnetTokens = defineTokens({
   ),
   uni: new Token(
     TESTNET,
-    '0x60fddcD089546ac364450C13f4128815e6C557C5',
+    '0x75A20B4A73BCad81eAD0A3dAFc6E6dE8Fe098d4D',
     18,
     'UNISWAP',
     'Bakeryswap Token',
@@ -2247,7 +2247,7 @@ export const testnetTokens = defineTokens({
   ),
   avax: new Token(
     TESTNET,
-    '0x510A0183BB2Ba254fdBE975c82E9f2F2B21787dd',
+    '0xE10aD9C7B5D74C5242Ed3C2dCe1237bdb68A0CC6',
     18,
     'AVAX',
     'Bakeryswap Token',

@@ -341,10 +341,10 @@ export function useMulticallContract(usingWeb3?: boolean) {
 }
 
 export function useGenesisContract() {
-  const { library } = useActiveWeb3React()
+  const { library,account } = useActiveWeb3React()
   return useMemo(() => {
-    if (!library) return null
-    return getGenesisContract(library.getSigner(getGenesisAddress()))
+    if (!library || !account) return null
+    return getGenesisContract(library.getSigner())
   }, [library])
 }
 

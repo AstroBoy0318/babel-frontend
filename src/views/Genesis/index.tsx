@@ -85,6 +85,8 @@ export default function Genesis() {
     const { toastSuccess, toastError } = useToast()
     const [ pending, setPending ] = useState(false)
     const [ isOpened, setOpened ] = useState(true)
+    const [ deposit, setDeposit ] = useState("0")
+    const [ isOn, setIsOn ] = useState(false)
 
     const handleInput1 = useCallback(
         (event) => {
@@ -110,7 +112,7 @@ export default function Genesis() {
         try{
             setPending(true)
             const busdApproved = await busdContract.allowance(account, getGenesisAddress())
-            if(getBalanceNumber(new BigNumber(busdApproved._hex)) < 1) {
+            if(getBalanceNumber(new BigNumber(busdApproved._hex)) < getBalanceNumber(new BigNumber(deposit))) {
                 const tx = await busdContract.approve(getGenesisAddress(), MaxUint256)
                 await tx.wait()
             }
@@ -161,8 +163,14 @@ export default function Genesis() {
             genesisContract.isGenesisOpen().then((re) => {
                 setOpened(re)
             })
+            genesisContract.deposit().then((re) => {
+                setDeposit(re)
+            })
+            genesisContract.isOnGenesis(account).then((re) => {
+                setIsOn(re)
+            })
         }
-    }, [genesisContract, setOpened])
+    }, [genesisContract, setOpened, setDeposit])
     return (
         <Page>
             {account ? (<Flex flexDirection="column" width="100%">

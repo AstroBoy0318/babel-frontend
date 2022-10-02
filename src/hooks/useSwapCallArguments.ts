@@ -48,7 +48,6 @@ export function useSwapCallArguments(
         deadline: deadline.toNumber(),
       }),
     )
-
     if (trade.tradeType === TradeType.EXACT_INPUT) {
       swapMethods.push(
         Router.swapCallParameters(trade, {

@@ -8,6 +8,11 @@
                 "internalType": "address",
                 "name": "_admin",
                 "type": "address"
+            },
+            {
+                "internalType": "contract INFT",
+                "name": "_nftGenesis",
+                "type": "address"
             }
         ],
         "stateMutability": "nonpayable",
@@ -23,9 +28,9 @@
             },
             {
                 "indexed": false,
-                "internalType": "uint128",
+                "internalType": "uint256",
                 "name": "deposit",
-                "type": "uint128"
+                "type": "uint256"
             }
         ],
         "name": "AddToGenesis",
@@ -107,12 +112,27 @@
         "type": "function"
     },
     {
+        "inputs": [{
+            "internalType": "uint256",
+            "name": "_num",
+            "type": "uint256"
+        }],
+        "name": "Index",
+        "outputs": [{
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "RewardAmount",
         "outputs": [{
-            "internalType": "uint128",
+            "internalType": "uint256",
             "name": "",
-            "type": "uint128"
+            "type": "uint256"
         }],
         "stateMutability": "view",
         "type": "function"
@@ -146,6 +166,21 @@
             "internalType": "address",
             "name": "",
             "type": "address"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "uint256",
+            "name": "_max",
+            "type": "uint256"
+        }],
+        "name": "arrayIndex",
+        "outputs": [{
+            "internalType": "address[]",
+            "name": "",
+            "type": "address[]"
         }],
         "stateMutability": "view",
         "type": "function"
@@ -194,9 +229,9 @@
         "inputs": [],
         "name": "deposit",
         "outputs": [{
-            "internalType": "uint128",
+            "internalType": "uint256",
             "name": "",
-            "type": "uint128"
+            "type": "uint256"
         }],
         "stateMutability": "view",
         "type": "function"
@@ -242,9 +277,9 @@
         "inputs": [],
         "name": "maxTime",
         "outputs": [{
-            "internalType": "uint64",
+            "internalType": "uint256",
             "name": "",
-            "type": "uint64"
+            "type": "uint256"
         }],
         "stateMutability": "view",
         "type": "function"
@@ -256,17 +291,6 @@
             "type": "bool"
         }],
         "name": "setFreeze",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-            "internalType": "contract INFT",
-            "name": "_genesisNFT",
-            "type": "address"
-        }],
-        "name": "setGenesisNFT",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
