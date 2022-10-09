@@ -76,6 +76,7 @@ import erc721CollectionAbi from 'config/abi/erc721collection.json'
 import genesisAbi from 'config/abi/genesis.json'
 import nftchefAbi from 'config/abi/nftChef.json'
 import positionNft from 'config/abi/positionNft.json'
+import mirrorAbi from 'config/abi/mirror.json'
 
 // Types
 import type {
@@ -236,4 +237,7 @@ export const getNftChefContract = (signer?: Signer | Provider) => {
 }
 export const getPositionNftContract = (signer?: Signer | Provider) => {
   return getContract(positionNft, getPositionNftAddress(), signer)
+}
+export const getMirrorContract = (signer?: Signer | Provider) => {
+  return getContract(mirrorAbi, tokens.mirror.address, signer)
 }

@@ -30,6 +30,14 @@ export const mainnetTokens = defineTokens({
     'PancakeSwap Token',
     'https://pancakeswap.finance/',
   ),
+  mirror: new Token(
+    MAINNET,
+    '0x35f6fb63F083a2DBC1963ddF75bec60E6b40ccA5',
+    18,
+    'bBMirror',
+    'Babel Mirror',
+    'https://pancakeswap.finance/',
+  ),
   tlos: new Token(MAINNET, '0xb6C53431608E626AC81a9776ac3e999c5556717c', 18, 'TLOS', 'Telos', 'https://www.telos.net/'),
   beta: new Token(
     MAINNET,
@@ -2047,7 +2055,7 @@ export const mainnetTokens = defineTokens({
 export const testnetTokens = defineTokens({
   wbnb: new Token(
     TESTNET,
-    '0x2140608F118F78c84445D5F6269D6b5439689B4D',
+    '0xb7CdEd9c15D695b5FEabaF230BcA424C32EAef20',
     18,
     'WBNB',
     'Wrapped BNB',
@@ -2055,7 +2063,7 @@ export const testnetTokens = defineTokens({
   ),
   cake: new Token(
     TESTNET,
-    '0x1A7eFD77F62eeBE30F7ca70221Cece93f010aEcA',
+    '0x9F3D976c134260Ec1661bF68eF509B7250355E59',
     18,
     'Babel',
     'BABEL',
@@ -2063,7 +2071,7 @@ export const testnetTokens = defineTokens({
   ),
   busd: new Token(
     TESTNET,
-    '0x542aaC0219079Cd114a2D20674Ce186351902aaC',
+    '0xD0cCD65D45BC11B333d908aE3646A084a3525D5C',
     18,
     'BUSD',
     'BUSD',
@@ -2071,10 +2079,18 @@ export const testnetTokens = defineTokens({
   ),
   syrup: new Token(
     TESTNET,
-    '0xDA84E13E6666730ad28d651d13244E1BC90Aa081',
+    '0x0779F1E767d4556639Ef93706E31ab93dD55062D',
     18,
     'Bank',
     'Babel Bank Token',
+    'https://pancakeswap.finance/',
+  ),
+  mirror: new Token(
+    TESTNET,
+    '0x35f6fb63F083a2DBC1963ddF75bec60E6b40ccA5',
+    18,
+    'bBMirror',
+    'Babel Mirror',
     'https://pancakeswap.finance/',
   ),
   bake: new Token(

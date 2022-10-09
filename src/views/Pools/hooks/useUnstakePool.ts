@@ -20,14 +20,14 @@ const sousEmergencyUnstake = (sousChefContract: any) => {
   return sousChefContract.emergencyWithdraw({ gasPrice })
 }
 
-const useUnstakePool = (sousId: number, enableEmergencyWithdraw = false, isMasterChef = false) => {
+const useUnstakePool = (sousId: number, enableEmergencyWithdraw = false, isMasterChef = false, isMirror = false) => {
   const masterChefContract = useMasterchef()
   const sousChefContract = useSousChef(sousId)
 
   const handleUnstake = useCallback(
     async (amount: string, decimals: number) => {
       if (sousId === 0 || isMasterChef) {
-        return unstakeFarm(masterChefContract, sousId, amount, BIG_TEN.pow(decimals))
+        return unstakeFarm(masterChefContract, sousId, amount, BIG_TEN.pow(decimals), isMirror)
       }
       if (enableEmergencyWithdraw) {
         return sousEmergencyUnstake(sousChefContract)

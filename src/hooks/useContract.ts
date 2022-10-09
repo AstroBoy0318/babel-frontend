@@ -34,6 +34,7 @@ import {
   getGenesisContract,
   getNftChefContract,
   getPositionNftContract,
+  getMirrorContract,
 } from 'utils/contractHelpers'
 import { getGenesisAddress, getMulticallAddress } from 'utils/addressHelpers'
 import { VaultKey } from 'state/types'
@@ -343,7 +344,7 @@ export function useMulticallContract(usingWeb3?: boolean) {
 export function useGenesisContract() {
   const { library,account } = useActiveWeb3React()
   return useMemo(() => {
-    if (!library || !account) return null
+    if (!library || !account) return getGenesisContract()
     return getGenesisContract(library.getSigner())
   }, [library])
 }
@@ -361,6 +362,14 @@ export function usePositionNftContract() {
   return useMemo(() => {
     if (!library) return null
     return getPositionNftContract(library.getSigner())
+  }, [library])
+}
+
+export function useMirrorContract() {
+  const { library } = useActiveWeb3React()
+  return useMemo(() => {
+    if (!library) return getMirrorContract()
+    return getMirrorContract(library.getSigner())
   }, [library])
 }
 

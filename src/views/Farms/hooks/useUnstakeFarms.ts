@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { unstakeFarm } from 'utils/calls'
 import { useMasterchef } from 'hooks/useContract'
 
-const useUnstakeFarms = (pid: number) => {
+const useUnstakeFarms = (pid: number, isMirror = false) => {
   const masterChefContract = useMasterchef()
 
   const handleUnstake = useCallback(

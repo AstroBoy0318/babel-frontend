@@ -250,6 +250,8 @@ export const fetchPoolsUserDataAsync =
         pendingReward: pendingRewards[pool.sousId],
       }))
 
+      console.log(userData, "ddddddddddddd")
+
       dispatch(setPoolsUserData(userData))
     } catch (error) {
       console.error('[Pools Action] Error fetching pool user data', error)

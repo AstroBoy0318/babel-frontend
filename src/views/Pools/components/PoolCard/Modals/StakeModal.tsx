@@ -30,6 +30,7 @@ import { getInterestBreakdown } from 'utils/compoundApyHelpers'
 import PercentageButton from './PercentageButton'
 import useStakePool from '../../../hooks/useStakePool'
 import useUnstakePool from '../../../hooks/useUnstakePool'
+import tokens from 'config/constants/tokens'
 
 interface StakeModalProps {
   isBnbPool: boolean
@@ -69,8 +70,8 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
   const { theme } = useTheme()
-  const { onStake } = useStakePool(sousId, isBnbPool, pool.version === undefined)
-  const { onUnstake } = useUnstakePool(sousId, pool.enableEmergencyWithdraw, pool.version === undefined)
+  const { onStake } = useStakePool(sousId, isBnbPool, pool.version === undefined, pool.stakingToken.address === tokens.mirror.address)
+  const { onUnstake } = useUnstakePool(sousId, pool.enableEmergencyWithdraw, pool.version === undefined, pool.stakingToken.address === tokens.mirror.address)
   const { toastSuccess } = useToast()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
   const [stakeAmount, setStakeAmount] = useState('')

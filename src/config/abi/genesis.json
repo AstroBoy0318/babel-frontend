@@ -13,6 +13,11 @@
                 "internalType": "contract INFT",
                 "name": "_nftGenesis",
                 "type": "address"
+            },
+            {
+                "internalType": "contract INFT",
+                "name": "_nftGenesisTree",
+                "type": "address"
             }
         ],
         "stateMutability": "nonpayable",
@@ -23,7 +28,7 @@
         "inputs": [{
                 "indexed": false,
                 "internalType": "address",
-                "name": "sentBy",
+                "name": "wallet",
                 "type": "address"
             },
             {
@@ -34,24 +39,6 @@
             }
         ],
         "name": "AddToGenesis",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [{
-                "indexed": false,
-                "internalType": "address",
-                "name": "claimedBy",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "RewardAmount",
-                "type": "uint256"
-            }
-        ],
-        "name": "Claim",
         "type": "event"
     },
     {
@@ -77,6 +64,57 @@
         ],
         "name": "CreateTree",
         "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [{
+            "indexed": false,
+            "internalType": "bool",
+            "name": "isSwapPaused",
+            "type": "bool"
+        }],
+        "name": "PauseSwap",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [{
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "FreezedTimestamp",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "bool",
+                "name": "claimIsFreezed",
+                "type": "bool"
+            }
+        ],
+        "name": "SetFreeze",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [{
+            "indexed": false,
+            "internalType": "address",
+            "name": "bBMirror",
+            "type": "address"
+        }],
+        "name": "SetMirror",
+        "type": "event"
+    },
+    {
+        "inputs": [],
+        "name": "FreezedSwapTime",
+        "outputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
     },
     {
         "inputs": [],
@@ -112,36 +150,10 @@
         "type": "function"
     },
     {
-        "inputs": [{
-            "internalType": "uint256",
-            "name": "_num",
-            "type": "uint256"
-        }],
-        "name": "Index",
-        "outputs": [{
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [],
-        "name": "RewardAmount",
+        "name": "GenesisTreeNFT",
         "outputs": [{
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "RewardToken",
-        "outputs": [{
-            "internalType": "contract IERC20",
+            "internalType": "contract INFT",
             "name": "",
             "type": "address"
         }],
@@ -150,10 +162,37 @@
     },
     {
         "inputs": [{
-            "internalType": "address",
-            "name": "wallet",
-            "type": "address"
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "SwapTokens",
+        "outputs": [{
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
         }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "address",
+                "name": "wallet",
+                "type": "address"
+            },
+            {
+                "internalType": "bool",
+                "name": "userChoise",
+                "type": "bool"
+            }
+        ],
         "name": "addToGenesis",
         "outputs": [],
         "stateMutability": "nonpayable",
@@ -176,11 +215,22 @@
             "name": "_max",
             "type": "uint256"
         }],
-        "name": "arrayIndex",
+        "name": "arrayOfTree",
         "outputs": [{
             "internalType": "address[]",
             "name": "",
             "type": "address[]"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "bBMirror",
+        "outputs": [{
+            "internalType": "contract IERC20",
+            "name": "",
+            "type": "address"
         }],
         "stateMutability": "view",
         "type": "function"
@@ -227,17 +277,6 @@
     },
     {
         "inputs": [],
-        "name": "deposit",
-        "outputs": [{
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "finalTime",
         "outputs": [{
             "internalType": "uint256",
@@ -275,6 +314,28 @@
     },
     {
         "inputs": [],
+        "name": "isSwapPaused",
+        "outputs": [{
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "limit",
+        "outputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "maxTime",
         "outputs": [{
             "internalType": "uint256",
@@ -286,8 +347,36 @@
     },
     {
         "inputs": [{
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bool",
+                "name": "nft",
+                "type": "bool"
+            }
+        ],
+        "name": "mintRemaining",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
             "internalType": "bool",
-            "name": "_isFreeze",
+            "name": "_paused",
+            "type": "bool"
+        }],
+        "name": "pauseSwap",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "bool",
+            "name": "_isFreezed",
             "type": "bool"
         }],
         "name": "setFreeze",
@@ -298,10 +387,10 @@
     {
         "inputs": [{
             "internalType": "contract IERC20",
-            "name": "_reWardToken",
+            "name": "_bBMirror",
             "type": "address"
         }],
-        "name": "setRewardToken",
+        "name": "setMirror",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -335,6 +424,21 @@
             "internalType": "uint256",
             "name": "",
             "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "uint256",
+            "name": "_pos",
+            "type": "uint256"
+        }],
+        "name": "tree",
+        "outputs": [{
+            "internalType": "address",
+            "name": "",
+            "type": "address"
         }],
         "stateMutability": "view",
         "type": "function"

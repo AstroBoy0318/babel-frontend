@@ -26,14 +26,14 @@ const sousStakeBnb = async (sousChefContract, amount) => {
   })
 }
 
-const useStakePool = (sousId: number, isUsingBnb = false, isMasterChef = false) => {
+const useStakePool = (sousId: number, isUsingBnb = false, isMasterChef = false, isMirror = false) => {
   const masterChefContract = useMasterchef()
   const sousChefContract = useSousChef(sousId)
 
   const handleStake = useCallback(
     async (amount: string, decimals: number) => {
       if (sousId === 0 || isMasterChef) {
-        return stakeFarm(masterChefContract, sousId, amount, BIG_TEN.pow(decimals))
+        return stakeFarm(masterChefContract, sousId, amount, BIG_TEN.pow(decimals), isMirror)
       }
       if (isUsingBnb) {
         return sousStakeBnb(sousChefContract, amount)
