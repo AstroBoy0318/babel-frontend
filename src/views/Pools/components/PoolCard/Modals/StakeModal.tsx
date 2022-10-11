@@ -130,7 +130,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const handleChangePercent = (sliderPercent: number) => {
     if (sliderPercent > 0) {
       const percentageOfStakingMax = getCalculatedStakingLimit().dividedBy(100).multipliedBy(sliderPercent)
-      const amountToStake = getFullDisplayBalance(percentageOfStakingMax, stakingToken.decimals, stakingToken.decimals)
+      const amountToStake = getFullDisplayBalance(percentageOfStakingMax, stakingToken.decimals, 3)
       setStakeAmount(amountToStake)
     } else {
       setStakeAmount('')

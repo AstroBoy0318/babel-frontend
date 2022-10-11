@@ -48,6 +48,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account }) => {
     stakingToken,
     earningToken,
     totalStaked,
+    totalMirror,
     startBlock,
     endBlock,
     stakingLimit,
@@ -178,6 +179,19 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account }) => {
           </Flex>
         </Flex>
       )}
+      {sousId === 0 &&
+      <Flex mb="2px" justifyContent="flex-end">
+        {totalMirror && Number(totalMirror) !== 0 && totalMirror.gte(0) ? (
+            <>
+              <Balance small value={getBalanceNumber(totalMirror, 18)} decimals={0} unit={` bBMirror`} />
+              <span ref={totalStakedTargetRef}>
+                <HelpIcon color="textSubtle" width="20px" ml="6px" mt="4px" />
+              </span>
+            </>
+          ) : (
+            <Skeleton width="90px" height="21px" />
+          )}
+      </Flex>}
       <Flex mb="2px" justifyContent="flex-end">
         <LinkExternal href={`/info/token/${earningToken.address}`} bold={false} small>
           {t('See Token Info')}

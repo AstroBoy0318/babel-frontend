@@ -85,6 +85,11 @@ export const fetchCakePoolPublicDataAsync = () => async (dispatch, getState) => 
     const earningTokenPrice = earningTokenAddress ? prices[earningTokenAddress] : 0
     const cakeContract = getBep20Contract(stakingTokenAddress);
     const totalStaking = await cakeContract.balanceOf(getAddress(cakePool.contractAddress))
+    let totalMirror
+    if(cakePool.sousId === 0) {
+      const mirrorContract = getBep20Contract(tokens.mirror.address)
+      totalMirror = await mirrorContract.balanceOf(getAddress(cakePool.contractAddress))
+    }
     const now = await simpleRpcProvider.getBlockNumber()
     const perSecond = await masterChefContract.babelPerBlock()
     const multiplier = await masterChefContract.getMultiplierEx(Number(now), Number(now)+1)
@@ -105,6 +110,7 @@ export const fetchCakePoolPublicDataAsync = () => async (dispatch, getState) => 
         sousId: cakePool.sousId,
         data: {
           totalStaked: new BigNumber(totalStaking.toString()).toJSON(),
+          totalMirror: new BigNumber(totalMirror?totalMirror._hex:"0"),
           stakingTokenPrice,
           earningTokenPrice,
           apr,
@@ -118,8 +124,15 @@ export const fetchCakePoolUserDataAsync = (account: string) => async (dispatch) 
   cakePools.forEach(async (cakePool, idx)=>{
     const cakePoolAddress = getAddress(cakePool.contractAddress)
     const stakingTokenAddress = cakePool.stakingToken.address ? cakePool.stakingToken.address.toLowerCase() : null
+    const mirrorAddress = tokens.mirror.address ? tokens.mirror.address.toLowerCase() : null
+    console.log(mirrorAddress)
     const allowanceCall = {
       address: stakingTokenAddress,
+      name: 'allowance',
+      params: [account, cakePoolAddress],
+    }
+    const mirrorAllowanceCall = {
+      address: mirrorAddress,
       name: 'allowance',
       params: [account, cakePoolAddress],
     }
@@ -128,8 +141,13 @@ export const fetchCakePoolUserDataAsync = (account: string) => async (dispatch) 
       name: 'balanceOf',
       params: [account],
     }
-    const cakeContractCalls = [allowanceCall, balanceOfCall]
-    const [[allowance], [stakingTokenBalance]] = await multicallv2(cakeAbi, cakeContractCalls)
+    const mirrorBalanceOfCall = {
+      address: mirrorAddress,
+      name: 'balanceOf',
+      params: [account],
+    }
+    const cakeContractCalls = [allowanceCall, mirrorAllowanceCall, balanceOfCall, mirrorBalanceOfCall]
+    const [[allowance], [mirrorAllowance], [stakingTokenBalance], [mirrorBalance]] = await multicallv2(cakeAbi, cakeContractCalls)
 
     const masterChefCalls = ['pendingBabel', 'userInfo'].map((method) => ({
       address: getMasterChefAddress(),
@@ -139,14 +157,34 @@ export const fetchCakePoolUserDataAsync = (account: string) => async (dispatch) 
 
     const [[pendingReward], { amount: masterPoolAmount }] = await multicallv2(masterChef, masterChefCalls)
 
+    let babelStaked = 0, mirrorStaked = 0
+    if(cakePool.sousId === 0) {
+      const masterChefCallsForStaked = [{
+        address: getMasterChefAddress(),
+        name: "seeBabelStaked",
+        params: [account]
+      },{
+        address: getMasterChefAddress(),
+        name: "seeMirrorStaked",
+        params: [account]
+      }]
+      const stakedResult = await multicallv2(masterChef, masterChefCallsForStaked)
+      babelStaked = stakedResult[0]
+      mirrorStaked = stakedResult[1]
+    }
+
     dispatch(
       setPoolUserData({
         sousId: cakePool.sousId,
         data: {
           allowance: new BigNumber(allowance.toString()).toJSON(),
+          mirrorAllowance: new BigNumber(mirrorAllowance.toString()).toJSON(),
           stakingTokenBalance: new BigNumber(stakingTokenBalance.toString()).toJSON(),
+          mirrorBalance: new BigNumber(mirrorBalance.toString()).toJSON(),
           pendingReward: new BigNumber(pendingReward.toString()).toJSON(),
           stakedBalances: new BigNumber(masterPoolAmount.toString()).toJSON(),
+          mirrorStaked: new BigNumber(mirrorStaked.toString()).toJSON(),
+          babelStaked: new BigNumber(babelStaked.toString()).toJSON()
         },
       }),
     )
@@ -249,8 +287,6 @@ export const fetchPoolsUserDataAsync =
         stakedBalance: stakedBalances[pool.sousId],
         pendingReward: pendingRewards[pool.sousId],
       }))
-
-      console.log(userData, "ddddddddddddd")
 
       dispatch(setPoolsUserData(userData))
     } catch (error) {

@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js'
+import {useEffect, useState} from 'react'
 
 import { CardBody, Flex, Text, CardRibbon } from '@pancakeswap/uikit'
 import ConnectWalletButton from 'components/ConnectWalletButton'
@@ -11,14 +12,31 @@ import { StyledCard } from './StyledCard'
 import CardFooter from './CardFooter'
 import PoolCardHeader, { PoolCardHeaderTitle } from './PoolCardHeader'
 import CardActions from './CardActions'
+import tokens from 'config/constants/tokens'
 
 const PoolCard: React.FC<{ pool: DeserializedPool; account: string }> = ({ pool, account }) => {
   const { sousId, stakingToken, earningToken, isFinished, userData } = pool
   const { t } = useTranslation()
-  const stakedBalance = userData?.stakedBalance ? new BigNumber(userData.stakedBalance) : BIG_ZERO
-  const accountHasStakedBalance = stakedBalance.gt(0)
+  const stakedBalance = sousId === 0?(userData?.babelStaked ? new BigNumber(userData.babelStaked) : BIG_ZERO):(userData?.stakedBalance ? new BigNumber(userData.stakedBalance) : BIG_ZERO)
+  const mirrorStakedBalance = sousId === 0?(userData?.mirrorStaked ? new BigNumber(userData.mirrorStaked) : BIG_ZERO):BIG_ZERO
+  const accountHasStakedBalance = stakedBalance.gt(0) || mirrorStakedBalance.gt(0)
 
   const isCakePool = earningToken.symbol === 'BABEL' && stakingToken.symbol === 'BABEL'
+
+  const [poolMirror, setPoolMirror] = useState(pool)
+
+  useEffect(()=>{
+    if(sousId === 0) {
+      let clonePool = { ...pool }
+      clonePool.stakingToken = tokens.mirror
+      clonePool.userData.stakedBalance = clonePool.userData.mirrorStaked
+      clonePool.userData.stakingTokenBalance = clonePool.userData.mirrorBalance
+      clonePool.harvest = false
+      clonePool.userData.allowance = clonePool.userData.mirrorAllowance
+      setPoolMirror(clonePool)
+      console.log(clonePool, pool)
+    }
+  }, [pool])
 
   return (
     <StyledCard
@@ -36,7 +54,12 @@ const PoolCard: React.FC<{ pool: DeserializedPool; account: string }> = ({ pool,
         <AprRow pool={pool} stakedBalance={stakedBalance} />
         <Flex mt="24px" flexDirection="column">
           {account ? (
-            <CardActions pool={pool} stakedBalance={stakedBalance} />
+            <>
+              <CardActions pool={pool} stakedBalance={stakedBalance} />
+              {sousId === 0 &&
+                <CardActions pool={poolMirror} stakedBalance={mirrorStakedBalance} />
+              }
+            </>
           ) : (
             <>
               <Text mb="10px" textTransform="uppercase" fontSize="12px" color="textSubtle" bold>

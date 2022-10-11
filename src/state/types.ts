@@ -130,10 +130,14 @@ export interface DeserializedPool extends DeserializedPoolConfig, CorePoolProps 
     thresholdPoints: BigNumber
   }
   userData?: {
-    allowance: BigNumber
-    stakingTokenBalance: BigNumber
-    stakedBalance: BigNumber
-    pendingReward: BigNumber
+    allowance: SerializedBigNumber
+    mirrorAllowance: SerializedBigNumber
+    stakingTokenBalance: SerializedBigNumber
+    mirrorBalance: SerializedBigNumber
+    stakedBalance: SerializedBigNumber
+    mirrorStaked: SerializedBigNumber
+    babelStaked: SerializedBigNumber
+    pendingReward: SerializedBigNumber
   }
 }
 
@@ -147,8 +151,12 @@ export interface SerializedPool extends SerializedPoolConfig, CorePoolProps {
   }
   userData?: {
     allowance: SerializedBigNumber
+    mirrorAllowance: SerializedBigNumber
     stakingTokenBalance: SerializedBigNumber
+    mirrorBalance: SerializedBigNumber
     stakedBalance: SerializedBigNumber
+    mirrorStaked: SerializedBigNumber
+    babelStaked: SerializedBigNumber
     pendingReward: SerializedBigNumber
   }
 }

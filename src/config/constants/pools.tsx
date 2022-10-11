@@ -35,23 +35,7 @@ const pools: SerializedPoolConfig[] = [
     stakingToken: serializedTokens.cake,
     earningToken: serializedTokens.cake,
     contractAddress: {
-      97: '0x4A1af1577cD653a0d4E3a42989186799AA630A19',
-      56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
-      4002: '0x4a8a51825D463d9A241A8151A822dd307CF88A8C',
-      5777: '0xd483E67A042C2A702e13D19BA961F350DA4ef346',
-    },
-    poolCategory: PoolCategory.CORE,
-    harvest: true,
-    tokenPerBlock: '0.0000033',
-    sortOrder: 1,
-    isFinished: false,
-  },
-  {
-    sousId: 0,
-    stakingToken: serializedTokens.mirror,
-    earningToken: serializedTokens.cake,
-    contractAddress: {
-      97: '0x4A1af1577cD653a0d4E3a42989186799AA630A19',
+      97: '0x07d97125aba1CBe896AF789b3401326756C59030',
       56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
       4002: '0x4a8a51825D463d9A241A8151A822dd307CF88A8C',
       5777: '0xd483E67A042C2A702e13D19BA961F350DA4ef346',
@@ -67,7 +51,7 @@ const pools: SerializedPoolConfig[] = [
     stakingToken: serializedTokens.busd,
     earningToken: serializedTokens.cake,
     contractAddress: {
-      97: '0x4A1af1577cD653a0d4E3a42989186799AA630A19',
+      97: '0x07d97125aba1CBe896AF789b3401326756C59030',
       56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
       4002: '0x4a8a51825D463d9A241A8151A822dd307CF88A8C',
       5777: '0xd483E67A042C2A702e13D19BA961F350DA4ef346',

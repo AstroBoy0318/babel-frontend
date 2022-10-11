@@ -15,16 +15,24 @@ type UserData =
   | DeserializedPool['userData']
   | {
       allowance: number | string
+      mirrorAllowance: number | string
       stakingTokenBalance: number | string
+      mirrorBalance: number | string
       stakedBalance: number | string
+      mirrorStaked: number | string
+      babelStaked: number | string
       pendingReward: number | string
     }
 
 export const transformUserData = (userData: UserData) => {
   return {
     allowance: userData ? new BigNumber(userData.allowance) : BIG_ZERO,
+    mirrorAllowance: userData ? new BigNumber(userData.mirrorAllowance) : BIG_ZERO,
     stakingTokenBalance: userData ? new BigNumber(userData.stakingTokenBalance) : BIG_ZERO,
+    mirrorBalance: userData ? new BigNumber(userData.mirrorBalance) : BIG_ZERO,
     stakedBalance: userData ? new BigNumber(userData.stakedBalance) : BIG_ZERO,
+    mirrorStaked: userData ? new BigNumber(userData.mirrorStaked) : BIG_ZERO,
+    babelStaked: userData ? new BigNumber(userData.babelStaked) : BIG_ZERO,
     pendingReward: userData ? new BigNumber(userData.pendingReward) : BIG_ZERO,
   }
 }

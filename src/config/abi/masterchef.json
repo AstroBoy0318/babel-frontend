@@ -473,6 +473,17 @@
     },
     {
         "inputs": [],
+        "name": "maxPerBlock",
+        "outputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "minPerBlock",
         "outputs": [{
             "internalType": "uint256",
@@ -572,6 +583,36 @@
     },
     {
         "inputs": [{
+            "internalType": "address",
+            "name": "wallet",
+            "type": "address"
+        }],
+        "name": "seeBabelStaked",
+        "outputs": [{
+            "internalType": "uint256",
+            "name": "total",
+            "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "address",
+            "name": "wallet",
+            "type": "address"
+        }],
+        "name": "seeMirrorStaked",
+        "outputs": [{
+            "internalType": "uint256",
+            "name": "total",
+            "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
                 "internalType": "uint256",
                 "name": "_pid",
                 "type": "uint256"
@@ -614,7 +655,7 @@
             "name": "_treasury",
             "type": "address"
         }],
-        "name": "settreasury",
+        "name": "setTreasury",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
