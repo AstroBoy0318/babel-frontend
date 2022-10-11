@@ -27,12 +27,12 @@ const PoolCard: React.FC<{ pool: DeserializedPool; account: string }> = ({ pool,
 
   useEffect(()=>{
     if(sousId === 0) {
-      let clonePool = { ...pool }
+      let clonePool = { ...poolMirror }
       clonePool.stakingToken = tokens.mirror
-      clonePool.userData.stakedBalance = clonePool.userData.mirrorStaked
-      clonePool.userData.stakingTokenBalance = clonePool.userData.mirrorBalance
+      clonePool.userData.stakedBalance = pool.userData.mirrorStaked
+      clonePool.userData.stakingTokenBalance = pool.userData.mirrorBalance
       clonePool.harvest = false
-      clonePool.userData.allowance = clonePool.userData.mirrorAllowance
+      clonePool.userData.allowance = pool.userData.mirrorAllowance
       setPoolMirror(clonePool)
       console.log(clonePool, pool)
     }

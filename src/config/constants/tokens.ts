@@ -2063,7 +2063,7 @@ export const testnetTokens = defineTokens({
   ),
   cake: new Token(
     TESTNET,
-    '0x62Dab629612985a53B8ad7F4eCB6462E40868e4B',
+    '0xf91B3795b184cF7d424A1D1458dC3A3A2d78E310',
     18,
     'Babel',
     'BABEL',
@@ -2079,7 +2079,7 @@ export const testnetTokens = defineTokens({
   ),
   syrup: new Token(
     TESTNET,
-    '0x7e1795fcc021B2394172479B57f43116Ca127a97',
+    '0x6F21caf9138f5e4Ac6B29E55de204482a24A3083',
     18,
     'Bank',
     'Babel Bank Token',
@@ -2087,7 +2087,7 @@ export const testnetTokens = defineTokens({
   ),
   mirror: new Token(
     TESTNET,
-    '0x08A077E848ED0F2a9Abc27BbC6F545a68ffC66f0',
+    '0xC2F5810d1D53634211538709834331352cDf9786',
     18,
     'bBMirror',
     'Babel Mirror',

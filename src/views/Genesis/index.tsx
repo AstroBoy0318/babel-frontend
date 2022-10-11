@@ -136,6 +136,7 @@ export default function Genesis() {
             }
             const tx = await genesisContract.addToGenesis(account, userChoise)
             await tx.wait()
+            setToRefresh(!toRefresh)
             setPending(false)
         } catch (error: any) {
             const errorDescription = `${error.message} - ${error.data?.message}`
@@ -154,6 +155,7 @@ export default function Genesis() {
             }
             const tx = await genesisContract.addToGenesis(friendAddress, userChoise)
             await tx.wait()
+            setToRefresh(!toRefresh)
             setPending(false)
         } catch (error: any) {
             const errorDescription = `${error.message} - ${error.data?.message}`
@@ -168,6 +170,7 @@ export default function Genesis() {
             const proof = await genesisContract.viewProof()
             const tx = await genesisContract.claim(proof)
             await tx.wait()
+            setToRefresh(!toRefresh)
             setPending(false)
         } catch (error: any) {
             const errorDescription = `${error.message} - ${error.data?.message}`
@@ -179,8 +182,9 @@ export default function Genesis() {
     const swap = async () => {
         try{
             setPending(true)
-            const tx = await genesisContract.SwapTokens(account, mirrorBalance)
+            const tx = await genesisContract.SwapTokens(getBalanceNumber(mirrorBalance))
             await tx.wait()
+            setToRefresh(!toRefresh)
             setPending(false)
         } catch (error: any) {
             const errorDescription = `${error.message} - ${error.data?.message}`

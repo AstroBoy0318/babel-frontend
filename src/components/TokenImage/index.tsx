@@ -15,13 +15,15 @@ interface TokenPairImageProps extends Omit<UIKitTokenPairImageProps, 'primarySrc
 }
 
 const getImageUrlFromToken = (token: Token) => {
-  if(CHAIN_ID == ChainId.MAINNET.toString()) {
+  let result = "";
+  if(CHAIN_ID === ChainId.MAINNET.toString()) {
     const address = token.symbol === 'BNB' ? tokens.wbnb.address : token.address
-    return `/images/tokens/${address}.svg`
-  } else if(CHAIN_ID == ChainId.TESTNET.toString()) {  
+    result = `/images/tokens/${address}.svg`
+  } else if(CHAIN_ID === ChainId.TESTNET.toString()) {  
     const address = token.symbol
-    return `/images/tokens/testnet/${address}.png`
+    result = `/images/tokens/testnet/${address}.png`
   }
+  return result
 }
 
 export const TokenPairImage: React.FC<TokenPairImageProps> = ({ primaryToken, secondaryToken, ...props }) => {
