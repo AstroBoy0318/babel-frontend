@@ -15,6 +15,11 @@
                 "type": "address"
             },
             {
+                "internalType": "address",
+                "name": "_DepositToken",
+                "type": "address"
+            },
+            {
                 "internalType": "uint256",
                 "name": "_babelPerBlock",
                 "type": "uint256"
@@ -67,9 +72,9 @@
             },
             {
                 "indexed": true,
-                "internalType": "uint8",
+                "internalType": "uint256",
                 "name": "pid",
-                "type": "uint8"
+                "type": "uint256"
             },
             {
                 "indexed": false,
@@ -137,11 +142,33 @@
         "anonymous": false,
         "inputs": [{
             "indexed": false,
+            "internalType": "address",
+            "name": "newToken",
+            "type": "address"
+        }],
+        "name": "UpdateDepositToken",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [{
+            "indexed": false,
             "internalType": "uint256",
             "name": "babelPerBlock",
             "type": "uint256"
         }],
         "name": "UpdateEmissionRate",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [{
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "newMinDeposit",
+            "type": "uint256"
+        }],
+        "name": "UpdateMinDeposit",
         "type": "event"
     },
     {
@@ -154,9 +181,9 @@
             },
             {
                 "indexed": true,
-                "internalType": "uint8",
+                "internalType": "uint256",
                 "name": "pid",
-                "type": "uint8"
+                "type": "uint256"
             },
             {
                 "indexed": false,
@@ -185,6 +212,17 @@
             "internalType": "uint256",
             "name": "",
             "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "DepositToken",
+        "outputs": [{
+            "internalType": "address",
+            "name": "",
+            "type": "address"
         }],
         "stateMutability": "view",
         "type": "function"
@@ -288,9 +326,9 @@
     },
     {
         "inputs": [{
-                "internalType": "uint8",
+                "internalType": "uint256",
                 "name": "_pid",
-                "type": "uint8"
+                "type": "uint256"
             },
             {
                 "internalType": "uint256",
@@ -337,35 +375,9 @@
     },
     {
         "inputs": [{
-                "internalType": "uint8",
-                "name": "pid",
-                "type": "uint8"
-            },
-            {
                 "internalType": "uint256",
-                "name": "tokenId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint8",
-                "name": "order",
-                "type": "uint8"
-            }
-        ],
-        "name": "getPriceOfTokenID",
-        "outputs": [{
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-                "internalType": "uint8",
                 "name": "_pid",
-                "type": "uint8"
+                "type": "uint256"
             },
             {
                 "internalType": "address",
@@ -390,6 +402,17 @@
     {
         "inputs": [],
         "name": "maXSupplyBabel",
+        "outputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "minDeposit",
         "outputs": [{
             "internalType": "uint256",
             "name": "",
@@ -426,7 +449,7 @@
             "name": "",
             "type": "bytes4"
         }],
-        "stateMutability": "nonpayable",
+        "stateMutability": "pure",
         "type": "function"
     },
     {
@@ -585,6 +608,28 @@
     },
     {
         "inputs": [{
+            "internalType": "address",
+            "name": "_address",
+            "type": "address"
+        }],
+        "name": "updateDepositToken",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "uint256",
+            "name": "_minDeposit",
+            "type": "uint256"
+        }],
+        "name": "updateMinDeposit",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
                 "internalType": "uint256",
                 "name": "",
                 "type": "uint256"
@@ -617,9 +662,9 @@
     },
     {
         "inputs": [{
-                "internalType": "uint8",
+                "internalType": "uint256",
                 "name": "_pid",
-                "type": "uint8"
+                "type": "uint256"
             },
             {
                 "internalType": "uint256",
