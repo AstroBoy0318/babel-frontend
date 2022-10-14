@@ -125,7 +125,6 @@ export const fetchCakePoolUserDataAsync = (account: string) => async (dispatch) 
     const cakePoolAddress = getAddress(cakePool.contractAddress)
     const stakingTokenAddress = cakePool.stakingToken.address ? cakePool.stakingToken.address.toLowerCase() : null
     const mirrorAddress = tokens.mirror.address ? tokens.mirror.address.toLowerCase() : null
-    console.log(mirrorAddress)
     const allowanceCall = {
       address: stakingTokenAddress,
       name: 'allowance',

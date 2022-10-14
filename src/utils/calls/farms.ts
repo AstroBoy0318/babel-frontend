@@ -29,7 +29,7 @@ export const unstakeFarm = async (masterChefContract, pid, amount, decimals = DE
 export const harvestFarm = async (masterChefContract, pid) => {
   const gasPrice = getGasPrice()
   if (pid === 0) {
-    return masterChefContract.leaveStaking('0', { ...options, gasPrice })
+    return masterChefContract.leaveStaking('0', false, { ...options, gasPrice })
   }
 
   return masterChefContract.deposit(pid, '0', { ...options, gasPrice })

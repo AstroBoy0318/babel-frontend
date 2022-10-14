@@ -54,7 +54,7 @@ const CollectModal: React.FC<CollectModalProps> = ({
   const dispatch = useAppDispatch()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
   const { onReward } = useHarvestPool(sousId, isBnbPool, isMaster)
-  const { onStake } = useStakePool(sousId, isBnbPool)
+  const { onStake } = useStakePool(sousId, isBnbPool, false)
   const [shouldCompound, setShouldCompound] = useState(isCompoundPool)
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
     <>

@@ -34,7 +34,6 @@ const PoolCard: React.FC<{ pool: DeserializedPool; account: string }> = ({ pool,
       clonePool.harvest = false
       clonePool.userData.allowance = pool.userData.mirrorAllowance
       setPoolMirror(clonePool)
-      console.log(clonePool, pool)
     }
   }, [pool])
 
