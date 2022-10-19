@@ -52,13 +52,14 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
   }, [onApprove, dispatch, account, pid, t, toastSuccess, fetchWithCatchTxError])
 
   const renderApprovalOrStakeButton = () => {
-    return isApproved ? (
-      <StakeAction {...farm} lpLabel={lpLabel} addLiquidityUrl={addLiquidityUrl} displayApr={displayApr} />
-    ) : (
-      <Button mt="8px" width="100%" disabled={pendingTx} onClick={handleApprove}>
-        {t('Enable Contract')}
-      </Button>
-    )
+    // return isApproved ? (
+    //   <StakeAction {...farm} lpLabel={lpLabel} addLiquidityUrl={addLiquidityUrl} displayApr={displayApr} />
+    // ) : (
+    //   <Button mt="8px" width="100%" disabled={pendingTx} onClick={handleApprove}>
+    //     {t('Enable Contract')}
+    //   </Button>
+    // )
+    return <StakeAction {...farm} lpLabel={lpLabel} addLiquidityUrl={addLiquidityUrl} displayApr={displayApr} />
   }
 
   return (

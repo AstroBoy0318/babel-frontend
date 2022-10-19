@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { stakeFarm } from 'utils/calls'
+import { stakeFarm, stakeFarmWithPermit } from 'utils/calls'
 import { useMasterchef } from 'hooks/useContract'
 
 const useStakeFarms = (pid: number) => {
@@ -12,7 +12,14 @@ const useStakeFarms = (pid: number) => {
     [masterChefContract, pid],
   )
 
-  return { onStake: handleStake }
+  const handleStakeWithPermit = useCallback(
+    async (amount: string, deadline: number, v: number, r: string, s: string) => {
+      return stakeFarmWithPermit(masterChefContract, pid, amount, deadline, v, r, s)
+    },
+    [masterChefContract, pid],
+  )
+
+  return { onStake: handleStake, onStakeWithPermit: handleStakeWithPermit }
 }
 
 export default useStakeFarms
