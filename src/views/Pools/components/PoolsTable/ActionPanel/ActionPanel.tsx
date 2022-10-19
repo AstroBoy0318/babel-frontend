@@ -32,6 +32,8 @@ import Stake from './Stake'
 import Apr from '../../Apr'
 import AutoHarvest from './AutoHarvest'
 import MaxStakeRow from '../../MaxStakeRow'
+import { useState, useEffect } from 'react'
+import tokens from 'config/constants/tokens'
 
 const expandAnimation = keyframes`
   from {
@@ -289,6 +291,20 @@ const ActionPanel: React.FC<ActionPanelProps> = ({ account, pool, userDataLoaded
     </Flex>
   )
 
+  const [poolMirror, setPoolMirror] = useState(pool)
+
+  useEffect(()=>{
+    if(sousId === 0) {
+      let clonePool = { ...poolMirror }
+      clonePool.stakingToken = tokens.mirror
+      clonePool.userData.stakedBalance = pool.userData.mirrorStaked
+      clonePool.userData.stakingTokenBalance = pool.userData.mirrorBalance
+      clonePool.harvest = false
+      clonePool.userData.allowance = pool.userData.mirrorAllowance
+      setPoolMirror(clonePool)  
+    }
+  }, [pool])
+
   return (
     <StyledActionPanel expanded={expanded}>
       <InfoSection>
@@ -350,6 +366,9 @@ const ActionPanel: React.FC<ActionPanelProps> = ({ account, pool, userDataLoaded
           <Harvest {...pool} userDataLoaded={userDataLoaded} />
         )}
         <Stake pool={pool} userDataLoaded={userDataLoaded} />
+        {sousId === 0 &&
+          <Stake pool={poolMirror} userDataLoaded={userDataLoaded} />
+        }
       </ActionContainer>
     </StyledActionPanel>
   )

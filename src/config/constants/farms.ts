@@ -12,7 +12,7 @@ const farms: SerializedFarmConfig[] = [
     pid: 0,
     lpSymbol: 'BABEL',
     lpAddresses: {
-      97: '0x540a67b069b832808F2752DFb34c04580346ec53',
+      97: '0x1C3C1D3425feb6D4Ea32CE65a5CD398cdec7400E',
       56: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
       4002: '0xf5a2BEfD9018C45DBc87859C72Fc116EF2052599',
       5777: '0x024f9c23b9999b34315648c858023809b2eaC57c',
@@ -27,7 +27,7 @@ const farms: SerializedFarmConfig[] = [
     pid: 8,
     lpSymbol: 'BABEL-BNB LP',
     lpAddresses: {
-      97: '0xE9cD44bBF86aD0Ce99794BA315ff0382FabF54ed',
+      97: '0x4a622D38eDF154224b24c220cc43aA88fE9b55f4',
       56: '0xA527a61703D82139F8a06Bc30097cC9CAA2df5A6',
       4002: '0x5F62C3a6caE8a107DFDC1A99e79cA49717fA44cA',
       5777: '0xC35354B751cC63A9c2Bc1500334BC2c97B2B6286',
@@ -39,7 +39,7 @@ const farms: SerializedFarmConfig[] = [
     pid: 6,
     lpSymbol: 'BUSD-BNB LP',
     lpAddresses: {
-      97: '0xd56B7dc92d3978fBeD7B656bee0f61841532E4De',
+      97: '0x0fa46C0aB9A595f571427ED4f37C968788D2Dc2C',
       56: '0x1b96b92314c44b159149f7e0303511fb2fc4774f',
       4002: '0x24269C6C58ca72cD6342F321926793A6D3F5B2e6',
       5777: '0x5ebb754cDd5113149289B17136106c14472060be',
@@ -52,7 +52,7 @@ const farms: SerializedFarmConfig[] = [
     pid: 1,
     lpSymbol: 'BABEL-BUSD LP',
     lpAddresses: {
-      97: '0xA6F9Cee822A0049b7784926764475F184008CB78',
+      97: '0xbf4B53E7a520da98E8a60ebE22Bc035bBf801829',
       56: '0xA527a61703D82139F8a06Bc30097cC9CAA2df5A6',
       4002: '0x5F62C3a6caE8a107DFDC1A99e79cA49717fA44cA',
       5777: '0xC35354B751cC63A9c2Bc1500334BC2c97B2B6286',

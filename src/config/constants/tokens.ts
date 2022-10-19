@@ -2063,10 +2063,10 @@ export const testnetTokens = defineTokens({
   ),
   cake: new Token(
     TESTNET,
-    '0x540a67b069b832808F2752DFb34c04580346ec53',
+    '0x1C3C1D3425feb6D4Ea32CE65a5CD398cdec7400E',
     18,
     'Babel',
-    'BABEL',
+    'BabelSwap',
     'https://app.begoiko.com/',
   ),
   busd: new Token(
@@ -2079,7 +2079,7 @@ export const testnetTokens = defineTokens({
   ),
   syrup: new Token(
     TESTNET,
-    '0x98233C4F3da2FA576b816f94696071810fEe4b00',
+    '0xc1C42B6D4cFD8Cf2Ca4C2B0A90ae7739F67aC097',
     18,
     'Bank',
     'Babel Bank Token',
@@ -2087,7 +2087,7 @@ export const testnetTokens = defineTokens({
   ),
   mirror: new Token(
     TESTNET,
-    '0x19E10aAff702088bE71e5Ffc91E3e225ef340182',
+    '0xAD99d49D170B834B432C5a864af7ff5fbfD072ff',
     18,
     'bBMirror',
     'Babel Mirror',

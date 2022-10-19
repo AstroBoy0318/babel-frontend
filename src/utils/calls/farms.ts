@@ -23,6 +23,13 @@ export const stakeFarmWithPermit = async (masterChefContract, pid, amount, deadl
   return masterChefContract.depositWithPermit(pid, value, deadline, false, v, r, s, { ...options, gasPrice })
 }
 
+export const enterStakingWithPermit = async (masterChefContract, isMirror, amount, deadline, v, r, s) => {
+  const gasPrice = getGasPrice()
+  const value = new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString()
+
+  return masterChefContract.enterStakingWithPermit(value, isMirror, deadline, false, v, r, s, { ...options, gasPrice })
+}
+
 export const unstakeFarm = async (masterChefContract, pid, amount, decimals = DEFAULT_TOKEN_DECIMAL, isMirror = false) => {
   const gasPrice = getGasPrice()
   const value = new BigNumber(amount).times(decimals).toString()

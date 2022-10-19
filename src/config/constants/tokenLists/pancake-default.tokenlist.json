@@ -124,7 +124,7 @@
         {
             "name": "BabelSwap Token",
             "symbol": "Babel",
-            "address": "0x540a67b069b832808F2752DFb34c04580346ec53",
+            "address": "0xc5B71666E4936973Cf0aed226956A157766eBa7D",
             "chainId": 97,
             "decimals": 18,
             "logoURI": "http://localhost:3000/images/babel_logo.svg"

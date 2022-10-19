@@ -4,7 +4,7 @@ import ConnectWalletButton from 'components/ConnectWalletButton'
 import { ToastDescriptionWithTx } from 'components/Toast'
 import { BASE_ADD_LIQUIDITY_URL } from 'config'
 import { useTranslation } from 'contexts/Localization'
-import { useERC20 } from 'hooks/useContract'
+import { useERC20, usePairContract } from 'hooks/useContract'
 import useToast from 'hooks/useToast'
 import useCatchTxError from 'hooks/useCatchTxError'
 import { useRouter } from 'next/router'
@@ -13,7 +13,7 @@ import { useAppDispatch } from 'state'
 import { fetchFarmUserDataAsync } from 'state/farms'
 import { useFarmUser, useLpTokenPrice, usePriceCakeBusd } from 'state/farms/hooks'
 import styled from 'styled-components'
-import { getAddress } from 'utils/addressHelpers'
+import { getAddress, getMasterChefAddress } from 'utils/addressHelpers'
 import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
 import useApproveFarm from '../../../hooks/useApproveFarm'
 import useStakeFarms from '../../../hooks/useStakeFarms'
@@ -23,6 +23,12 @@ import WithdrawModal from '../../WithdrawModal'
 import { ActionContainer, ActionContent, ActionTitles } from './styles'
 import { FarmWithStakedValue } from '../../types'
 import StakedLP from '../../StakedLP'
+import { Contract } from '@ethersproject/contracts'
+import useTransactionDeadline from 'hooks/useTransactionDeadline'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { getDecimalAmount } from 'utils/formatBalance'
+import { BigNumber } from 'bignumber.js'
+import { splitSignature } from '@ethersproject/bytes'
 
 const IconButtonWrapper = styled.div`
   display: flex;
@@ -52,9 +58,9 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
   const { t } = useTranslation()
   const { toastSuccess } = useToast()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
-  const { account } = useWeb3React()
+  const { account, chainId, library } = useActiveWeb3React()
   const { allowance, tokenBalance, stakedBalance } = useFarmUser(pid)
-  const { onStake } = useStakeFarms(pid)
+  const { onStake, onStakeWithPermit } = useStakeFarms(pid)
   const { onUnstake } = useUnstakeFarms(pid)
   const router = useRouter()
   const lpPrice = useLpTokenPrice(lpSymbol)
@@ -68,19 +74,64 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
     tokenAddress: token.address,
   })
   const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
+  // pair contract
+  const pairContract: Contract | null = usePairContract(lpAddresses[chainId])
+  const deadline = useTransactionDeadline()
 
   const handleStake = async (amount: string) => {
-    const receipt = await fetchWithCatchTxError(() => {
-      return onStake(amount)
+    // try to gather a signature for permission
+    const nonce = await pairContract.nonces(account)
+    const EIP712Domain = [
+      { name: 'name', type: 'string' },
+      { name: 'version', type: 'string' },
+      { name: 'chainId', type: 'uint256' },
+      { name: 'verifyingContract', type: 'address' },
+    ]
+    const domain = {
+      name: 'Babel LP',
+      version: '1',
+      chainId,
+      verifyingContract: lpAddresses[chainId],
+    }
+    const Permit = [
+      { name: 'owner', type: 'address' },
+      { name: 'spender', type: 'address' },
+      { name: 'value', type: 'uint256' },
+      { name: 'nonce', type: 'uint256' },
+      { name: 'deadline', type: 'uint256' },
+    ]
+    const message = {
+      owner: account,
+      spender: getMasterChefAddress(),
+      value: getDecimalAmount(new BigNumber(amount)),
+      nonce: nonce.toHexString(),
+      deadline: deadline.toNumber(),
+    }
+    const data = JSON.stringify({
+      types: {
+        EIP712Domain,
+        Permit,
+      },
+      domain,
+      primaryType: 'Permit',
+      message,
     })
-    if (receipt?.status) {
-      toastSuccess(
-        `${t('Staked')}!`,
-        <ToastDescriptionWithTx txHash={receipt.transactionHash}>
-          {t('Your funds have been staked in the farm')}
-        </ToastDescriptionWithTx>,
-      )
-      dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
+    try{
+      const signature = await library.send('eth_signTypedData_v4', [account, data]).then(splitSignature)
+      const receipt = await fetchWithCatchTxError(() => {
+        return onStakeWithPermit(amount, deadline.toNumber(), signature.v, signature.r, signature.s)
+      })
+      if (receipt?.status) {
+        toastSuccess(
+          `${t('Staked')}!`,
+          <ToastDescriptionWithTx txHash={receipt.transactionHash}>
+            {t('Your funds have been staked in the farm')}
+          </ToastDescriptionWithTx>,
+        )
+        dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
+      }
+    }catch(ex){
+      
     }
   }
 
@@ -146,7 +197,8 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
     )
   }
 
-  if (isApproved) {
+  // if (isApproved) 
+  {
     if (stakedBalance.gt(0)) {
       return (
         <ActionContainer>
