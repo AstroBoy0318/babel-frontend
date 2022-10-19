@@ -378,6 +378,48 @@
         "type": "function"
     },
     {
+        "inputs": [{
+                "internalType": "uint256",
+                "name": "_pid",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_amount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "deadline",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bool",
+                "name": "approveMax",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint8",
+                "name": "v",
+                "type": "uint8"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "r",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "s",
+                "type": "bytes32"
+            }
+        ],
+        "name": "depositWithPermit",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "distributor",
         "outputs": [{
@@ -605,7 +647,7 @@
         "name": "seeMirrorStaked",
         "outputs": [{
             "internalType": "uint256",
-            "name": "total",
+            "name": "",
             "type": "uint256"
         }],
         "stateMutability": "view",

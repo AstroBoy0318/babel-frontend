@@ -34,7 +34,7 @@
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "deposit",
+                "name": "pack",
                 "type": "uint256"
             }
         ],
@@ -44,24 +44,11 @@
     {
         "anonymous": false,
         "inputs": [{
-                "indexed": false,
-                "internalType": "address",
-                "name": "createdBy",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "time",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "root",
-                "type": "bytes32"
-            }
-        ],
+            "indexed": false,
+            "internalType": "bytes32",
+            "name": "root",
+            "type": "bytes32"
+        }],
         "name": "CreateTree",
         "type": "event"
     },
@@ -182,9 +169,9 @@
                 "type": "address"
             },
             {
-                "internalType": "bool",
-                "name": "userChoise",
-                "type": "bool"
+                "internalType": "uint256",
+                "name": "pack",
+                "type": "uint256"
             }
         ],
         "name": "addToGenesis",

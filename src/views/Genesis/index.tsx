@@ -104,7 +104,7 @@ export default function Genesis() {
     const [ babelBalance, setBabelBalance ] = useState("0")
     const [ mirrorBalance, setMirrorBalance ] = useState(BIG_ZERO)
     const [ toRefresh, setToRefresh ] = useState(false)
-    const [ userChoise, setUserChoise ] = useState(false)
+    const [ userChoise, setUserChoise ] = useState(1)
 
     const handleInput1 = useCallback(
         (event) => {
@@ -250,20 +250,29 @@ export default function Genesis() {
                             <Filter>
                                 <Radio
                                     scale="sm"
-                                    checked={!userChoise}
+                                    checked={userChoise === 1}
                                     disabled={!isOpened}
-                                    onChange={()=>setUserChoise(false)}
+                                    onChange={()=>setUserChoise(1)}
                                 />
-                                <Text ml="4px">10 BUSD(33 babel mirror + genesis nft)</Text>
+                                <Text ml="4px">$10 - 5 babel + genesis</Text>
                             </Filter>
                             <Filter>
                                 <Radio
                                     scale="sm"
-                                    checked={userChoise}
+                                    checked={userChoise === 2}
                                     disabled={!isOpened}
-                                    onChange={()=>setUserChoise(true)}
+                                    onChange={()=>setUserChoise(2)}
                                 />
-                                <Text ml="4px">100 BUSD(330 babel mirror + genesis nft + genesis tree)</Text>
+                                <Text ml="4px">$100 - 50 babel + genesis</Text>
+                            </Filter>
+                            <Filter>
+                                <Radio
+                                    scale="sm"
+                                    checked={userChoise === 3}
+                                    disabled={!isOpened}
+                                    onChange={()=>setUserChoise(3)}
+                                />
+                                <Text ml="4px">$500 - 275 babel + genesis + genesis tree</Text>
                             </Filter>
                         </Flex>
                         <InputPanel>

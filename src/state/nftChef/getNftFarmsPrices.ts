@@ -63,7 +63,7 @@ const getFarmQuoteTokenPrice = (
   quoteTokenFarm: DeserializedNftFarm,
   bnbPriceBusd: BigNumber,
 ): BigNumber => {
-  if (farm.quoteToken.symbol === tokens.busd.symbol) {
+  if (farm.quoteToken.symbol === tokens.busd.symbol || farm.quoteToken.symbol === tokens.dai.symbol || farm.quoteToken.symbol === tokens.usdt.symbol) {
     return BIG_ONE
   }
 

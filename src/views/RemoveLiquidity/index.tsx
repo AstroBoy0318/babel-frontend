@@ -22,7 +22,7 @@ import { CurrencyLogo } from '../../components/Logo'
 import { ROUTER_ADDRESS } from '../../config/constants'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { useCurrency } from '../../hooks/Tokens'
-import { usePairContract } from '../../hooks/useContract'
+import { usePairContract, usePositionNftContract } from '../../hooks/useContract'
 import useTransactionDeadline from '../../hooks/useTransactionDeadline'
 
 import { useTransactionAdder } from '../../state/transactions/hooks'
@@ -106,6 +106,10 @@ export default function RemoveLiquidity() {
   const [signatureData, setSignatureData] = useState<{ v: number; r: string; s: string; deadline: number } | null>(null)
   const [approval, approveCallback] = useApproveCallback(parsedAmounts[Field.LIQUIDITY], ROUTER_ADDRESS[CHAIN_ID])
 
+  // nft position contract
+  const nftPositionContract = usePositionNftContract()
+  const [nftApproving, setNftApproving] = useState(false)
+
   async function onAttemptToApprove() {
     if (!pairContract || !pair || !library || !deadline) throw new Error('missing dependencies')
     const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
@@ -113,9 +117,28 @@ export default function RemoveLiquidity() {
       toastError(t('Error'), t('Missing liquidity amount'))
       throw new Error('missing liquidity amount')
     }
+    const availableAmount = await nftPositionContract.getLiquidityForLP(account, pair?.liquidityToken?.address)
+    if (liquidityAmount.greaterThan(availableAmount) ) {
+      toastError(t('Error'), t('Liquidity amount is exceed, You have to withdraw all staked position nft tokens.'))
+      // throw new Error('Liquidity amount is exceed')
+      return
+    }
 
     // try to gather a signature for permission
     const nonce = await pairContract.nonces(account)
+
+    const allApproved = await nftPositionContract.isApprovedForAll(account, ROUTER_ADDRESS[CHAIN_ID])
+    if(!allApproved) {
+      setNftApproving(true)
+      try{
+        let tx = await nftPositionContract.setApprovalForAll(ROUTER_ADDRESS[CHAIN_ID], true)
+        await tx.wait()
+        setNftApproving(false)
+      } catch (ex) {
+        setNftApproving(false)
+        return
+      }
+    }
 
     const EIP712Domain = [
       { name: 'name', type: 'string' },
@@ -602,11 +625,11 @@ export default function RemoveLiquidity() {
                 <Button
                   variant={approval === ApprovalState.APPROVED || signatureData !== null ? 'success' : 'primary'}
                   onClick={onAttemptToApprove}
-                  disabled={approval !== ApprovalState.NOT_APPROVED || signatureData !== null}
+                  disabled={approval !== ApprovalState.NOT_APPROVED || signatureData !== null || nftApproving}
                   width="100%"
                   mr="0.5rem"
                 >
-                  {approval === ApprovalState.PENDING ? (
+                  {approval === ApprovalState.PENDING || nftApproving ? (
                     <Dots>{t('Enabling')}</Dots>
                   ) : approval === ApprovalState.APPROVED || signatureData !== null ? (
                     t('Enabled')
