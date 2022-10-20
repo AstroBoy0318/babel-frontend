@@ -1,5 +1,4 @@
-import BigNumber from 'bignumber.js'
-import { DEFAULT_GAS_LIMIT, DEFAULT_TOKEN_DECIMAL } from 'config'
+import { DEFAULT_GAS_LIMIT } from 'config'
 import getGasPrice from 'utils/getGasPrice'
 import { getNftChefAddress } from 'utils/addressHelpers'
 const options = {
@@ -13,6 +12,17 @@ export const stakeNftFarm = async (nftChefContract, positionNftContract, pid, to
     if (approved != getNftChefAddress()) {
         let tx = await positionNftContract.approve(getNftChefAddress(), tokenId)
         await tx.wait()
+    }
+
+    return nftChefContract.deposit(pid, tokenId, { ...options, gasPrice })
+}
+export const stakeNftFarmWithPermit = async (nftChefContract, positionNftContract, pid, tokenId, deadline, signature) => {
+    const gasPrice = getGasPrice()
+
+    const approved = await positionNftContract.getApproved(tokenId)
+
+    if (approved != getNftChefAddress()) {
+        return nftChefContract.depositWithPermit(pid, tokenId, deadline, signature, { ...options, gasPrice })
     }
 
     return nftChefContract.deposit(pid, tokenId, { ...options, gasPrice })

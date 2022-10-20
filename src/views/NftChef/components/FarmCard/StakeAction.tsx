@@ -16,6 +16,9 @@ import useUnstakeNftFarms from '../../hooks/useUnstakeNftFarms'
 import useStakeNftFarms from '../../hooks/useStakeNftFarms'
 import { NftFarmWithStakedValue } from '../types'
 import StakedLP from '../StakedLP'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import useTransactionDeadline from 'hooks/useTransactionDeadline'
+import { useNftChefContract, usePositionNftContract } from 'hooks/useContract'
 
 interface FarmCardActionsProps extends NftFarmWithStakedValue {
   lpLabel?: string
@@ -40,28 +43,74 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
   tokenAmountTotal,
 }) => {
   const { t } = useTranslation()
-  const { onStake } = useStakeNftFarms(pid)
+  const { onStake, onStakeWithPermit } = useStakeNftFarms(pid)
   const { onUnstake } = useUnstakeNftFarms(pid)
   const { tokenBalance, tokenBalanceIDs, stakedBalance, stakedBalanceIDs } = useNftFarmUser(pid)
   const cakePrice = usePriceCakeBusd()
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const { account } = useWeb3React()
   const { toastSuccess } = useToast()
   const { fetchWithCatchTxError } = useCatchTxError()
+  const { account, chainId, library } = useActiveWeb3React()
+  const deadline = useTransactionDeadline()
+  const nftChefContract = useNftChefContract()
+  const positionNftContract = usePositionNftContract()
 
   const handleStake = async (tokenID: string) => {
-    const receipt = await fetchWithCatchTxError(() => {
-      return onStake(tokenID)
+    // try to gather a signature for permission
+    const nonce = await positionNftContract.nonces(tokenID)
+    const name = await positionNftContract.name()
+    const EIP712Domain = [
+      { name: 'name', type: 'string' },
+      { name: 'version', type: 'string' },
+      { name: 'chainId', type: 'uint256' },
+      { name: 'verifyingContract', type: 'address' },
+    ]
+    const domain = {
+      name: name,
+      version: '1',
+      chainId,
+      verifyingContract: positionNftContract.address,
+    }
+    const Permit = [
+      { name: 'owner', type: 'address' },
+      { name: 'spender', type: 'address' },
+      { name: 'tokenId', type: 'uint256' },
+      { name: 'nonce', type: 'uint256' },
+      { name: 'deadline', type: 'uint256' },
+    ]
+    const message = {
+        owner: account,
+        spender: nftChefContract.address,
+        tokenId: tokenID,
+        nonce: nonce.toHexString(),
+        deadline: deadline.toNumber(),
+    }
+    const data = JSON.stringify({
+        types: {
+            EIP712Domain,
+            Permit,
+        },
+        domain,
+        primaryType: 'Permit',
+        message,
     })
-    if (receipt?.status) {
-      toastSuccess(
-        `${t('Staked')}!`,
-        <ToastDescriptionWithTx txHash={receipt.transactionHash}>
-          {t('Your funds have been staked in the farm')}
-        </ToastDescriptionWithTx>,
-      )
-      dispatch(fetchNftFarmUserDataAsync({ account, pids: [pid] }))
+    try{
+        const signature = await library.send('eth_signTypedData_v4', [account, data])        
+        const receipt = await fetchWithCatchTxError(() => {
+          return onStakeWithPermit(tokenID, deadline.toNumber(), signature)
+        })
+        if (receipt?.status) {
+          toastSuccess(
+            `${t('Staked')}!`,
+            <ToastDescriptionWithTx txHash={receipt.transactionHash}>
+              {t('Your funds have been staked in the farm')}
+            </ToastDescriptionWithTx>,
+          )
+          dispatch(fetchNftFarmUserDataAsync({ account, pids: [pid] }))
+        }
+    }catch(ex){
+    
     }
   }
 
