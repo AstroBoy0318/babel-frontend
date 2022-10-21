@@ -270,7 +270,7 @@ const NftChef: React.FC = ({ children }) => {
         return farmsCurrentlyVisible
       })
     }
-  }, [isIntersecting])
+  }, [isIntersecting, currentBlock])
 
   const rowData = chosenFarmsMemoized.map((farm) => {
     const lpLabel = farm.lpSymbol && farm.lpSymbol.split(' ')[0].toUpperCase().replace('PANCAKE', '')
@@ -394,7 +394,7 @@ const NftChef: React.FC = ({ children }) => {
           </Flex>
         )}
         <div ref={observerRef} />
-        <StyledImage src="/images/decorations/3dpan.png" alt="Pancake illustration" width={120} height={103} />
+        {/* <StyledImage src="/images/decorations/3dpan.png" alt="Pancake illustration" width={120} height={103} /> */}
       </Page>
     </NftChefContext.Provider>
   )
