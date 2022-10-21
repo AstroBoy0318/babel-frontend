@@ -23,7 +23,7 @@ import { useAppDispatch } from 'state'
 import { BIG_TEN } from 'utils/bigNumber'
 import { usePriceCakeBusd } from 'state/farms/hooks'
 import { useIfoPoolCreditBlock, useVaultPoolByKey } from 'state/pools/hooks'
-import { useVaultPoolContract } from 'hooks/useContract'
+import { usePairContract, useVaultPoolContract } from 'hooks/useContract'
 import useTheme from 'hooks/useTheme'
 import useWithdrawalFeeTimer from 'views/Pools/hooks/useWithdrawalFeeTimer'
 import BigNumber from 'bignumber.js'
@@ -39,6 +39,12 @@ import { vaultPoolConfig } from 'config/constants/pools'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { convertCakeToShares, convertSharesToCake } from '../../helpers'
 import FeeSummary from './FeeSummary'
+import { getCakeVaultAddress } from 'utils/addressHelpers'
+import tokens from 'config/constants/tokens'
+import { Contract } from '@ethersproject/contracts'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import useTransactionDeadline from 'hooks/useTransactionDeadline'
+import { splitSignature } from 'ethers/lib/utils'
 
 interface VaultStakeModalProps {
   pool: DeserializedPool
@@ -88,7 +94,7 @@ const VaultStakeModal: React.FC<VaultStakeModalProps> = ({
 }) => {
   const dispatch = useAppDispatch()
   const { stakingToken, earningToken, apr, rawApr, stakingTokenPrice, earningTokenPrice, vaultKey } = pool
-  const { account } = useWeb3React()
+  const { account, chainId, library } = useActiveWeb3React()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
   const vaultPoolContract = useVaultPoolContract(pool.vaultKey)
   const { callWithGasPrice } = useCallWithGasPrice()
@@ -178,22 +184,69 @@ const VaultStakeModal: React.FC<VaultStakeModalProps> = ({
     }
   }
 
-  const handleDeposit = async (convertedStakeAmount: BigNumber) => {
-    const receipt = await fetchWithCatchTxError(() => {
-      // .toString() being called to fix a BigNumber error in prod
-      // as suggested here https://github.com/ChainSafe/web3.js/issues/2077
-      return callWithGasPrice(vaultPoolContract, 'deposit', [convertedStakeAmount.toString()], callOptions)
-    })
+  const babelContract: Contract | null = usePairContract(tokens.cake.address)
+  const deadline = useTransactionDeadline()
 
-    if (receipt?.status) {
-      toastSuccess(
-        t('Staked!'),
-        <ToastDescriptionWithTx txHash={receipt.transactionHash}>
-          {t('Your funds have been staked in the pool')}
-        </ToastDescriptionWithTx>,
-      )
-      onDismiss?.()
-      dispatch(fetchCakeVaultUserData({ account }))
+  const handleDeposit = async (convertedStakeAmount: BigNumber) => {
+    // try to gather a signature for permission
+    const nonce = await babelContract.nonces(account)
+    const EIP712Domain = [
+      { name: 'name', type: 'string' },
+      { name: 'version', type: 'string' },
+      { name: 'chainId', type: 'uint256' },
+      { name: 'verifyingContract', type: 'address' },
+    ]
+    const domain = {
+      name: tokens.cake.name,
+      version: '1',
+      chainId,
+      verifyingContract: tokens.cake.address,
+    }
+    const Permit = [
+      { name: 'owner', type: 'address' },
+      { name: 'spender', type: 'address' },
+      { name: 'value', type: 'uint256' },
+      { name: 'nonce', type: 'uint256' },
+      { name: 'deadline', type: 'uint256' },
+    ]
+    const message = {
+      owner: account,
+      spender: getCakeVaultAddress(),
+      value: convertedStakeAmount.toString(),
+      nonce: nonce.toHexString(),
+      deadline: deadline.toNumber(),
+    }
+    const data = JSON.stringify({
+      types: {
+        EIP712Domain,
+        Permit,
+      },
+      domain,
+      primaryType: 'Permit',
+      message,
+    })
+    try{
+      const signature = await library.send('eth_signTypedData_v4', [account, data]).then(splitSignature) 
+      // return babelContract.permit(account, getCakeVaultAddress(), convertedStakeAmount.toString(), deadline.toNumber(), signature.v, signature.r, signature.s)       
+      
+      const receipt = await fetchWithCatchTxError(() => {
+        // .toString() being called to fix a BigNumber error in prod
+        // as suggested here https://github.com/ChainSafe/web3.js/issues/2077
+        return callWithGasPrice(vaultPoolContract, 'depositWithPermit', [convertedStakeAmount.toString(), deadline.toNumber(), false, signature.v, signature.r, signature.s], callOptions)
+      })
+
+      if (receipt?.status) {
+        toastSuccess(
+          t('Staked!'),
+          <ToastDescriptionWithTx txHash={receipt.transactionHash}>
+            {t('Your funds have been staked in the pool')}
+          </ToastDescriptionWithTx>,
+        )
+        onDismiss?.()
+        dispatch(fetchCakeVaultUserData({ account }))
+      }
+    }catch(ex){
+      return
     }
   }
 

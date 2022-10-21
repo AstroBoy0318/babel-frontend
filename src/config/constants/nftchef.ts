@@ -9,7 +9,7 @@ const nftchef: SerializedNftFarmConfig[] = [
       pid: 1,
       lpSymbol: 'BABEL-BNB',
       lpAddresses: {
-        97: '0x4a622D38eDF154224b24c220cc43aA88fE9b55f4',
+        97: '0x48Ac4cBd03DFb3721BED524Ab2155AC26f537788',
         56: '0xA527a61703D82139F8a06Bc30097cC9CAA2df5A6',
       },
       token: serializedTokens.cake,
@@ -19,7 +19,7 @@ const nftchef: SerializedNftFarmConfig[] = [
       pid: 0,
       lpSymbol: 'BABEL-BUSD',
       lpAddresses: {
-        97: '0xbf4B53E7a520da98E8a60ebE22Bc035bBf801829',
+        97: '0x3c11623fc2F2FbD5672d7a7590B2f9a572a06bD4',
         56: '0x1b96b92314c44b159149f7e0303511fb2fc4774f',
       },
       token: serializedTokens.cake,
@@ -29,7 +29,7 @@ const nftchef: SerializedNftFarmConfig[] = [
       pid: 2,
       lpSymbol: 'BABEL-DAI',
       lpAddresses: {
-        97: '0x11a03DaaaB09009E8a6D841244B2bEBCF92E7de1',
+        97: '0xc389A2444e48d176b1F9DCAc7e6396FBAA160607',
         56: '0x1b96b92314c44b159149f7e0303511fb2fc4774f',
       },
       token: serializedTokens.cake,

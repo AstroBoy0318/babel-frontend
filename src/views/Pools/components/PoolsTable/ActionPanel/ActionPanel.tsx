@@ -366,7 +366,7 @@ const ActionPanel: React.FC<ActionPanelProps> = ({ account, pool, userDataLoaded
           <Harvest {...pool} userDataLoaded={userDataLoaded} />
         )}
         <Stake pool={pool} userDataLoaded={userDataLoaded} />
-        {sousId === 0 &&
+        {sousId === 0 && !pool.vaultKey &&
           <Stake pool={poolMirror} userDataLoaded={userDataLoaded} />
         }
       </ActionContainer>

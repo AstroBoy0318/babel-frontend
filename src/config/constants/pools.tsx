@@ -35,7 +35,7 @@ const pools: SerializedPoolConfig[] = [
     stakingToken: serializedTokens.cake,
     earningToken: serializedTokens.cake,
     contractAddress: {
-      97: '0x4754E6d660b15DD03B14232138bb518b149249E1',
+      97: '0xDbc3ED32f831764dF0f63b1BEE74915dfa7c423B',
       56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
       4002: '0x4a8a51825D463d9A241A8151A822dd307CF88A8C',
       5777: '0xd483E67A042C2A702e13D19BA961F350DA4ef346',
@@ -51,7 +51,7 @@ const pools: SerializedPoolConfig[] = [
     stakingToken: serializedTokens.busd,
     earningToken: serializedTokens.cake,
     contractAddress: {
-      97: '0x4754E6d660b15DD03B14232138bb518b149249E1',
+      97: '0xDbc3ED32f831764dF0f63b1BEE74915dfa7c423B',
       56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
       4002: '0x4a8a51825D463d9A241A8151A822dd307CF88A8C',
       5777: '0xd483E67A042C2A702e13D19BA961F350DA4ef346',
@@ -67,7 +67,7 @@ const pools: SerializedPoolConfig[] = [
     stakingToken: serializedTokens.dai,
     earningToken: serializedTokens.cake,
     contractAddress: {
-      97: '0x4754E6d660b15DD03B14232138bb518b149249E1',
+      97: '0xDbc3ED32f831764dF0f63b1BEE74915dfa7c423B',
       56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
       4002: '0x4a8a51825D463d9A241A8151A822dd307CF88A8C',
       5777: '0xd483E67A042C2A702e13D19BA961F350DA4ef346',
