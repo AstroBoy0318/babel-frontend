@@ -181,7 +181,7 @@ export const fetchCakePoolUserDataAsync = (account: string) => async (dispatch) 
           stakingTokenBalance: new BigNumber(stakingTokenBalance.toString()).toJSON(),
           mirrorBalance: new BigNumber(mirrorBalance.toString()).toJSON(),
           pendingReward: new BigNumber(pendingReward.toString()).toJSON(),
-          stakedBalances: new BigNumber(masterPoolAmount.toString()).toJSON(),
+          stakedBalance: new BigNumber(masterPoolAmount.toString()).toJSON(),
           mirrorStaked: new BigNumber(mirrorStaked.toString()).toJSON(),
           babelStaked: new BigNumber(babelStaked.toString()).toJSON()
         },
@@ -202,7 +202,7 @@ export const fetchPoolsPublicDataAsync = (currentBlockNumber: number) => async (
 
     const prices = getTokenPricesFromFarm(getState().farms.data)
 
-    const liveData = poolsConfig.map((pool) => {
+    const liveData = poolsConfig.map(async (pool) => {
       const blockLimit = blockLimits.find((entry) => entry.sousId === pool.sousId)
       const totalStaking = totalStakings.find((entry) => entry.sousId === pool.sousId)
       const isPoolEndBlockExceeded = currentBlock > 0 && blockLimit ? currentBlock > Number(blockLimit.endBlock) : false
@@ -213,12 +213,18 @@ export const fetchPoolsPublicDataAsync = (currentBlockNumber: number) => async (
 
       const earningTokenAddress = pool.earningToken.address ? pool.earningToken.address.toLowerCase() : null
       const earningTokenPrice = earningTokenAddress ? prices[earningTokenAddress] : 0
+      const now = await simpleRpcProvider.getBlockNumber()
+      const perSecond = await masterChefContract.babelPerBlock()
+      const multiplier = await masterChefContract.getMultiplierEx(Number(now), Number(now)+1)
+      const poolInfos = await masterChefContract.poolInfo(pool.sousId)
+      const totalAlloc = await masterChefContract.totalAllocPoint()  
+      const tokenPerBlock = Number(poolInfos.allocPoint)/Number(totalAlloc)*Number(perSecond)*Number(multiplier)
       const apr = !isPoolFinished
         ? getPoolApr(
             stakingTokenPrice,
             earningTokenPrice,
             getBalanceNumber(new BigNumber(totalStaking.totalStaked), pool.stakingToken.decimals),
-            parseFloat(pool.tokenPerBlock),
+            parseFloat(tokenPerBlock.toString()),
           )
         : 0
 
@@ -373,6 +379,7 @@ export const PoolsSlice = createSlice({
       const { sousId } = action.payload
       const poolIndex = state.data.findIndex((pool) => pool.sousId === sousId)
       state.data[poolIndex].userData = action.payload.data
+      state.userDataLoaded = true
     },
     setPoolsPublicData: (state, action) => {
       const livePoolsData: SerializedPool[] = action.payload

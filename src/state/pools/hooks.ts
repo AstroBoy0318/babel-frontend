@@ -83,7 +83,7 @@ export const usePoolsPageFetch = () => {
       dispatch(fetchCakeVaultPublicData())
       // dispatch(fetchIfoPoolPublicData())
       if (account) {
-        dispatch(fetchPoolsUserDataAsync(account))
+        // dispatch(fetchPoolsUserDataAsync(account))
         dispatch(fetchCakeVaultUserData({ account }))
         // dispatch(fetchIfoPoolUserAndCredit({ account }))
       }
@@ -110,10 +110,10 @@ export const useFetchIfoPool = (fetchCakePool = true) => {
         }
         dispatch(fetchCakePoolPublicDataAsync())
       }
-      if (account) {
-        dispatch(fetchIfoPoolUserAndCredit({ account }))
-      }
-      dispatch(fetchIfoPoolPublicData())
+      // if (account) {
+      //   dispatch(fetchIfoPoolUserAndCredit({ account }))
+      // }
+      // dispatch(fetchIfoPoolPublicData())
     })
   }, [dispatch, account, fetchCakePool])
 

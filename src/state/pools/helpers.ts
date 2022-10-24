@@ -27,12 +27,12 @@ type UserData =
 export const transformUserData = (userData: UserData) => {
   return {
     allowance: userData ? new BigNumber(userData.allowance) : BIG_ZERO,
-    mirrorAllowance: userData ? new BigNumber(userData.mirrorAllowance) : BIG_ZERO,
+    mirrorAllowance: userData && userData.mirrorAllowance ? new BigNumber(userData.mirrorAllowance) : BIG_ZERO,
     stakingTokenBalance: userData ? new BigNumber(userData.stakingTokenBalance) : BIG_ZERO,
-    mirrorBalance: userData ? new BigNumber(userData.mirrorBalance) : BIG_ZERO,
+    mirrorBalance: userData && userData.mirrorBalance ? new BigNumber(userData.mirrorBalance) : BIG_ZERO,
     stakedBalance: userData ? new BigNumber(userData.stakedBalance) : BIG_ZERO,
-    mirrorStaked: userData ? new BigNumber(userData.mirrorStaked) : BIG_ZERO,
-    babelStaked: userData ? new BigNumber(userData.babelStaked) : BIG_ZERO,
+    mirrorStaked: userData && userData.mirrorStaked ? new BigNumber(userData.mirrorStaked) : BIG_ZERO,
+    babelStaked: userData && userData.babelStaked ? new BigNumber(userData.babelStaked) : BIG_ZERO,
     pendingReward: userData ? new BigNumber(userData.pendingReward) : BIG_ZERO,
   }
 }

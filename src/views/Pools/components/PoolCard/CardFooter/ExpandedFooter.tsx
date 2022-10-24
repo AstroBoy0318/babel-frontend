@@ -179,7 +179,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account }) => {
           </Flex>
         </Flex>
       )}
-      {sousId === 0 &&
+      {!vaultKey && sousId === 0 &&
       <Flex mb="2px" justifyContent="flex-end">
         {totalMirror && Number(totalMirror) !== 0 && totalMirror.gte(0) ? (
             <>
