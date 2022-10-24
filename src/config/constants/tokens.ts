@@ -2055,7 +2055,7 @@ export const mainnetTokens = defineTokens({
 export const testnetTokens = defineTokens({
   wbnb: new Token(
     TESTNET,
-    '0xb7CdEd9c15D695b5FEabaF230BcA424C32EAef20',
+    '0x12e8960512FD7BBF860429Ce2a3AbC6Cbc03ecd9',
     18,
     'WBNB',
     'Wrapped BNB',
@@ -2063,15 +2063,15 @@ export const testnetTokens = defineTokens({
   ),
   cake: new Token(
     TESTNET,
-    '0xa19a9073A0c6BCCe34EEf239ba66Be4b04D53Bfb',
+    '0xE4948CA2957232a598a4A3F60e56584626163831',
     18,
     'Babel',
     'BabelSwap',
-    'https://app.begoiko.com/',
+    '',
   ),
   busd: new Token(
     TESTNET,
-    '0xD0cCD65D45BC11B333d908aE3646A084a3525D5C',
+    '0x3fe4fB3A556Eccd6bF2877b041917E2c66505c29',
     18,
     'BUSD',
     'BUSD',
@@ -2079,7 +2079,7 @@ export const testnetTokens = defineTokens({
   ),
   syrup: new Token(
     TESTNET,
-    '0x3E9852b7A861A6cBa96a8Bc26B005b89724bE115',
+    '0x8495042412Fdf21013756C37B3aBa918C6E96dF3',
     18,
     'Bank',
     'Babel Bank Token',
@@ -2087,7 +2087,7 @@ export const testnetTokens = defineTokens({
   ),
   mirror: new Token(
     TESTNET,
-    '0x93918a32f43c0C179f378935dcf06016972F4dCa',
+    '0xBfD0d482Aacf90FCac30bA78edc4cE5f62c30B8E',
     18,
     'bBMirror',
     'Babel Mirror',
@@ -2103,7 +2103,7 @@ export const testnetTokens = defineTokens({
   ),
   dai: new Token(
     TESTNET,
-    '0xa8448a7250b9C29E075e634e7B8585C1dF097ade',
+    '0x3632752fA3D613139bC959Bd152a76BFC3158237',
     18,
     'DAI',
     'Bakeryswap Token',
@@ -2111,7 +2111,7 @@ export const testnetTokens = defineTokens({
   ),
   usdc: new Token(
     TESTNET,
-    '0x80C581B52D2396b67Fc0EFf0B79E18355e476663',
+    '0x965eAccF1981bEcf877D298482916e806c62b0BE',
     18,
     'USDC',
     'Bakeryswap Token',
@@ -2119,7 +2119,7 @@ export const testnetTokens = defineTokens({
   ),
   usdt: new Token(
     TESTNET,
-    '0x857311f2Afd4d07a52B434bf4fb8ABb1817134Ad',
+    '0x16Ee7594AD19eE2682D9D433b5D70ff189EDCC8A',
     6,
     'USDT',
     'Bakeryswap Token',
@@ -2127,7 +2127,7 @@ export const testnetTokens = defineTokens({
   ),
   wbtc: new Token(
     TESTNET,
-    '0xf7a3D3bA5C53Bbf8155ec4Ebd87c84d68264Ce3d',
+    '0x7F38CD9B0c6292ADb925d1696e2a89FcdE7be784',
     8,
     'WBTC',
     'Bakeryswap Token',
@@ -2135,7 +2135,7 @@ export const testnetTokens = defineTokens({
   ),
   weth: new Token(
     TESTNET,
-    '0xCabd26dB646fB8422a51357bfaB8CbC87E4c3cE2',
+    '0x9Ed42a7cd4cc57c10276021dc91eC0ec05bc772B',
     18,
     'WETH',
     'Bakeryswap Token',
@@ -2143,7 +2143,7 @@ export const testnetTokens = defineTokens({
   ),  
   iota: new Token(
     TESTNET,
-    '0x30853B796A549bA374C420C7e5569075E5683B8c',
+    '0x47C53A2FC17315DEc3ad92A4FEe9f3e7a494425D',
     6,
     'IOTA',
     'Bakeryswap Token',
@@ -2151,7 +2151,7 @@ export const testnetTokens = defineTokens({
   ), 
   shiba: new Token(
     TESTNET,
-    '0xaF6345D759e98908B6c01e512c408853c19fDB9f',
+    '0xdC9D746853A0320d4A8204Ab5A9fC9c473cd304C',
     18,
     'SHIBA',
     'Bakeryswap Token',
@@ -2159,7 +2159,7 @@ export const testnetTokens = defineTokens({
   ),
   doge: new Token(
     TESTNET,
-    '0x34ac2b6C137256DA9A3b30b8D993fDa0afDeb1ad',
+    '0x02F98f579E261f227A6071D6528f33a2B04daD42',
     8,
     'DOGE',
     'Bakeryswap Token',
@@ -2167,7 +2167,7 @@ export const testnetTokens = defineTokens({
   ),
   cardano: new Token(
     TESTNET,
-    '0x7552D6c10168E6e60EEDd65B7EB8FD1De72DaBA8',
+    '0xD4D5Cb2f2B7177E3E8B650F78C931002Bd595Fa5',
     18,
     'CARDANO',
     'Bakeryswap Token',
@@ -2175,7 +2175,7 @@ export const testnetTokens = defineTokens({
   ),
   maker: new Token(
     TESTNET,
-    '0x7A1C2a9eE4049720644121fD42Cfff6f542fCe63',
+    '0x3F7f615d46EDA48397d462DC650a2E1D998E047E',
     18,
     'MAKER',
     'Bakeryswap Token',
@@ -2183,7 +2183,7 @@ export const testnetTokens = defineTokens({
   ),
   aave: new Token(
     TESTNET,
-    '0x8959d2667D83b8860a9F4cbB9aC4fE9E57854ac9',
+    '0x9140cF8aA9895694f627011949500184d23EB121',
     18,
     'AAVE',
     'Bakeryswap Token',
@@ -2191,7 +2191,7 @@ export const testnetTokens = defineTokens({
   ),
   realcake: new Token(
     TESTNET,
-    '0xb7C3cEDa308b2cfc6A32f18C62f1A9821e85089F',
+    '0xeAC9C62a4E1EA310c870cF45f44113AD8860032c',
     18,
     'CAKE',
     'Bakeryswap Token',
@@ -2199,7 +2199,7 @@ export const testnetTokens = defineTokens({
   ),
   comp: new Token(
     TESTNET,
-    '0x43208B5205728634dCB71Cea73BDee2a91721616',
+    '0xB2dD168bA9b8065f331b3fFE6f1D29776BEA10D8',
     18,
     'COMPOUND',
     'Bakeryswap Token',
@@ -2207,7 +2207,7 @@ export const testnetTokens = defineTokens({
   ),
   inch: new Token(
     TESTNET,
-    '0x01cd46b61Db2Ec2C78436eCc1Cf450E78377781c',
+    '0xAc7f0c2082922e76F691D746129E07e13e2d44C9',
     18,
     'INCH',
     'Bakeryswap Token',
@@ -2215,7 +2215,7 @@ export const testnetTokens = defineTokens({
   ),
   bbadger: new Token(
     TESTNET,
-    '0x014fd273F84265D06351517dC400aA16676D0E21',
+    '0xF3011969859C5E684C901e7b05D717Da9C7760A7',
     18,
     'BADGER',
     'Bakeryswap Token',
@@ -2223,7 +2223,7 @@ export const testnetTokens = defineTokens({
   ),
   xvs: new Token(
     TESTNET,
-    '0x1532D1B3ae0ef7C04d885CD30e0359b22BB2b998',
+    '0xFf8b4b5241Ad646860cfC7715450fb8F63a91A2C',
     18,
     'VENUS',
     'Bakeryswap Token',
@@ -2231,7 +2231,7 @@ export const testnetTokens = defineTokens({
   ),
   mim: new Token(
     TESTNET,
-    '0x7FFc9B01060c8c8eBFa7D21Ab75E192Cc5Fd5f57',
+    '0xBe259B3da77b5e9A784693C3482fb054Ef9F5bc9',
     18,
     'MIM',
     'Bakeryswap Token',
@@ -2239,7 +2239,7 @@ export const testnetTokens = defineTokens({
   ),
   xrp: new Token(
     TESTNET,
-    '0x49419811C3D6C37188fa1541b510890529DcE3f4',
+    '0xFE493FbD3db30793C6F5b0Ce61e055Ec8F23ea33',
     18,
     'RIPPLE',
     'Bakeryswap Token',
@@ -2247,7 +2247,7 @@ export const testnetTokens = defineTokens({
   ),
   dot: new Token(
     TESTNET,
-    '0x06fF120b875232dde6ec1a9fFeF85900F3442D86',
+    '0x0921a1cCDBE61E782A452824FbeFfE5021c4870b',
     18,
     'POLKADOT',
     'Bakeryswap Token',
@@ -2255,7 +2255,7 @@ export const testnetTokens = defineTokens({
   ),
   uni: new Token(
     TESTNET,
-    '0xcA7A693Abe624956BfbEc51B727c16F6B81dedb4',
+    '0x3174d6A90C35959763E250043a97fbab9f5d2c83',
     18,
     'UNISWAP',
     'Bakeryswap Token',
@@ -2263,7 +2263,7 @@ export const testnetTokens = defineTokens({
   ),
   avax: new Token(
     TESTNET,
-    '0xD5A82433101445624C32598fBB4c208B8A4BbBBD',
+    '0x6fB84A62BFAf16409c9ea0bBf543AE8f956f250F',
     18,
     'AVAX',
     'Bakeryswap Token',
@@ -2286,7 +2286,7 @@ export const ganacheTokens = defineTokens({
     18,
     'Babel',
     'BABEL',
-    'https://app.begoiko.com/',
+    '',
   ),
   busd: new Token(
     GANACHE,
