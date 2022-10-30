@@ -5,9 +5,9 @@ import { AutoColumn } from '../../components/Layout/Column'
 import { RowBetween } from '../../components/Layout/Row'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { useWeb3React } from '@web3-react/core'
-import { Flex, Button, Radio, Text } from '@pancakeswap/uikit'
+import { Flex, Button, Radio, Text, CardBody, Heading, Card, CardHeader, CardRibbon, CardFooter, TimerIcon } from '@pancakeswap/uikit'
 import ConnectWalletButton from 'components/ConnectWalletButton'
-import { useGenesisContract, useTokenContract, useMirrorContract } from 'hooks/useContract'
+import { useGenesisContract, useTokenContract, useMirrorContract, useGenesisNFTContract, useGenesisTreeNFTContract } from 'hooks/useContract'
 import useToast from 'hooks/useToast'
 import tokens from 'config/constants/tokens'
 import { getGenesisAddress } from 'utils/addressHelpers'
@@ -16,6 +16,25 @@ import BigNumber from 'bignumber.js'
 import { MaxUint256 } from '@ethersproject/constants'
 import { BIG_INT_ZERO } from 'config/constants'
 import { BIG_ZERO } from 'utils/bigNumber'
+import Container from 'components/Layout/Container'
+import { FlexGap } from 'components/Layout/Flex'
+
+const CurvedDiv = styled.div`
+    width: 150%;
+    margin-left: -25%;
+    margin-top: -21%;
+    padding-top: 11em;
+    padding-bottom: 1em;
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.colors.background};
+    text-align: center;
+`
+
+const StyledCard = styled(Card)`
+  max-width: 736px;
+  width: 100%;
+  margin: auto;
+`
 
 const Filter = styled.label`
   align-items: center;
@@ -85,26 +104,45 @@ const Input = styled.input<{ error?: boolean }>`
   }
 `
 
+const ImageWrapper = styled.div`
+  flex: none;
+  order: 2;
+  max-width: 414px;
+  width: 100%;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    order: 1;
+  }
+`
+
 export default function Genesis() {
     const { account } = useWeb3React()
     const [myAddress, setMyAddress] = useState(account)
     const [friendAddress, setFriendAddress] = useState("")
     const genesisContract = useGenesisContract()
+    const genesisNFTContract = useGenesisNFTContract()
+    const genesisTreeNFTContract = useGenesisTreeNFTContract()
     const busdContract = useTokenContract(tokens.busd.address, true)
     const babelContract = useTokenContract(tokens.cake.address, true)
     const mirrorContract = useMirrorContract()
     const { toastSuccess, toastError } = useToast()
-    const [ pending, setPending ] = useState(false)
-    const [ isOpened, setOpened ] = useState(true)
-    const [ deposit, setDeposit ] = useState("100")
-    const [ isOn, setIsOn ] = useState(false)
-    const [ totalMember, setTotalMember ] = useState("0")
-    const [ totalRaised, setTotalRaised ] = useState("")
-    const [ isSwapPaused, setIsSwapPaused ] = useState(false)
-    const [ babelBalance, setBabelBalance ] = useState("0")
-    const [ mirrorBalance, setMirrorBalance ] = useState(BIG_ZERO)
-    const [ toRefresh, setToRefresh ] = useState(false)
-    const [ userChoise, setUserChoise ] = useState(1)
+    const [pending, setPending] = useState(false)
+    const [isOpened, setOpened] = useState(true)
+    const [deposit, setDeposit] = useState("100")
+    const [isOn, setIsOn] = useState(false)
+    const [totalMember, setTotalMember] = useState("0")
+    const [totalRaised, setTotalRaised] = useState("")
+    const [isSwapPaused, setIsSwapPaused] = useState(false)
+    const [babelBalance, setBabelBalance] = useState("0")
+    const [mirrorBalance, setMirrorBalance] = useState(BIG_ZERO)
+    const [toRefresh, setToRefresh] = useState(false)
+    const [userChoise, setUserChoise] = useState(1)
+    const [limit, setLimit] = useState(0)
+    const [nftTotalSupply, setNftTotalSupply] = useState(0)
+    const [nftMaxSupply, setNftMaxSupply] = useState(0)
+    const [treeNftTotalSupply, setTreeNftTotalSupply] = useState(0)
+    const [treeNftMaxSupply, setTreeNftMaxSupply] = useState(0)
+    const [finalTime, setFinalTime] = useState(0)
 
     const handleInput1 = useCallback(
         (event) => {
@@ -127,10 +165,10 @@ export default function Genesis() {
     const error2 = !friendAddress
 
     const addToGenesis = async () => {
-        try{
+        try {
             setPending(true)
             const busdApproved = await busdContract.allowance(account, getGenesisAddress())
-            if(getBalanceNumber(new BigNumber(busdApproved._hex)) < getBalanceNumber(new BigNumber(deposit))) {
+            if (getBalanceNumber(new BigNumber(busdApproved._hex)) < getBalanceNumber(new BigNumber(deposit))) {
                 const tx = await busdContract.approve(getGenesisAddress(), MaxUint256)
                 await tx.wait()
             }
@@ -146,10 +184,10 @@ export default function Genesis() {
     }
 
     const addFriendToGenesis = async () => {
-        try{
+        try {
             setPending(true)
             const busdApproved = await busdContract.allowance(account, getGenesisAddress())
-            if(getBalanceNumber(new BigNumber(busdApproved._hex)) < 1) {
+            if (getBalanceNumber(new BigNumber(busdApproved._hex)) < 1) {
                 const tx = await busdContract.approve(getGenesisAddress(), MaxUint256)
                 await tx.wait()
             }
@@ -165,7 +203,7 @@ export default function Genesis() {
     }
 
     const claim = async () => {
-        try{
+        try {
             setPending(true)
             const proof = await genesisContract.viewProof()
             const tx = await genesisContract.claim(proof)
@@ -180,7 +218,7 @@ export default function Genesis() {
     }
 
     const swap = async () => {
-        try{
+        try {
             setPending(true)
             const tx = await genesisContract.SwapTokens(getBalanceNumber(mirrorBalance))
             await tx.wait()
@@ -193,12 +231,12 @@ export default function Genesis() {
         }
     }
 
-    useEffect(()=>{
-        if(genesisContract) {
+    useEffect(() => {
+        if (genesisContract) {
             genesisContract.isGenesisOpen().then((re) => {
                 setOpened(re)
             })
-            if(account) {
+            if (account) {
                 genesisContract.isOnGenesis(account).then((re) => {
                     setIsOn(re)
                 })
@@ -207,15 +245,30 @@ export default function Genesis() {
                 setTotalMember(re.toString())
             })
             genesisContract.totalLiquidity().then((re) => {
-                setTotalRaised(getFullDisplayBalance(new BigNumber(re._hex), 18, 3))
+                setTotalRaised(getFullDisplayBalance(new BigNumber(re._hex), 18, 0))
             })
             genesisContract.isSwapPaused().then((re) => {
                 setIsSwapPaused(re)
             })
-            genesisContract.isSwapPaused().then((re) => {
-                setIsSwapPaused(re)
+            genesisContract.limit().then((re) => {
+                setLimit(re.toNumber())
             })
-            if(account) {
+            genesisNFTContract.totalSupply().then((re) => {
+                setNftTotalSupply(re.toNumber())
+            })
+            genesisNFTContract.maxSupply().then((re) => {
+                setNftMaxSupply(re.toNumber())
+            })
+            genesisTreeNFTContract.totalSupply().then((re) => {
+                setTreeNftTotalSupply(re.toNumber())
+            })
+            genesisTreeNFTContract.maxSupply().then((re) => {
+                setTreeNftMaxSupply(re.toNumber())
+            })
+            genesisContract.finalTime().then((re) => {
+                setFinalTime(re.toNumber())
+            })
+            if (account) {
                 mirrorContract.balanceOf(account).then((re) => {
                     setMirrorBalance(new BigNumber(re._hex))
                 })
@@ -225,133 +278,239 @@ export default function Genesis() {
             }
         }
     }, [genesisContract, setOpened, setDeposit, toRefresh])
+
+    const [currentTime, setCurrentTime] = useState(0)
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            setCurrentTime(Math.floor(new Date().getTime()/1000))
+        }, 1000)
+    },[currentTime])
+
+    const seconds2time = (seconds)=>{
+        if(seconds <= 0)
+            return "Finished";
+        let days = Math.floor(seconds / 3600 / 24);
+        let hours = Math.floor((seconds - (days * 3600 * 24)) / 3600);
+        let minutes = Math.floor((seconds - (days * 3600 * 24) - (hours * 3600)) / 60);
+        seconds = seconds % 60;
+        let time = "Ends in ";
+
+        if (days != 0) {
+            time = days + "day(s) ";
+        }
+        if (hours != 0) {
+            time += hours + "hour(s) ";
+        }
+        if (minutes != 0 || time !== "") {
+            let minutesStr = (minutes < 10 && time !== "") ? "0" + minutes : String(minutes);
+            time += minutesStr + "minute(s) ";
+        }
+        if (time === "") {
+            time = seconds + "";
+        } else {
+            time += ((seconds < 10) ? "0" + seconds : String(seconds)) + "second(s)";
+        }
+        return time;
+    }
+    
     return (
         <Page>
-            <Flex width="100%" maxWidth="1280px" flexWrap="wrap">
-                <Flex flexDirection="column" flex="1" minWidth="600px">
-                    <Flex justifyContent="space-around">
-                        <span style={{fontSize:"24px"}}>
-                            Genesis
-                        </span>
-                    </Flex>
-                    <Flex flexDirection="row" width="100%" mx="auto" my={20} justifyContent="space-around">
-                        <div>
-                            Status: {isOpened?"Open":"Close"}
-                        </div>
-                        <div>
-                            Total Member: {totalMember}
-                        </div>
-                        <div>
-                            Total Raised: {totalRaised}
-                        </div>
-                    </Flex>
-                    {account && (<Flex flexDirection="column">
-                        <Flex alignItems="center" flexDirection="column" mb={20}>
-                            <Filter>
-                                <Radio
-                                    scale="sm"
-                                    checked={userChoise === 1}
-                                    disabled={!isOpened}
-                                    onChange={()=>setUserChoise(1)}
-                                />
-                                <Text ml="4px">$10 - 5 babel + genesis</Text>
-                            </Filter>
-                            <Filter>
-                                <Radio
-                                    scale="sm"
-                                    checked={userChoise === 2}
-                                    disabled={!isOpened}
-                                    onChange={()=>setUserChoise(2)}
-                                />
-                                <Text ml="4px">$100 - 50 babel + genesis</Text>
-                            </Filter>
-                            <Filter>
-                                <Radio
-                                    scale="sm"
-                                    checked={userChoise === 3}
-                                    disabled={!isOpened}
-                                    onChange={()=>setUserChoise(3)}
-                                />
-                                <Text ml="4px">$500 - 275 babel + genesis + genesis tree</Text>
-                            </Filter>
-                        </Flex>
-                        <InputPanel>
-                            <ContainerRow error={error1}>
-                                <InputContainer>
-                                    <AutoColumn gap="md">
-                                        <Input
-                                            className="recipient-address-input"
-                                            type="text"
-                                            autoComplete="off"
-                                            autoCorrect="off"
-                                            autoCapitalize="off"
-                                            spellCheck="false"
-                                            placeholder={'Wallet Address'}
-                                            pattern="^(0x[a-fA-F0-9]{40})$"
-                                            onChange={handleInput1}
-                                            value={account}
+            <FlexGap width="100%" maxWidth="1280px" flexWrap="wrap" gap="2em" paddingBottom="2em">
+                <Flex flexDirection="column" flex={1} minWidth={250}>
+                    <Card>
+                        <CardHeader>
+                            <Heading>
+                                Options
+                            </Heading>
+                            Genesis Rewards
+                        </CardHeader>
+                        <CardBody>
+                            <Flex flexDirection="column">
+                                <Flex alignItems="start" flexDirection="column" mb={20}>
+                                    <Filter>
+                                        <Radio
+                                            scale="sm"
+                                            checked={userChoise === 1}
+                                            disabled={!isOpened || !account}
+                                            onChange={() => setUserChoise(1)}
                                         />
-                                    </AutoColumn>
-                                </InputContainer>
-                            </ContainerRow>
-                            <Button disabled={pending || !isOpened} mt={3} onClick={addToGenesis}>Add To Genesis</Button>
-                        </InputPanel>
-                        <InputPanel>
-                            <ContainerRow error={error2}>
-                                <InputContainer>
-                                    <AutoColumn gap="md">
-                                        <Input
-                                            className="recipient-address-input"
-                                            type="text"
-                                            autoComplete="off"
-                                            autoCorrect="off"
-                                            autoCapitalize="off"
-                                            spellCheck="false"
-                                            placeholder={'Wallet Address'}
-                                            pattern="^(0x[a-fA-F0-9]{40})$"
-                                            onChange={handleInput2}
-                                            value={friendAddress}
+                                        <Text ml="4px" fontSize="20px">$10</Text>
+                                    </Filter>
+                                    <Text color="textSubtle">
+                                        Babel: 5
+                                    </Text>
+                                    <Text color="textSubtle">
+                                        NFTs: x1 Genesis
+                                    </Text>
+                                    <Filter>
+                                        <Radio
+                                            scale="sm"
+                                            checked={userChoise === 2}
+                                            disabled={!isOpened || !account}
+                                            onChange={() => setUserChoise(2)}
                                         />
-                                    </AutoColumn>
-                                </InputContainer>
-                            </ContainerRow>
-                            <Button disabled={pending || !isOpened} onClick={addFriendToGenesis} mt={3}>Add Friend To Genesis</Button>
-                        </InputPanel>
-                        <Flex justifyContent="space-around">
-                            <Button disabled={pending || isOpened} onClick={claim} mt={3}>Claim</Button>
-                        </Flex>
-                    </Flex>)}
+                                        <Text ml="4px" fontSize="20px">$100</Text>
+                                    </Filter>
+                                    <Text color="textSubtle">
+                                        Babel: 50
+                                    </Text>
+                                    <Text color="textSubtle">
+                                        NFTs: x1 Genesis
+                                    </Text>
+                                    <Filter>
+                                        <Radio
+                                            scale="sm"
+                                            checked={userChoise === 3}
+                                            disabled={!isOpened || !account}
+                                            onChange={() => setUserChoise(3)}
+                                        />
+                                        <Text ml="4px" fontSize="20px">$500</Text>
+                                    </Filter>
+                                    <Text color="textSubtle">
+                                        Babel: 275
+                                    </Text>
+                                    <Text color="textSubtle">
+                                        NFTs: x1 Genesis, x1 Genesis Tree
+                                    </Text>
+                                </Flex>
+                            </Flex>
+                        </CardBody>
+                    </Card>
+                    <Card marginTop={20}>
+                        <CardHeader>
+                            <Heading>
+                                Status
+                            </Heading>
+                        </CardHeader>
+                        <CardBody>
+                            <Text fontSize="20px" textAlign="center">
+                                Genesis
+                            </Text>
+                            <Text color="textSubtle">
+                                Total Members: {totalMember}
+                            </Text>
+                            <Text color="textSubtle">
+                                Max Members: {limit}
+                            </Text>
+                            <Text fontSize="20px" textAlign="center" marginTop={20}>
+                                Genesis NFT
+                            </Text>
+                            <Text color="textSubtle">
+                                Total Minited: {nftTotalSupply}
+                            </Text>
+                            <Text color="textSubtle">
+                                Max Supply: {nftMaxSupply}
+                            </Text>
+                            <Text fontSize="20px" textAlign="center" marginTop={20}>
+                                Genesis Tree NFT
+                            </Text>
+                            <Text color="textSubtle">
+                                Total Minted: {treeNftTotalSupply}
+                            </Text>
+                            <Text color="textSubtle">
+                                Max Supply: {treeNftMaxSupply}
+                            </Text>
+                        </CardBody>
+                    </Card>
                 </Flex>
-                <Flex flexDirection="column" flex="1" minWidth="600px" borderLeft="1px solid gray">
-                    <Flex justifyContent="space-around">
-                        <span style={{fontSize:"24px"}}>
-                            Babel Mirror
-                        </span>
-                    </Flex>
-                    <Flex justifyContent="center" width="100%" my={20}>
-                        Description
-                    </Flex>
-                    <Flex flexDirection="column" width="max-content" mx="auto" my={20}>
-                        <div>
-                            Status: {isSwapPaused?"Close":"Open"}
-                        </div>
-                        {account && (<>
-                        <div>
-                            Your Babel Balance: {babelBalance}
-                        </div>
-                        <div>
-                            Your Babel Mirror Balance: {getFullDisplayBalance(mirrorBalance, 18, 3)}
-                        </div>
-                        </>)}
-                    </Flex>
-                    <Flex width="max-content" mx="auto">
-                        <Button disabled={pending || isSwapPaused || mirrorBalance.eq(0)} onClick={swap} mt={10}>Swap</Button>
-                    </Flex>
+                <Flex flexDirection="column" flex={3} minWidth={500}>
+                    <Card>
+                        <CardHeader>
+                            <Heading textAlign="center">
+                                Genesis
+                            </Heading>
+                        </CardHeader>
+                        <CardBody style={{ overflow: "hidden" }}>
+                            <CurvedDiv>
+                                {seconds2time(finalTime-currentTime)}
+                                {finalTime-currentTime > 0 && <TimerIcon />}
+                            </CurvedDiv>
+                            {!account ?
+                                (<Flex justifyContent="center">
+                                    <ConnectWalletButton mt={30} />
+                                </Flex>) :
+                                (<>
+                                    <InputPanel>
+                                        <ContainerRow error={error1}>
+                                            <InputContainer>
+                                                <AutoColumn gap="md">
+                                                    <Input
+                                                        className="recipient-address-input"
+                                                        type="text"
+                                                        autoComplete="off"
+                                                        autoCorrect="off"
+                                                        autoCapitalize="off"
+                                                        spellCheck="false"
+                                                        placeholder={'Wallet Address'}
+                                                        pattern="^(0x[a-fA-F0-9]{40})$"
+                                                        onChange={handleInput1}
+                                                        value={account}
+                                                    />
+                                                </AutoColumn>
+                                            </InputContainer>
+                                        </ContainerRow>
+                                        <Button disabled={pending || !isOpened} mt={3} onClick={addToGenesis}>Add To Genesis</Button>
+                                    </InputPanel>
+                                    <InputPanel>
+                                        <ContainerRow error={error2}>
+                                            <InputContainer>
+                                                <AutoColumn gap="md">
+                                                    <Input
+                                                        className="recipient-address-input"
+                                                        type="text"
+                                                        autoComplete="off"
+                                                        autoCorrect="off"
+                                                        autoCapitalize="off"
+                                                        spellCheck="false"
+                                                        placeholder={'Wallet Address'}
+                                                        pattern="^(0x[a-fA-F0-9]{40})$"
+                                                        onChange={handleInput2}
+                                                        value={friendAddress}
+                                                    />
+                                                </AutoColumn>
+                                            </InputContainer>
+                                        </ContainerRow>
+                                        <Button disabled={pending || !isOpened} onClick={addFriendToGenesis} mt={3}>Add Friend To Genesis</Button>
+                                    </InputPanel>
+                                    <Flex justifyContent="space-around">
+                                        <Button disabled={pending || isOpened} onClick={claim} mt={3}>Claim</Button>
+                                    </Flex>
+
+                                    <Flex justifyContent="space-around" marginTop="5em">
+                                        <span style={{ fontSize: "24px" }}>
+                                            Babel Mirror
+                                        </span>
+                                    </Flex>
+                                    <Flex justifyContent="center" width="100%" my={20}>
+                                        Description
+                                    </Flex>
+                                    <Flex flexDirection="column" width="max-content" mx="auto" my={20}>
+                                        <div>
+                                            Status: {isSwapPaused ? "Close" : "Open"}
+                                        </div>
+                                        {account && (<>
+                                            <div>
+                                                Your Babel Balance: {babelBalance}
+                                            </div>
+                                            <div>
+                                                Your Babel Mirror Balance: {getFullDisplayBalance(mirrorBalance, 18, 3)}
+                                            </div>
+                                        </>)}
+                                    </Flex>
+                                    <Flex width="max-content" mx="auto" marginBottom="2em">
+                                        <Button disabled={pending || isSwapPaused || mirrorBalance.eq(0)} onClick={swap} mt={10}>Swap</Button>
+                                    </Flex>
+                                </>)}
+                        </CardBody>
+                        <CardFooter>
+                            <Heading textAlign="center">
+                                Total Raised: ${totalRaised}
+                            </Heading>
+                        </CardFooter>
+                    </Card>
                 </Flex>
-            </Flex>
-            <Flex>
-                {!account && <ConnectWalletButton mt={30} />}
-            </Flex>
-        </Page >
+            </FlexGap>
+        </Page>
     )
 }

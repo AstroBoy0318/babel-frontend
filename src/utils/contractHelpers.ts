@@ -36,6 +36,8 @@ import {
   getGenesisAddress,
   getNftChefAddress,
   getPositionNftAddress,
+  getGenesisNFTAddress,
+  getGenesisTreeNFTAddress,
 } from 'utils/addressHelpers'
 
 // ABI
@@ -74,6 +76,8 @@ import nftSaleAbi from 'config/abi/nftSale.json'
 import pancakeSquadAbi from 'config/abi/pancakeSquad.json'
 import erc721CollectionAbi from 'config/abi/erc721collection.json'
 import genesisAbi from 'config/abi/genesis.json'
+import genesisNFTAbi from 'config/abi/genesisnft.json'
+import genesisTreeNFTAbi from 'config/abi/genesistree.json'
 import nftchefAbi from 'config/abi/nftChef.json'
 import positionNft from 'config/abi/positionNft.json'
 import mirrorAbi from 'config/abi/mirror.json'
@@ -231,6 +235,12 @@ export const getErc721CollectionContract = (signer?: Signer | Provider, address?
 }
 export const getGenesisContract = (signer?: Signer | Provider) => {
   return getContract(genesisAbi, getGenesisAddress(), signer)
+}
+export const getGenesisNFTContract = (signer?: Signer | Provider) => {
+  return getContract(genesisNFTAbi, getGenesisNFTAddress(), signer)
+}
+export const getGenesisTreeNFTContract = (signer?: Signer | Provider) => {
+  return getContract(genesisTreeNFTAbi, getGenesisTreeNFTAddress(), signer)
 }
 export const getNftChefContract = (signer?: Signer | Provider) => {
   return getContract(nftchefAbi, getNftChefAddress(), signer)

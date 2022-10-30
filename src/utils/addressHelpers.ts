@@ -94,6 +94,12 @@ export const getPancakeSquadAddress = () => {
 export const getGenesisAddress = () => {
   return getAddress(addresses.genesis)
 }
+export const getGenesisNFTAddress = () => {
+  return getAddress(addresses.genesisnft)
+}
+export const getGenesisTreeNFTAddress = () => {
+  return getAddress(addresses.genesistreenft)
+}
 export const getNftChefAddress = () => {
   return getAddress(addresses.nftchef)
 }

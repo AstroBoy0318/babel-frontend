@@ -35,6 +35,8 @@ import {
   getNftChefContract,
   getPositionNftContract,
   getMirrorContract,
+  getGenesisNFTContract,
+  getGenesisTreeNFTContract,
 } from 'utils/contractHelpers'
 import { getGenesisAddress, getMulticallAddress } from 'utils/addressHelpers'
 import { VaultKey } from 'state/types'
@@ -370,6 +372,22 @@ export function useMirrorContract() {
   return useMemo(() => {
     if (!library) return getMirrorContract()
     return getMirrorContract(library.getSigner())
+  }, [library])
+}
+
+export function useGenesisNFTContract() {
+  const { library,account } = useActiveWeb3React()
+  return useMemo(() => {
+    if (!library || !account) return getGenesisNFTContract()
+    return getGenesisNFTContract(library.getSigner())
+  }, [library])
+}
+
+export function useGenesisTreeNFTContract() {
+  const { library,account } = useActiveWeb3React()
+  return useMemo(() => {
+    if (!library || !account) return getGenesisTreeNFTContract()
+    return getGenesisTreeNFTContract(library.getSigner())
   }, [library])
 }
 
