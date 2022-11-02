@@ -197,7 +197,7 @@ export default function Genesis() {
             setPending(false)
         } catch (error: any) {
             const errorDescription = `${error.message} - ${error.data?.message}`
-            toastError('Failed to Add', errorDescription)
+            toastError('Failed to Add Friend', errorDescription)
             setPending(false)
         }
     }
@@ -212,7 +212,7 @@ export default function Genesis() {
             setPending(false)
         } catch (error: any) {
             const errorDescription = `${error.message} - ${error.data?.message}`
-            toastError('Failed to Add', errorDescription)
+            toastError('Failed to Claim', errorDescription)
             setPending(false)
         }
     }
@@ -226,7 +226,7 @@ export default function Genesis() {
             setPending(false)
         } catch (error: any) {
             const errorDescription = `${error.message} - ${error.data?.message}`
-            toastError('Failed to Add', errorDescription)
+            toastError('Failed to Swap', errorDescription)
             setPending(false)
         }
     }
@@ -316,7 +316,7 @@ export default function Genesis() {
     
     return (
         <Page>
-            <FlexGap width="100%" maxWidth="1280px" flexWrap="wrap" gap="2em" paddingBottom="2em">
+            <FlexGap width="100%" maxWidth="1280px" flexWrap="wrap" gap="2em" paddingBottom="4em">
                 <Flex flexDirection="column" flex={1} minWidth={250}>
                     <Card>
                         <CardHeader>
@@ -335,13 +335,13 @@ export default function Genesis() {
                                             disabled={!isOpened || !account}
                                             onChange={() => setUserChoise(1)}
                                         />
-                                        <Text ml="4px" fontSize="20px">$10</Text>
+                                        <Text ml="4px" fontSize="18px">Option 1 - 10 BUSD</Text>
                                     </Filter>
-                                    <Text color="textSubtle">
-                                        Babel: 5
+                                    <Text marginTop={13} color="textSubtle">
+                                        Amount: 5 Babel
                                     </Text>
                                     <Text color="textSubtle">
-                                        NFTs: x1 Genesis
+                                        NFT: x1 Genesis
                                     </Text>
                                     <Filter>
                                         <Radio
@@ -350,13 +350,13 @@ export default function Genesis() {
                                             disabled={!isOpened || !account}
                                             onChange={() => setUserChoise(2)}
                                         />
-                                        <Text ml="4px" fontSize="20px">$100</Text>
+                                        <Text ml="4px" fontSize="18px">Option 2 - 100 BUSD</Text>
                                     </Filter>
-                                    <Text color="textSubtle">
-                                        Babel: 50
+                                    <Text marginTop={13} color="textSubtle">
+                                        Amount: 50 Babel
                                     </Text>
                                     <Text color="textSubtle">
-                                        NFTs: x1 Genesis
+                                        NFT: x1 Genesis
                                     </Text>
                                     <Filter>
                                         <Radio
@@ -365,10 +365,10 @@ export default function Genesis() {
                                             disabled={!isOpened || !account}
                                             onChange={() => setUserChoise(3)}
                                         />
-                                        <Text ml="4px" fontSize="20px">$500</Text>
+                                        <Text ml="4px" fontSize="18px">Option 3 - 500 BUSD</Text>
                                     </Filter>
-                                    <Text color="textSubtle">
-                                        Babel: 275
+                                    <Text marginTop={13} color="textSubtle">
+                                        Amount: 275 Babel
                                     </Text>
                                     <Text color="textSubtle">
                                         NFTs: x1 Genesis, x1 Genesis Tree
@@ -380,11 +380,11 @@ export default function Genesis() {
                     <Card marginTop={20}>
                         <CardHeader>
                             <Heading>
-                                Status
+                                General Stats
                             </Heading>
                         </CardHeader>
                         <CardBody>
-                            <Text fontSize="20px" textAlign="center">
+                            <Text fontSize="20px">
                                 Genesis
                             </Text>
                             <Text color="textSubtle">
@@ -393,8 +393,8 @@ export default function Genesis() {
                             <Text color="textSubtle">
                                 Max Members: {limit}
                             </Text>
-                            <Text fontSize="20px" textAlign="center" marginTop={20}>
-                                Genesis NFT
+                            <Text fontSize="20px" marginTop={20}>
+                                NFT: Genesis
                             </Text>
                             <Text color="textSubtle">
                                 Total Minited: {nftTotalSupply}
@@ -402,8 +402,8 @@ export default function Genesis() {
                             <Text color="textSubtle">
                                 Max Supply: {nftMaxSupply}
                             </Text>
-                            <Text fontSize="20px" textAlign="center" marginTop={20}>
-                                Genesis Tree NFT
+                            <Text fontSize="20px" marginTop={20}>
+                                NFT: Genesis Tree
                             </Text>
                             <Text color="textSubtle">
                                 Total Minted: {treeNftTotalSupply}
@@ -418,7 +418,7 @@ export default function Genesis() {
                     <Card>
                         <CardHeader>
                             <Heading textAlign="center">
-                                Genesis
+                                BabelSwap Genesis
                             </Heading>
                         </CardHeader>
                         <CardBody style={{ overflow: "hidden" }}>
@@ -473,7 +473,8 @@ export default function Genesis() {
                                         </ContainerRow>
                                         <Button disabled={pending || !isOpened} onClick={addFriendToGenesis} mt={3}>Add Friend To Genesis</Button>
                                     </InputPanel>
-                                    <Flex justifyContent="space-around">
+
+                                    {/*<Flex justifyContent="space-around">
                                         <Button disabled={pending || isOpened} onClick={claim} mt={3}>Claim</Button>
                                     </Flex>
 
@@ -500,8 +501,8 @@ export default function Genesis() {
                                     </Flex>
                                     <Flex width="max-content" mx="auto" marginBottom="2em">
                                         <Button disabled={pending || isSwapPaused || mirrorBalance.eq(0)} onClick={swap} mt={10}>Swap</Button>
-                                    </Flex>
-                                </>)}
+                                        </Flex> */}
+                                    </>)}
                         </CardBody>
                         <CardFooter>
                             <Heading textAlign="center">

@@ -78,7 +78,7 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
       { name: 'verifyingContract', type: 'address' },
     ]
     const domain = {
-      name: 'Babel LP',
+      name: 'BabelSwap LPs',
       version: '1',
       chainId,
       verifyingContract: lpAddresses[chainId],
