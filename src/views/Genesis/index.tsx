@@ -316,14 +316,16 @@ export default function Genesis() {
     
     return (
         <Page>
-            <FlexGap width="100%" maxWidth="1280px" flexWrap="wrap" gap="2em" paddingBottom="4em">
+            <FlexGap width="100%" maxWidth="1280px" flexWrap="wrap" gap="2em" paddingBottom="2em">
                 <Flex flexDirection="column" flex={1} minWidth={250}>
                     <Card>
                         <CardHeader>
                             <Heading>
-                                Options
+                               Options
                             </Heading>
-                            Genesis Rewards
+                            <Text color="textSubtle">
+                               Rewards
+                            </Text>
                         </CardHeader>
                         <CardBody>
                             <Flex flexDirection="column">
@@ -335,13 +337,13 @@ export default function Genesis() {
                                             disabled={!isOpened || !account}
                                             onChange={() => setUserChoise(1)}
                                         />
-                                        <Text ml="4px" fontSize="18px">Option 1 - 10 BUSD</Text>
+                                        <Text ml="11px" fontSize="18px">Option 1 - 10 BUSD</Text>
                                     </Filter>
                                     <Text marginTop={13} color="textSubtle">
-                                        Amount: 5 Babel
+                                        5 Babel Mirror
                                     </Text>
                                     <Text color="textSubtle">
-                                        NFT: x1 Genesis
+                                        x1 Babel Genesis NFT
                                     </Text>
                                     <Filter>
                                         <Radio
@@ -350,13 +352,13 @@ export default function Genesis() {
                                             disabled={!isOpened || !account}
                                             onChange={() => setUserChoise(2)}
                                         />
-                                        <Text ml="4px" fontSize="18px">Option 2 - 100 BUSD</Text>
+                                        <Text ml="11px" fontSize="18px">Option 2 - 100 BUSD</Text>
                                     </Filter>
                                     <Text marginTop={13} color="textSubtle">
-                                        Amount: 50 Babel
+                                        50 Babel Mirror
                                     </Text>
                                     <Text color="textSubtle">
-                                        NFT: x1 Genesis
+                                        x1 Babel Genesis NFT
                                     </Text>
                                     <Filter>
                                         <Radio
@@ -365,13 +367,16 @@ export default function Genesis() {
                                             disabled={!isOpened || !account}
                                             onChange={() => setUserChoise(3)}
                                         />
-                                        <Text ml="4px" fontSize="18px">Option 3 - 500 BUSD</Text>
+                                        <Text ml="11px" fontSize="18px">Option 3 - 500 BUSD</Text>
                                     </Filter>
                                     <Text marginTop={13} color="textSubtle">
-                                        Amount: 275 Babel
+                                        275 Babel Mirror
                                     </Text>
                                     <Text color="textSubtle">
-                                        NFTs: x1 Genesis, x1 Genesis Tree
+                                        x1 Babel Genesis NFT
+                                    </Text>
+                                    <Text color="textSubtle">
+                                        x1 Babel Genesis Tree NFT
                                     </Text>
                                 </Flex>
                             </Flex>
@@ -394,16 +399,16 @@ export default function Genesis() {
                                 Max Members: {limit}
                             </Text>
                             <Text fontSize="20px" marginTop={20}>
-                                NFT: Genesis
+                                Genesis NFT
                             </Text>
                             <Text color="textSubtle">
-                                Total Minited: {nftTotalSupply}
+                                Total Minted: {nftTotalSupply}
                             </Text>
                             <Text color="textSubtle">
                                 Max Supply: {nftMaxSupply}
                             </Text>
                             <Text fontSize="20px" marginTop={20}>
-                                NFT: Genesis Tree
+                                Genesis Tree NFT
                             </Text>
                             <Text color="textSubtle">
                                 Total Minted: {treeNftTotalSupply}
