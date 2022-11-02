@@ -3,7 +3,7 @@ import { BIG_ONE, BIG_ZERO } from 'utils/bigNumber'
 import { filterNftFarmsByQuoteToken } from 'utils/farmsPriceHelpers'
 import { DeserializedNftFarm } from 'state/types'
 import tokens from 'config/constants/tokens'
-import { Price } from '@pancakeswap/sdk'
+import { Price } from '@babelswap/sdk'
 
 const getFarmFromTokenSymbol = (
   farms: DeserializedNftFarm[],

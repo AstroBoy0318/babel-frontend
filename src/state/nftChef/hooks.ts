@@ -1,17 +1,14 @@
-import { ChainId } from '@pancakeswap/sdk'
 import { useWeb3React } from '@web3-react/core'
-import BigNumber from 'bignumber.js'
 import { nftchef } from 'config/constants'
-import { CHAIN_ID } from 'config/constants/networks'
-import { useFastRefreshEffect, useSlowRefreshEffect } from 'hooks/useRefreshEffect'
+import { useSlowRefreshEffect } from 'hooks/useRefreshEffect'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from 'state'
-import { fetchNftFarmsPublicDataAsync, fetchNftFarmUserDataAsync, nonArchivedFarms } from '.'
+import { DeserializedNftFarmsState, DeserializedNftFarmUserData } from 'state/types'
+import { fetchNftFarmsPublicDataAsync, fetchNftFarmUserDataAsync } from '.'
 import {
   farmSelector, makeUserFarmFromPidSelector,
 } from './selectors'
-import { DeserializedNftFarmsState, DeserializedNftFarmUserData } from 'state/types'
 
 export const usePollFarmsWithUserData = (includeArchive = false) => {
   const dispatch = useAppDispatch()

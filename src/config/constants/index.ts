@@ -1,4 +1,4 @@
-import { ChainId, JSBI, Percent, Token } from '@pancakeswap/sdk'
+import { ChainId, JSBI, Percent, Token } from '@babelswap/sdk'
 import { BigNumber } from '@ethersproject/bignumber'
 import { mainnetTokens, testnetTokens, ganacheTokens } from './tokens'
 
@@ -48,7 +48,7 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
-  [ChainId.MAINNET]: [mainnetTokens.busd, mainnetTokens.cake/*, mainnetTokens.btcb*/],
+  [ChainId.MAINNET]: [mainnetTokens.busd, mainnetTokens.cake /* , mainnetTokens.btcb */],
   [ChainId.TESTNET]: [testnetTokens.wbnb, testnetTokens.cake, testnetTokens.busd],
   [ChainId.GANACHE]: [ganacheTokens.wbnb, ganacheTokens.cake, ganacheTokens.busd],
 }

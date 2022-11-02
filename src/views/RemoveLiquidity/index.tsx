@@ -5,7 +5,7 @@ import { Contract } from '@ethersproject/contracts'
 import { TransactionResponse } from '@ethersproject/providers'
 import { useRouter } from 'next/router'
 import useToast from 'hooks/useToast'
-import { Currency, currencyEquals, ETHER, Percent, WETH } from '@pancakeswap/sdk'
+import { Currency, currencyEquals, ETHER, Percent, WETH } from '@babelswap/sdk'
 import { Button, Text, AddIcon, ArrowDownIcon, CardBody, Slider, Box, Flex, useModal } from '@pancakeswap/uikit'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useTranslation } from 'contexts/Localization'
@@ -131,7 +131,7 @@ export default function RemoveLiquidity() {
     if(!allApproved) {
       setNftApproving(true)
       try{
-        let tx = await nftPositionContract.setApprovalForAll(ROUTER_ADDRESS[CHAIN_ID], true)
+        const tx = await nftPositionContract.setApprovalForAll(ROUTER_ADDRESS[CHAIN_ID], true)
         await tx.wait()
         setNftApproving(false)
       } catch (ex) {

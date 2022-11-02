@@ -5,7 +5,7 @@ import {
   ImageProps,
 } from '@pancakeswap/uikit'
 import tokens from 'config/constants/tokens'
-import { ChainId, Token } from '@pancakeswap/sdk'
+import { ChainId, Token } from '@babelswap/sdk'
 import { CHAIN_ID } from '../../config/constants/networks'
 
 

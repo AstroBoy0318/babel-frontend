@@ -96,7 +96,6 @@ import type {
   Cake,
   BunnyFactory,
   PancakeRabbits,
-  PancakeProfile,
   LotteryV2,
   Masterchef,
   SousChef,
