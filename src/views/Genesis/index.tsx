@@ -22,7 +22,7 @@ import { FlexGap } from 'components/Layout/Flex'
 const CurvedDiv = styled.div`
     width: 150%;
     margin-left: -25%;
-    margin-top: -21%;
+    margin-top: -12em;
     padding-top: 11em;
     padding-bottom: 1em;
     border-radius: 50%;
@@ -419,7 +419,7 @@ export default function Genesis() {
                         </CardBody>
                     </Card>
                 </Flex>
-                <Flex flexDirection="column" flex={3} minWidth={500}>
+                <Flex flexDirection="column" flex={3} minWidth={300}>
                     <Card>
                         <CardHeader>
                             <Heading textAlign="center">
