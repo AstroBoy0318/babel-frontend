@@ -25,6 +25,7 @@ const PriceLink = styled.a`
 `;
 
 const CakePrice: React.FC<Props> = ({ cakePriceUsd, color = "textSubtle", showSkeleton = true }) => {
+  return null
   return cakePriceUsd ? (
     <PriceLink
       href="/swap?outputCurrency=0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82"

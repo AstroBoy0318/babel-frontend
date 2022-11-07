@@ -17,63 +17,63 @@ import { perpLangMap } from 'utils/getPerpetualLanguageCode'
 export type ConfigMenuItemsType = MenuItemsType & { hideSubNav?: boolean }
 
 const config: (t: ContextApi['t'], languageCode?: string) => ConfigMenuItemsType[] = (t, languageCode) => [
-  {
-    label: t('Trade'),
-    icon: SwapIcon,
-    fillIcon: SwapFillIcon,
-    href: '/swap',
-    showItemsOnMobile: false,
-    items: [
-      {
-        label: t('Swap'),
-        href: '/swap',
-      },
-      // {
-      //   label: t('Limit'),
-      //   href: '/limit-orders',
-      // },
-      {
-        label: t('Liquidity'),
-        href: '/liquidity',
-      },
-      // {
-      //   label: t('Perpetual'),
-      //   href: `https://perp.pancakeswap.finance/${perpLangMap(languageCode)}/futures/BTCUSDT`,
-      //   type: DropdownMenuItemType.EXTERNAL_LINK,
-      // },
-    ],
-  },
- {
-    label: t('Earn'),
-    href: '/farms',
-    icon: EarnIcon,
-    fillIcon: EarnFillIcon,
-    items: [
-      {
-        label: t('Farms'),
-        href: '/farms',
-      },
-      {
-        label: t('Pools'),
-        href: '/pools',
-      },
-    ],
-  },
+  // {
+  //   label: t('Trade'),
+  //   icon: SwapIcon,
+  //   fillIcon: SwapFillIcon,
+  //   href: '/swap',
+  //   showItemsOnMobile: false,
+  //   items: [
+  //     {
+  //       label: t('Swap'),
+  //       href: '/swap',
+  //     },
+  //     {
+  //       label: t('Limit'),
+  //       href: '/limit-orders',
+  //     },
+  //     {
+  //       label: t('Liquidity'),
+  //       href: '/liquidity',
+  //     },
+  //     {
+  //       label: t('Perpetual'),
+  //       href: `https://perp.pancakeswap.finance/${perpLangMap(languageCode)}/futures/BTCUSDT`,
+  //       type: DropdownMenuItemType.EXTERNAL_LINK,
+  //     },
+  //   ],
+  // },
+//  {
+//     label: t('Earn'),
+//     href: '/farms',
+//     icon: EarnIcon,
+//     fillIcon: EarnFillIcon,
+//     items: [
+//       {
+//         label: t('Farms'),
+//         href: '/farms',
+//       },
+//       {
+//         label: t('Pools'),
+//         href: '/pools',
+//       },
+//     ],
+//   },
   {
     label: 'Genesis',
     href: '/genesis',
     items: []
   },
-  {
-    label: 'NFT Farm',
-    href: '/nftchef',
-    items: []
-  },
-  {
-    label: 'Info',
-    href: '/info',
-    items: []
-  },
+  // {
+  //   label: 'NFT Farm',
+  //   href: '/nftchef',
+  //   items: []
+  // },
+  // {
+  //   label: 'Info',
+  //   href: '/info',
+  //   items: []
+  // },
   // {
   //   label: t('Win'),
   //   href: '/prediction',
