@@ -1,9 +1,18 @@
-import Genesis from 'views/Genesis'
-import Swap from '../views/Swap'
+import Router from 'next/router'
 
-const SwapPage = () => {
-  // return <Swap />
-  return <Genesis />
+const Index = () => null
+
+Index.getInitialProps = async ({ res }) => {
+    if (res) {
+        res.writeHead(302, {
+            Location: `/genesis`
+        })
+        res.end()
+    } 
+    else
+        Router.push(`/genesis`)
+
+    return {}
 }
 
-export default SwapPage
+export default Index

@@ -5,7 +5,7 @@ import { AutoColumn } from '../../components/Layout/Column'
 import { RowBetween } from '../../components/Layout/Row'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { useWeb3React } from '@web3-react/core'
-import { Flex, Button, Radio, Text, CardBody, Heading, Card, CardHeader, CardRibbon, CardFooter, TimerIcon } from '@pancakeswap/uikit'
+import { Flex, Button, Radio, Text, CardBody, Heading, Card, CardHeader, CardRibbon, CardFooter, TimerIcon, Box } from '@pancakeswap/uikit'
 import ConnectWalletButton from 'components/ConnectWalletButton'
 import { useGenesisContract, useTokenContract, useMirrorContract, useGenesisNFTContract, useGenesisTreeNFTContract } from 'hooks/useContract'
 import useToast from 'hooks/useToast'
@@ -115,6 +115,51 @@ const ImageWrapper = styled.div`
   }
 `
 
+const StepContainer = styled(Flex)`
+  gap: 24px;
+  width: 100%;
+  padding: 24px;
+  flex-direction: column;
+  ${({ theme }) => theme.mediaQueries.md} {
+    flex-direction: row;
+  }
+`
+
+const StyledStepCard = styled(Box)`
+  display: flex;
+  align-self: baseline;
+  position: relative;
+  background: ${({ theme }) => theme.colors.cardBorder};
+  padding: 1px 1px 3px 1px;
+  border-radius: ${({ theme }) => theme.radii.card};
+`
+
+const StepCardInner = styled(Box)`
+  width: 100%;
+  padding: 24px;
+  background: ${({ theme }) => theme.card.background};
+  border-radius: ${({ theme }) => theme.radii.card};
+`
+
+const StepCard: React.FC<React.PropsWithChildren<{ step: Step }>> = ({ step }) => {
+    return (
+      <StyledStepCard width="100%">
+        <StepCardInner height={['200px', '180px', null, '200px']}>
+          <Text mb="16px" fontSize="12px" bold textAlign="right" textTransform="uppercase">
+            {step.label}
+          </Text>
+          <Heading mb="16px" scale="lg" color="secondary">
+            {step.title}
+          </Heading>
+          <Text color="textSubtle">{step.subtitle}</Text>
+        </StepCardInner>
+      </StyledStepCard>
+    )
+}
+  
+
+type Step = { title: string; subtitle: string; label: string }
+
 export default function Genesis() {
     const { account } = useWeb3React()
     const [myAddress, setMyAddress] = useState(account)
@@ -196,7 +241,7 @@ export default function Genesis() {
             setToRefresh(!toRefresh)
             setPending(false)
         } catch (error: any) {
-            const errorDescription = `${error.message} - ${error.data?.message}`
+            const errorDescription = `${error.message} - ${error.data?.message} `
             toastError('Failed to Add Friend', errorDescription)
             setPending(false)
         }
@@ -211,7 +256,7 @@ export default function Genesis() {
             setToRefresh(!toRefresh)
             setPending(false)
         } catch (error: any) {
-            const errorDescription = `${error.message} - ${error.data?.message}`
+            const errorDescription = `${error.message} - ${error.data?.message } `
             toastError('Failed to Claim', errorDescription)
             setPending(false)
         }
@@ -225,7 +270,7 @@ export default function Genesis() {
             setToRefresh(!toRefresh)
             setPending(false)
         } catch (error: any) {
-            const errorDescription = `${error.message} - ${error.data?.message}`
+            const errorDescription = `${ error.message } - ${ error.data?.message } `
             toastError('Failed to Swap', errorDescription)
             setPending(false)
         }
@@ -313,6 +358,25 @@ export default function Genesis() {
         }
         return time;
     }
+
+    const steps: Step[] = [
+        {
+          label: 'Step 1',
+          title: 'Buy Tickets',
+          subtitle: 'Prices are set when the round starts, equal to 5 USD in CAKE per ticket.',
+        },
+        {
+          label: 'Step 2',
+          title: 'Wait for the Draw',
+          subtitle: 'There is one draw every day alternating between 0 AM UTC and 12 PM UTC.',
+        },
+        {
+          label: 'Step 3',
+          title: 'Check for Prizes',
+          subtitle: "Once the round's over, come back to the page and check to see if you’ve won!",
+        },
+    ]
+    
     
     return (
         <Page>
@@ -514,6 +578,22 @@ export default function Genesis() {
                                 Total Raised: ${totalRaised}
                             </Heading>
                         </CardFooter>
+                    </Card>
+                    <Card mt={3}>
+                        <Flex m="40px" alignItems="center" flexDirection="column">
+                            <Heading mb="24px" scale="xl" color="secondary">
+                                How to Play
+                            </Heading>
+                            <Text textAlign="center">
+                                If the digits on your tickets match the winning numbers in the correct order, you win a portion of the prize pool.'
+                            </Text>
+                            <Text>Simple!</Text>
+                        </Flex>
+                        <StepContainer>
+                            {steps.map((step) => (
+                            <StepCard key={step.label} step={step} />
+                            ))}
+                        </StepContainer>
                     </Card>
                 </Flex>
             </FlexGap>
