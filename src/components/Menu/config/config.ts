@@ -84,7 +84,7 @@ const config: (t: ContextApi['t'], languageCode?: string) => ConfigMenuItemsType
     items: []
   },
   {
-    label: 'Info',
+    label: 'Analytics',
     icon: MoreIcon,
     showOnMobile: false,
     showItemsOnMobile: false,

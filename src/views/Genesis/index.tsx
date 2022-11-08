@@ -145,7 +145,7 @@ const StepCard: React.FC<React.PropsWithChildren<{ step: Step }>> = ({ step }) =
     return (
       <StyledStepCard width="100%">
         <StepCardInner height={['200px', '180px', null, '200px']}>
-          <Text mb="16px" fontSize="12px" bold textAlign="right" textTransform="uppercase">
+          <Text mb="16px" fontSize="9px" bold textAlign="right" textTransform="uppercase">
             {step.label}
           </Text>
           <Heading mb="16px" scale="lg" color="secondary">
@@ -362,18 +362,13 @@ export default function Genesis() {
     const steps: Step[] = [
         {
           label: 'Step 1',
-          title: 'Buy Tickets',
-          subtitle: 'Prices are set when the round starts, equal to 5 USD in CAKE per ticket.',
+          title: 'Choose an Option',
+          subtitle: 'Connect you wallet, choose 1 of the 3 options.',
         },
         {
           label: 'Step 2',
-          title: 'Wait for the Draw',
-          subtitle: 'There is one draw every day alternating between 0 AM UTC and 12 PM UTC.',
-        },
-        {
-          label: 'Step 3',
-          title: 'Check for Prizes',
-          subtitle: "Once the round's over, come back to the page and check to see if you’ve won!",
+          title: 'Add to Genesis',
+          subtitle: 'You can add your wallet to Genesis or you can also gift a position in Genesis to anyone you want.',
         },
     ]
     
@@ -519,7 +514,7 @@ export default function Genesis() {
                                                 </AutoColumn>
                                             </InputContainer>
                                         </ContainerRow>
-                                        <Button disabled={pending || !isOpened} mt={3} onClick={addToGenesis}>Add To Genesis</Button>
+                                        <Button disabled={pending || !isOpened} mt={3} onClick={addToGenesis}>Add your wallet to Genesis</Button>
                                     </InputPanel>
                                     <InputPanel>
                                         <ContainerRow error={error2}>
@@ -540,7 +535,7 @@ export default function Genesis() {
                                                 </AutoColumn>
                                             </InputContainer>
                                         </ContainerRow>
-                                        <Button disabled={pending || !isOpened} onClick={addFriendToGenesis} mt={3}>Add Friend To Genesis</Button>
+                                        <Button disabled={pending || !isOpened} onClick={addFriendToGenesis} mt={3}>Add friend to Genesis</Button>
                                     </InputPanel>
 
                                     {/*<Flex justifyContent="space-around">
@@ -581,13 +576,10 @@ export default function Genesis() {
                     </Card>
                     <Card mt={3}>
                         <Flex m="40px" alignItems="center" flexDirection="column">
-                            <Heading mb="24px" scale="xl" color="secondary">
-                                How to Play
+                            <Heading mb="24px" scale="lg">
+                                ¿ How to Participate ?
                             </Heading>
-                            <Text textAlign="center">
-                                If the digits on your tickets match the winning numbers in the correct order, you win a portion of the prize pool.'
-                            </Text>
-                            <Text>Simple!</Text>
+                            <Text>Easy!</Text>
                         </Flex>
                         <StepContainer>
                             {steps.map((step) => (
