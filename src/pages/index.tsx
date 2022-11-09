@@ -1,18 +1,11 @@
-import Router from 'next/router'
+import { useMemo } from "react"
+import Genesis from "./genesis"
 
-const Index = () => null
-
-Index.getInitialProps = async ({ res }) => {
-    if (res) {
-        res.writeHead(302, {
-            Location: `/genesis`
-        })
-        res.end()
-    } 
-    else
-        Router.push(`/genesis`)
-
-    return {}
+const SwapPage = () => {
+    useMemo(()=>{
+        document.location.href="/genesis"
+    }, [])
+    // return <Swap />
+    return <Genesis />
 }
-
-export default Index
+export default SwapPage
