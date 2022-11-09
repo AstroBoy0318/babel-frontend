@@ -362,8 +362,8 @@ export default function Genesis() {
     const steps: Step[] = [
         {
           label: 'Step 1',
-          title: 'Choose an Option',
-          subtitle: 'Connect you wallet, choose 1 of the 3 options.',
+          title: 'Choose an option',
+          subtitle: 'Connect your wallet and choose 1 of the 3 options.',
         },
         {
           label: 'Step 2',

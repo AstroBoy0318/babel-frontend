@@ -5,7 +5,7 @@ export const DEFAULT_META: PageMeta = {
   title: 'BabelSwap - We build the new order, We build the new world™️',
   description:
     'The hottest AMM on Binance! Join us! Genesis, Swap, NFT, Airdrop, Bank',
-  image: 'https://pancakeswap.finance/images/hero.png',
+  image: 'https://bafkreigxbnl2wpjbqnczmctff64kr2ullieg4cml5fxpo2gwgdahyjf5yu.ipfs.nftstorage.link',
 }
 
 export const getCustomMeta = (path: string, t: ContextApi['t']): PageMeta => {

@@ -32,7 +32,7 @@ export const mainnetTokens = defineTokens({
   ),
   mirror: new Token(
     MAINNET,
-    '0x35f6fb63F083a2DBC1963ddF75bec60E6b40ccA5',
+    '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
     18,
     'bBMIRROR',
     'BabelSwap Mirror',
