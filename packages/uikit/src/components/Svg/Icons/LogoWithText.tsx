@@ -9,7 +9,7 @@ interface LogoProps extends SvgProps {
 const Logo: React.FC<LogoProps> = ({ isDark, ...props }) => {
   const textColor = isDark ? "#e9950c" : "#000";
   return (
-    <div {...props} style={{display:"flex", alignItems: "center", gap: "10px"}}>
+    <div {...props} style={{alignItems: "center", gap: "10px"}}>
       <img src="/images/babel.svg" alt="logo with text" width={32}/>
       <span style={{color: textColor, fontSize: "18px"}}>
         <b>

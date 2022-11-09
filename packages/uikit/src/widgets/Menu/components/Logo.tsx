@@ -27,7 +27,7 @@ const StyledLink = styled("a")`
     width: 160px;
     display: none;
     ${({ theme }) => theme.mediaQueries.nav} {
-      display: block;
+      display: flex;
     }
   }
   .eye {
