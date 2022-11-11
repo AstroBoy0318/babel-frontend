@@ -74,7 +74,7 @@ const config: (t: ContextApi['t'], languageCode?: string) => ConfigMenuItemsType
     items: []
   },
   {
-    label: 'NFT Farm',
+    label: 'NFTs Farm',
     icon: NftIcon,
     fillIcon: NftFillIcon,
     showOnMobile: false,
@@ -90,6 +90,14 @@ const config: (t: ContextApi['t'], languageCode?: string) => ConfigMenuItemsType
     showItemsOnMobile: false,
     href: null,
     // href: '/info',
+    items: []
+  },
+  {
+    label: 'Docs',
+    icon: MoreIcon,
+    showOnMobile: true,
+    showItemsOnMobile: false,
+    href: 'https://docs.babelswap.com',
     items: []
   },
   // {

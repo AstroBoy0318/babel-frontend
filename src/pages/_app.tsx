@@ -54,16 +54,16 @@ function MyApp(props: AppProps) {
         />
         <meta
           name="description"
-          content="The hottest AMM on Binance! Join us! Multichain, Genesis, Swap, NFT, Airdrop, Bank, Sports Betting"
+          content="Join and Earn! Multichain, Genesis, Swap, NFTs, Airdrops, Bank"
         />
         <meta name="theme-color" content="#1FC7D4" />
         <meta name="twitter:image" content="https://bafkreigxbnl2wpjbqnczmctff64kr2ullieg4cml5fxpo2gwgdahyjf5yu.ipfs.nftstorage.link" />
         <meta
           name="twitter:description"
-          content="The hottest AMM on Binance! Join us! Multichain, Genesis, Swap, NFT, Airdrop, Bank, Sports Betting"
+          content="Join and Earn! Multichain, Genesis, Swap, NFTs, Airdrops, Bank"
         />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="BabelSwap - We build the new order, We build the new world ™️" />
+        <meta name="twitter:title" content="We build the new order, We build the new world™️" />
         <title>Swap</title>
       </Head>
       <Providers store={store}>

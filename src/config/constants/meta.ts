@@ -4,7 +4,7 @@ import { PageMeta } from './types'
 export const DEFAULT_META: PageMeta = {
   title: 'BabelSwap - We build the new order, We build the new world™️',
   description:
-    'The hottest AMM on Binance! Join us! Genesis, Swap, NFT, Airdrop, Bank',
+    'Join and Earn! Multichain, Genesis, Swap, NFTs, Airdrops, Bank',
   image: 'https://bafkreigxbnl2wpjbqnczmctff64kr2ullieg4cml5fxpo2gwgdahyjf5yu.ipfs.nftstorage.link',
 }
 
