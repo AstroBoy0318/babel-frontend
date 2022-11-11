@@ -34,7 +34,7 @@ export const PageMeta: React.FC<{ symbol?: string }> = ({ symbol }) => {
   // if (symbol) {
   //   pageTitle = [symbol, title].join(' - ')
   // }
-  let pageTitle = title
+  const pageTitle = title
 
   return (
     <Head>
