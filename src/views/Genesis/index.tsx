@@ -18,6 +18,7 @@ import { BIG_INT_ZERO } from 'config/constants'
 import { BIG_ZERO } from 'utils/bigNumber'
 import Container from 'components/Layout/Container'
 import { FlexGap } from 'components/Layout/Flex'
+import FAQ from './components/FAQ'
 
 const CurvedDiv = styled.div`
     width: 150%;
@@ -587,6 +588,7 @@ export default function Genesis() {
                             ))}
                         </StepContainer>
                     </Card>
+                    <FAQ />
                 </Flex>
             </FlexGap>
         </Page>
